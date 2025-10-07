@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Globe, Home, MapPin, Users, Newspaper, Lightbulb, Map } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo.jpeg";
 import {
   DropdownMenu,
@@ -11,10 +11,9 @@ import {
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"full" | "overview">("full");
   const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useState(0);
 
   useEffect(() => {
     let lastY = 0;
@@ -22,9 +21,6 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      setScrolled(currentScrollY > 50);
-
-      // Hide when scrolling up, show when scrolling down
       if (currentScrollY > lastY && currentScrollY > 100) {
         setIsVisible(false);
       } else {
@@ -38,12 +34,22 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", href: "#home" },
+  const fullViewItems = [
     { name: "About", href: "#about" },
     { name: "Blogs", href: "#blogs" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" }
+  ];
+
+  const menuItems = [
+    { name: "3D Tour", icon: Globe, href: "#3d-tour" },
+    { name: "Ongoing Projects", icon: Home, href: "#projects" },
+    { name: "Visit Samara", icon: MapPin, href: "#samara" },
+    { name: "Contact Us", icon: Phone, href: "#contact" },
+    { name: "For Developers", icon: Users, href: "#developers" },
+    { name: "News", icon: Newspaper, href: "#blogs" },
+    { name: "Insights", icon: Lightbulb, href: "#insights" },
+    { name: "Local Guides", icon: Map, href: "#guides" },
   ];
 
   return (
@@ -65,47 +71,69 @@ const Header = () => {
           isVisible ? 'top-6 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-foreground/95 backdrop-blur-2xl rounded-full px-8 py-4 border border-white/10 shadow-2xl">
+        <div className="bg-muted/95 backdrop-blur-2xl rounded-full px-6 py-3 border border-border shadow-2xl">
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+          <nav className="hidden md:flex items-center gap-2">
+            {/* View Mode Toggle */}
+            <div className="flex items-center bg-background rounded-full p-1 mr-4">
+              <button
+                onClick={() => setViewMode("full")}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  viewMode === "full"
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Full view
+              </button>
+              <button
+                onClick={() => setViewMode("overview")}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  viewMode === "overview"
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Overview
+              </button>
+            </div>
+
+            {/* Full View Items */}
+            {viewMode === "full" && fullViewItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-background hover:text-primary-foreground font-medium text-sm uppercase tracking-wider transition-all duration-300 relative group"
+                className="text-foreground hover:text-primary font-medium text-sm px-4 py-2 transition-all duration-300 relative group"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary-foreground transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
 
             {/* Menu Dropdown */}
-            <DropdownMenu open={projectsOpen} onOpenChange={setProjectsOpen}>
+            <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
               <DropdownMenuTrigger asChild>
-                <button className="text-background hover:text-primary-foreground font-medium text-sm uppercase tracking-wider transition-all duration-300 flex items-center space-x-1">
-                  <Menu className="w-4 h-4" />
-                  <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${projectsOpen ? 'rotate-180' : ''}`} />
+                <button className="text-foreground hover:text-primary font-medium text-sm px-4 py-2 transition-all duration-300 flex items-center">
+                  <Menu className="w-5 h-5" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-72 p-6 bg-background border shadow-lg z-[100] mt-2">
-                <div className="space-y-3">
-                  <div className="font-bold text-sm uppercase tracking-wider text-primary mb-4 border-b pb-2">More</div>
-                  <DropdownMenuItem asChild className="cursor-pointer text-base py-3 hover:bg-accent rounded-md transition-colors">
-                    <a href="#projects">Ongoing Projects</a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="cursor-pointer text-base py-3 hover:bg-accent rounded-md transition-colors">
-                    <a href="#projects">Upcoming Projects</a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="cursor-pointer text-base py-3 hover:bg-accent rounded-md transition-colors">
-                    <a href="#projects">Completed Projects</a>
-                  </DropdownMenuItem>
-                  <div className="border-t my-4"></div>
-                  <DropdownMenuItem className="cursor-pointer text-base py-3 hover:bg-accent rounded-md transition-colors">
-                    <a href="#careers" className="w-full">Careers</a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="cursor-pointer text-base py-3 hover:bg-accent rounded-md transition-colors">
-                    <a href="/referral" className="w-full">Referral Program</a>
-                  </DropdownMenuItem>
+              <DropdownMenuContent align="end" className="w-64 p-3 bg-background border shadow-xl z-[100] mt-2 rounded-2xl">
+                <div className="space-y-1">
+                  {menuItems.map((item, index) => {
+                    const Icon = item.icon;
+                    const showDivider = index === 3 || index === 4;
+                    return (
+                      <div key={item.name}>
+                        <DropdownMenuItem asChild className="cursor-pointer py-3 px-4 hover:bg-muted rounded-xl transition-colors">
+                          <a href={item.href} className="flex items-center gap-3">
+                            <Icon className="w-5 h-5 text-muted-foreground" />
+                            <span className="text-foreground font-normal">{item.name}</span>
+                          </a>
+                        </DropdownMenuItem>
+                        {showDivider && <div className="my-2 border-t border-border" />}
+                      </div>
+                    );
+                  })}
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -114,7 +142,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-background hover:text-primary-foreground transition-colors"
+            className="md:hidden w-8 h-8 flex items-center justify-center text-foreground hover:text-primary transition-colors"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -124,11 +152,11 @@ const Header = () => {
         {isOpen && (
           <div className="md:hidden absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-background/95 backdrop-blur-xl border border-border rounded-3xl shadow-2xl w-[280px]">
             <nav className="flex flex-col p-6 space-y-4">
-              {navItems.map((item) => (
+              {fullViewItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-foreground hover:text-primary font-medium text-sm uppercase tracking-wider py-2 transition-all duration-300"
+                  className="text-foreground hover:text-primary font-medium text-sm py-2 transition-all duration-300"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -138,7 +166,7 @@ const Header = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground text-xs uppercase tracking-wider font-medium"
+                  className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground text-xs font-medium"
                   onClick={() => window.location.href = 'tel:+918884545404'}
                 >
                   <Phone className="w-4 h-4 mr-2" />
