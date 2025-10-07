@@ -1,8 +1,32 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Shield, Award, Users, TrendingUp, Heart, Building2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (headingRef.current) {
+      observer.observe(headingRef.current);
+    }
+
+    return () => {
+      if (headingRef.current) {
+        observer.unobserve(headingRef.current);
+      }
+    };
+  }, []);
   const features = [
     {
       icon: Shield,
@@ -54,15 +78,15 @@ const About = () => {
       <div className="container mx-auto px-4 lg:px-8">
 
         {/* Leo9 Style Header */}
-        <div className="text-center mb-32 leo9-text-reveal">
+        <div ref={headingRef} className="text-center mb-32 leo9-text-reveal">
           <div className="mb-8">
             <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">About Us</span>
           </div>
           <h2 className="font-heading font-bold text-5xl md:text-7xl text-foreground mb-12 leading-tight">
-            <span style={{ animationDelay: '0.1s' }}>We are a premium</span><br/>
-            <span style={{ animationDelay: '0.2s' }}>real estate developer that</span><br/>
-            <span style={{ animationDelay: '0.3s' }}>transforms architectural vision</span><br/>
-            <span style={{ animationDelay: '0.4s' }}>into living reality</span>
+            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.1s' }}>We are a premium</span><br/>
+            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.3s' }}>real estate developer that</span><br/>
+            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.5s' }}>transforms architectural vision</span><br/>
+            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.7s' }}>into living reality</span>
           </h2>
         </div>
 
