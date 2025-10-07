@@ -54,17 +54,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Fixed Logo - Top Left */}
-      <div className="fixed top-6 left-6 z-50">
-        <a href="#home" className="flex items-center">
-          <img
-            src={vastwikLogo}
-            alt="Vastvik Realty"
-            className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 mix-blend-multiply"
-          />
-        </a>
-      </div>
-
       {/* Dynamic Island Header */}
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
@@ -74,6 +63,14 @@ const Header = () => {
         <div className="bg-muted/95 backdrop-blur-2xl rounded-full px-6 py-3 border border-border shadow-2xl">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2">
+            {/* Logo */}
+            <a href="#home" className="flex items-center mr-4">
+              <img
+                src={vastwikLogo}
+                alt="Vastvik Realty"
+                className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-90 hover:opacity-100 transition-opacity duration-300"
+              />
+            </a>
             {/* View Mode Toggle */}
             <div className="flex items-center bg-background rounded-full p-1 mr-4">
               <button
@@ -139,13 +136,22 @@ const Header = () => {
             </DropdownMenu>
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-foreground hover:text-primary transition-colors"
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center gap-3">
+            <a href="#home" className="flex items-center">
+              <img
+                src={vastwikLogo}
+                alt="Vastvik Realty"
+                className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
+              />
+            </a>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-8 h-8 flex items-center justify-center text-foreground hover:text-primary transition-colors"
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Dropdown */}
