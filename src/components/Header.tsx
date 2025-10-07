@@ -60,7 +60,7 @@ const Header = () => {
           isVisible ? 'top-6 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-muted/95 backdrop-blur-2xl rounded-full px-6 py-3 border border-border shadow-2xl">
+        <div className="bg-background/60 backdrop-blur-xl rounded-full px-6 py-3 border border-border/50 shadow-2xl">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2">
             {/* Logo */}
@@ -68,7 +68,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 [filter:brightness(0)_saturate(100%)_invert(1)] dark:[filter:brightness(0)_saturate(100%)_invert(0)]"
               />
             </a>
             {/* View Mode Toggle */}
@@ -142,7 +142,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
+                className="h-8 w-auto object-contain opacity-90 [filter:brightness(0)_saturate(100%)_invert(1)] dark:[filter:brightness(0)_saturate(100%)_invert(0)]"
               />
             </a>
             <button
@@ -156,7 +156,7 @@ const Header = () => {
 
         {/* Mobile Navigation Dropdown */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-background/95 backdrop-blur-xl border border-border rounded-3xl shadow-2xl w-[280px]">
+          <div className="md:hidden absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-background/60 backdrop-blur-xl border border-border/50 rounded-3xl shadow-2xl w-[280px]">
             <nav className="flex flex-col p-6 space-y-4">
               {fullViewItems.map((item) => (
                 <a
