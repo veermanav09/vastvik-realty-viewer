@@ -83,10 +83,18 @@ const About = () => {
             <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium">About Us</span>
           </div>
           <h2 className="font-heading font-bold text-5xl md:text-7xl text-foreground mb-12 leading-tight">
-            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.1s' }}>We are a premium</span><br/>
-            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.3s' }}>real estate developer that</span><br/>
-            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.5s' }}>transforms architectural vision</span><br/>
-            <span className={`inline-block transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.7s' }}>into living reality</span>
+            <span className="inline-block overflow-hidden">
+              <span className={`inline-block transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`} style={{ transitionDelay: '0.1s' }}>We are a premium</span>
+            </span><br/>
+            <span className="inline-block overflow-hidden">
+              <span className={`inline-block transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`} style={{ transitionDelay: '0.3s' }}>real estate developer that</span>
+            </span><br/>
+            <span className="inline-block overflow-hidden">
+              <span className={`inline-block transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`} style={{ transitionDelay: '0.5s' }}>transforms architectural vision</span>
+            </span><br/>
+            <span className="inline-block overflow-hidden">
+              <span className={`inline-block transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`} style={{ transitionDelay: '0.7s' }}>into living reality</span>
+            </span>
           </h2>
         </div>
 
