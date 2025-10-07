@@ -31,7 +31,6 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <Hero />
-      <InfiniteScrollBand />
       <About />
       <Projects />
       <BlogsSection />

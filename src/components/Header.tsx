@@ -68,7 +68,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 [filter:brightness(0)_saturate(100%)_invert(1)] dark:[filter:brightness(0)_saturate(100%)_invert(0)]"
+                className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-90 hover:opacity-100 transition-opacity duration-300"
               />
             </a>
             {/* View Mode Toggle */}
@@ -142,7 +142,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-8 w-auto object-contain opacity-90 [filter:brightness(0)_saturate(100%)_invert(1)] dark:[filter:brightness(0)_saturate(100%)_invert(0)]"
+                className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
               />
             </a>
             <button
