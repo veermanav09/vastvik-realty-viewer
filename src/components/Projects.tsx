@@ -69,7 +69,7 @@ const Projects = () => {
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className={`relative overflow-hidden rounded-2xl backdrop-blur-md bg-card/85 shadow-lg transition-all duration-500 ${isHovered ? 'shadow-2xl scale-[1.02]' : ''}`}>
+                <div className={`relative overflow-hidden rounded-3xl backdrop-blur-md bg-card/85 shadow-xl transition-all duration-500 ${isHovered ? 'shadow-2xl scale-[1.02]' : ''}`}>
                   {/* Image Section */}
                   <div className="relative h-64 overflow-hidden">
                     <img
