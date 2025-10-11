@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Globe, Home, MapPin, Users, Newspaper, Lightbulb, Map } from "lucide-react";
+import { Menu, X, Phone, Globe, Home, MapPin, Users, Newspaper, Lightbulb, Map, Gift } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo.jpeg";
 import {
   DropdownMenu,
@@ -38,6 +38,7 @@ const Header = () => {
     { name: "About", href: "#about" },
     { name: "Blogs", href: "#blogs" },
     { name: "Projects", href: "#projects" },
+    { name: "Referral", href: "/referral" },
     { name: "Contact", href: "#contact" }
   ];
 
@@ -46,6 +47,7 @@ const Header = () => {
     { name: "Ongoing Projects", icon: Home, href: "#projects" },
     { name: "Visit Samara", icon: MapPin, href: "#samara" },
     { name: "Contact Us", icon: Phone, href: "#contact" },
+    { name: "Referral Program", icon: Gift, href: "/referral" },
     { name: "For Developers", icon: Users, href: "#developers" },
     { name: "News", icon: Newspaper, href: "#blogs" },
     { name: "Insights", icon: Lightbulb, href: "#insights" },
@@ -118,7 +120,7 @@ const Header = () => {
                 <div className="space-y-1">
                   {menuItems.map((item, index) => {
                     const Icon = item.icon;
-                    const showDivider = index === 3 || index === 4;
+                    const showDivider = index === 3 || index === 5;
                     return (
                       <div key={item.name}>
                         <DropdownMenuItem asChild className="cursor-pointer py-3 px-4 hover:bg-muted rounded-xl transition-colors">
@@ -168,7 +170,7 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <div className="border-t pt-4">
+              <div className="border-t pt-4 space-y-3">
                 <Button
                   variant="outline"
                   size="sm"
