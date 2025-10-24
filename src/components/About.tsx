@@ -47,16 +47,8 @@ const About = () => {
       description: "Modern amenities seamlessly integrated with classic sophistication, delivering living spaces that set new standards."
     },
     {
-      title: "Enduring Value",
-      description: "Properties built to stand the test of time, offering lasting value in both construction quality and market appreciation."
-    },
-    {
       title: "Exceptional Amenities",
       description: "An array of world-class amenities that enhance comfort, convenience, and elevate your everyday living experience."
-    },
-    {
-      title: "Strategic Locations",
-      description: "Prime addresses that offer prestige, connectivity, and access to everything that matters in modern urban living."
     },
     {
       title: "Investment",
