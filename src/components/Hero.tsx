@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import PortfolioCarousel from "./PortfolioCarousel";
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showPortfolio, setShowPortfolio] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,9 +78,9 @@ const Hero = () => {
           {/* Clean CTA */}
           <div className="leo9-reveal depth-3d-item">
             <Button
-              onClick={scrollToProjects}
+              onClick={() => setShowPortfolio(true)}
               size="lg"
-              className="bg-white text-primary px-12 py-6 text-lg font-medium elevated-shadow hover:shadow-2xl transition-all duration-500 group premium-lift-subtle hover:scale-105"
+              className="bg-background/95 backdrop-blur-md text-foreground border-2 border-foreground px-12 py-6 text-lg font-semibold elevated-shadow hover:bg-foreground hover:text-background hover:shadow-2xl transition-all duration-500 group premium-lift-subtle hover:scale-105"
             >
               Explore Our Portfolio
               <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
@@ -94,6 +96,9 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Portfolio Carousel Modal */}
+      <PortfolioCarousel isOpen={showPortfolio} onClose={() => setShowPortfolio(false)} />
     </section>
   );
 };
