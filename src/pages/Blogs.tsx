@@ -17,7 +17,6 @@ const Blogs = () => {
       <div className="pt-24 pb-16 bg-gradient-subtle">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-6 text-primary border-primary">Latest Insights</Badge>
             <h1 className="font-heading font-bold text-5xl md:text-6xl mb-6">Real Estate Blog</h1>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -37,9 +37,6 @@ const BlogsSection = () => {
     <section id="blogs" className="py-24 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
-          <Badge variant="outline" className="mb-6 text-primary border-primary">
-            Latest Insights
-          </Badge>
           <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
             Real Estate Insights
           </h2>

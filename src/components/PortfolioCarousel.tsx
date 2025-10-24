@@ -63,14 +63,6 @@ const PortfolioCarousel = ({ isOpen, onClose }: PortfolioCarouselProps) => {
             <X className="w-6 h-6" />
           </button>
 
-          {/* Title */}
-          <div className="absolute top-6 left-6 z-40">
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground">
-              Our Portfolio
-            </h2>
-            <p className="text-sm text-muted-foreground mt-2">Hover to pause</p>
-          </div>
-
           {/* Infinite Carousel */}
           <div 
             className="relative w-full h-full flex items-center overflow-hidden"
