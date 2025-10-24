@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Globe, Home, MapPin, Users, Newspaper, Lightbulb, Map, Gift } from "lucide-react";
-import vastwikLogo from "@/assets/vastvik-logo.jpeg";
+import vastwikLogo from "@/assets/vastvik-logo-new.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,6 @@ import {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<"full" | "overview">("full");
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -70,35 +69,12 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="h-12 w-auto object-contain"
               />
             </a>
-            {/* View Mode Toggle */}
-            <div className="flex items-center bg-background rounded-full p-1 mr-4">
-              <button
-                onClick={() => setViewMode("full")}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  viewMode === "full"
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Full view
-              </button>
-              <button
-                onClick={() => setViewMode("overview")}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  viewMode === "overview"
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Overview
-              </button>
-            </div>
 
-            {/* Full View Items */}
-            {viewMode === "full" && fullViewItems.map((item) => (
+            {/* Navigation Items */}
+            {fullViewItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -144,7 +120,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
+                className="h-8 w-auto object-contain"
               />
             </a>
             <button
