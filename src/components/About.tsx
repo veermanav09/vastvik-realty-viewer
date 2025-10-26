@@ -163,8 +163,8 @@ const About = () => {
                 onMouseEnter={() => setHoveredItem(index)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className="border-b border-border py-4 transition-all duration-300">
-                  <h4 className="text-2xl md:text-3xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <div className="border-b border-border py-4 transition-all duration-300 group-hover:border-secondary/50">
+                  <h4 className="text-2xl md:text-3xl font-light text-muted-foreground group-hover:text-secondary transition-colors duration-300">
                     {item.title}
                   </h4>
                   
