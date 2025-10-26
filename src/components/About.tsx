@@ -66,7 +66,7 @@ const About = () => {
         {/* Header */}
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
-            Our Philosophy
+            About us
           </h2>
         </div>
 
