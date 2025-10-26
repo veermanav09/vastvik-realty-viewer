@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -42,8 +40,8 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          <div className="lg:col-span-3">
+        <div className="grid lg:grid-cols-1 gap-12">
+          <div className="lg:col-span-1">
             <div className="bg-card rounded-3xl p-12 elevated-shadow premium-lift">
               <h3 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-16">
                 Send us a Message
@@ -108,43 +106,27 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-7 text-xl"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2">
-            <div className="bg-card rounded-3xl p-10 elevated-shadow sticky top-24">
-              <h3 className="font-heading font-bold text-3xl text-foreground mb-8">
-                Let's Connect
-              </h3>
-
-              <div className="flex items-start space-x-6 p-8 rounded-3xl bg-gradient-card">
-                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-8 h-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-bold text-foreground mb-3 text-xl">Office Hours</h4>
-                  <p className="text-muted-foreground mb-6 text-lg leading-relaxed">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                <div className="flex gap-4">
                   <Button
-                    variant="outline"
-                    size="sm"
+                    type="submit"
+                    size="lg"
+                    className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-7 text-xl"
+                  >
+                    Send Message
+                  </Button>
+                  <Button
+                    type="button"
+                    size="lg"
                     onClick={() => {
                       const message = encodeURIComponent("Hi, I am interested to know more");
                       window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
                     }}
-                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-7 text-xl"
                   >
                     Schedule Visit via WhatsApp
                   </Button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

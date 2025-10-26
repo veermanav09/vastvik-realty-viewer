@@ -73,6 +73,11 @@ const Footer = () => {
                   Chandapura-Anekal Main Road, Bengaluru-562106
                 </button>
               </div>
+              <div className="pt-4">
+                <p className="text-sm text-white/80">
+                  Office Hours: Mon - Sat: 9:00 AM - 7:00 PM
+                </p>
+              </div>
             </div>
           </div>
 
