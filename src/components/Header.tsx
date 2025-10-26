@@ -44,7 +44,7 @@ const Header = () => {
           isVisible ? 'top-6 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-background/80 backdrop-blur-xl rounded-full px-6 py-2 border border-border/50 shadow-2xl">
+        <div className="bg-background/60 backdrop-blur-2xl rounded-2xl px-6 py-2.5 border border-white/20 shadow-xl">
           <nav className="flex items-center justify-between gap-8">
             {/* Left Navigation Items */}
             <div className="hidden md:flex items-center gap-6">
@@ -65,7 +65,7 @@ const Header = () => {
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain"
+                className="h-11 w-auto object-contain brightness-110"
               />
             </a>
 
