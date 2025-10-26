@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
-import vastwikLogo from "@/assets/vastvik-logo-new.png";
+import vastwikLogo from "@/assets/vastvik-logo-black.png";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
