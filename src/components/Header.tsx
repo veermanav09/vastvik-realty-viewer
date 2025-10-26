@@ -25,10 +25,13 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
+  const leftNavItems = [
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
-    { name: "Blogs", href: "#blogs" },
+    { name: "Blogs", href: "#blogs" }
+  ];
+
+  const rightNavItems = [
     { name: "Referral", href: "/referral" },
     { name: "Contact", href: "#contact" }
   ];
@@ -41,20 +44,41 @@ const Header = () => {
           isVisible ? 'top-6 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-background/80 backdrop-blur-xl rounded-full px-8 py-4 border border-border/50 shadow-2xl">
-          <nav className="flex items-center gap-8">
-            {/* Logo */}
+        <div className="bg-background/80 backdrop-blur-xl rounded-full px-6 py-2 border border-border/50 shadow-2xl">
+          <nav className="flex items-center justify-between gap-8">
+            {/* Left Navigation Items */}
+            <div className="hidden md:flex items-center gap-6">
+              {leftNavItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground hover:text-primary font-medium text-sm transition-all duration-300 relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ))}
+            </div>
+
+            {/* Logo - Center */}
             <a href="#home" className="flex items-center">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </a>
 
-            {/* Navigation Items */}
+            {/* Right Navigation Items */}
             <div className="hidden md:flex items-center gap-6">
-              {navItems.map((item) => (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-foreground hover:text-primary font-medium text-sm"
+              >
+                Overview
+              </Button>
+              {rightNavItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
