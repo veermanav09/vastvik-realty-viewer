@@ -94,7 +94,7 @@ const Header = () => {
       </header>
 
       {/* Floating Contact Button - Above Chatbot */}
-      <div className="fixed bottom-28 right-6 z-40">
+      <div className="fixed bottom-20 right-6 z-40">
         <Button
           size="lg"
           className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
