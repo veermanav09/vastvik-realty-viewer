@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
 
 const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -14,9 +16,9 @@ const About = () => {
       const windowHeight = window.innerHeight;
       const elementHeight = rect.height;
       
-      // Calculate progress based on element position in viewport
-      const start = windowHeight;
-      const end = -elementHeight;
+      // Faster animation - completes when element is centered in viewport
+      const start = windowHeight * 0.8;
+      const end = windowHeight * 0.2;
       const current = rect.top;
       
       const progress = Math.max(0, Math.min(1, (start - current) / (start - end)));
@@ -60,8 +62,49 @@ const About = () => {
   const totalChars = largeText.length;
 
   return (
-    <section id="about" ref={sectionRef} className="py-32 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="about" ref={sectionRef} className="relative py-32 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+      {/* 3D Background Elements */}
+      <div className="absolute inset-0 opacity-30">
+        <Canvas camera={{ position: [0, 0, 5] }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+            <Sphere args={[1, 32, 32]} position={[-3, 2, 0]}>
+              <MeshDistortMaterial
+                color="#B57B66"
+                attach="material"
+                distort={0.3}
+                speed={2}
+                roughness={0.4}
+              />
+            </Sphere>
+          </Float>
+          <Float speed={1.8} rotationIntensity={0.6} floatIntensity={0.7}>
+            <Sphere args={[0.7, 32, 32]} position={[3, -1, -1]}>
+              <MeshDistortMaterial
+                color="#A1A79E"
+                attach="material"
+                distort={0.4}
+                speed={1.5}
+                roughness={0.3}
+              />
+            </Sphere>
+          </Float>
+          <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
+            <Sphere args={[0.5, 32, 32]} position={[2, 3, -2]}>
+              <MeshDistortMaterial
+                color="#B57B66"
+                attach="material"
+                distort={0.35}
+                speed={1.8}
+                roughness={0.5}
+              />
+            </Sphere>
+          </Float>
+        </Canvas>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-24">
@@ -78,15 +121,25 @@ const About = () => {
             <div ref={largeTextRef} className="relative">
               <h3 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight break-words">
                 {largeText.split('').map((char, index) => {
-                  const charProgress = (scrollProgress * totalChars) - index;
+                  const charProgress = (scrollProgress * totalChars * 1.2) - index;
                   const opacity = Math.max(0, Math.min(1, charProgress));
+                  
+                  // Calculate gradient color based on character position
+                  const colorProgress = index / totalChars;
+                  const hue1 = 25; // Orange
+                  const hue2 = 10; // Red-orange
+                  const currentHue = hue1 + (hue2 - hue1) * colorProgress;
                   
                   return (
                     <span
                       key={index}
-                      className={char === ' ' ? 'inline-block w-3 md:w-4' : 'inline-block transition-colors duration-300'}
+                      className={char === ' ' ? 'inline-block w-3 md:w-4' : 'inline-block transition-all duration-500 ease-out'}
                       style={{
-                        color: `hsl(var(--foreground) / ${0.3 + (opacity * 0.7)})`
+                        color: opacity > 0.1 
+                          ? `hsl(${currentHue}, 70%, ${45 + opacity * 15}%)`
+                          : 'hsl(var(--muted-foreground) / 0.2)',
+                        transform: `translateY(${(1 - opacity) * 10}px)`,
+                        filter: `blur(${(1 - opacity) * 2}px)`
                       }}
                     >
                       {char === ' ' ? '\u00A0' : char}
