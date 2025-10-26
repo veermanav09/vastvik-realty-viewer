@@ -119,7 +119,7 @@ const About = () => {
           {/* Left Side - Large Text with Letter Animation */}
           <div className="lg:pr-12">
             <div ref={largeTextRef} className="relative">
-              <h3 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight break-words">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight break-words">
                 {largeText.split('').map((char, index) => {
                   const charProgress = (scrollProgress * totalChars * 1.2) - index;
                   const opacity = Math.max(0, Math.min(1, charProgress));
