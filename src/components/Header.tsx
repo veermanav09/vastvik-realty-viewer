@@ -96,12 +96,11 @@ const Header = () => {
       {/* Floating Contact Button - Above Chatbot */}
       <div className="fixed bottom-28 right-6 z-40">
         <Button
-          variant="outline"
           size="lg"
-          className="bg-background/95 backdrop-blur-xl border-2 border-foreground text-foreground hover:bg-foreground hover:text-background font-semibold rounded-full shadow-lg px-6"
+          className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
           onClick={() => window.location.href = 'tel:+918884545404'}
         >
-          <Phone className="w-5 h-5 mr-2" />
+          <Phone className="w-4 h-4 mr-2" />
           <span>Get In Touch</span>
         </Button>
       </div>
