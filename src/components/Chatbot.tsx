@@ -44,13 +44,13 @@ const Chatbot = () => {
           <Button
             onClick={() => setIsOpen(true)}
             size="lg"
-            className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
+            className="bg-primary/90 backdrop-blur-xl text-primary-foreground hover:bg-primary hover:shadow-2xl font-medium rounded-full px-6 transition-all duration-300 border border-background/70 shadow-xl"
           >
             <MessageCircle className="w-4 h-4 mr-2" />
             <span className="hidden sm:inline">Chat Help</span>
             <span className="sm:hidden">Chat</span>
           </Button>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
         </div>
       )}
 

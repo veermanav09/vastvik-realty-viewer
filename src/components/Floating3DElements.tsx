@@ -87,7 +87,7 @@ const Floating3DElements = () => {
 
     // Create particles
     const particles: Particle[] = [];
-    const particleCount = 50;
+    const particleCount = 120;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
@@ -115,8 +115,8 @@ const Floating3DElements = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'screen' }}
+      className="fixed inset-0 pointer-events-none z-10 opacity-25"
+      style={{ mixBlendMode: 'soft-light' }}
     />
   );
 };

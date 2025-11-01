@@ -142,7 +142,7 @@ const Header = () => {
       <div className="fixed bottom-20 right-6 z-[100]">
         <Button
           size="lg"
-          className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
+          className="bg-primary/90 backdrop-blur-xl text-primary-foreground hover:bg-primary hover:shadow-2xl font-medium rounded-full px-6 transition-all duration-300 border border-background/70 shadow-xl"
           onClick={() => window.location.href = 'tel:+918884545404'}
         >
           <Phone className="w-4 h-4 mr-2" />
