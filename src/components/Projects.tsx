@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
+import elementImage from "@/assets/element-project.png";
 
 const Projects = () => {
   const [brochureDialog, setBrochureDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
@@ -21,7 +22,7 @@ const Projects = () => {
       units: "60 UNITS",
       price: "38 LAKHS ONWARD",
       location: "MARSUR GATE",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop",
+      image: elementImage,
       features: ["Premium Amenities", "Gated Community", "24/7 Security"],
       completion: "Dec 2024",
       description: "Experience luxury living at Element with modern architecture and world-class amenities. Located in the heart of Marsur Gate with excellent connectivity.",
