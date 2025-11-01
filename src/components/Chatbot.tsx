@@ -40,21 +40,22 @@ const Chatbot = () => {
   return (
     <>
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-6 right-6 z-[100]">
           <Button
             onClick={() => setIsOpen(true)}
             size="lg"
             className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
           >
             <MessageCircle className="w-4 h-4 mr-2" />
-            <span>Chat Help</span>
+            <span className="hidden sm:inline">Chat Help</span>
+            <span className="sm:hidden">Chat</span>
           </Button>
           <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
       )}
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-2rem)] z-50">
+        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-2rem)] z-[100]">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden card-shadow">
             <div className="bg-gradient-primary p-6 text-white">
               <div className="flex items-center justify-between mb-4">

@@ -42,13 +42,13 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-1 gap-12">
           <div className="lg:col-span-1">
-            <div className="bg-card rounded-3xl p-12 elevated-shadow premium-lift">
-              <h3 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-16">
+            <div className="bg-card rounded-3xl p-6 md:p-12 elevated-shadow premium-lift">
+              <h3 className="font-heading font-bold text-3xl md:text-5xl lg:text-6xl text-foreground mb-8 md:mb-16">
                 Send us a Message
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-10">
-                <div className="grid md:grid-cols-2 gap-10">
+              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
+                <div className="grid md:grid-cols-2 gap-6 md:gap-10">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">
                       Full Name *
@@ -106,11 +106,11 @@ const Contact = () => {
                   />
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Button
                     type="submit"
                     size="lg"
-                    className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-7 text-xl"
+                    className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-5 sm:py-7 text-base sm:text-xl"
                   >
                     Send Message
                   </Button>
@@ -121,9 +121,10 @@ const Contact = () => {
                       const message = encodeURIComponent("Hi, I am interested to know more");
                       window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
                     }}
-                    className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-7 text-xl"
+                    className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-5 sm:py-7 text-base sm:text-xl"
                   >
-                    Schedule Visit via WhatsApp
+                    <span className="hidden sm:inline">Schedule Visit via WhatsApp</span>
+                    <span className="sm:hidden">WhatsApp Visit</span>
                   </Button>
                 </div>
               </form>

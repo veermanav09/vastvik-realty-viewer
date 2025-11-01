@@ -9,6 +9,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
+import Floating3DElements from "@/components/Floating3DElements";
 
 const Index = () => {
   useEffect(() => {
@@ -29,7 +30,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <Floating3DElements />
       <Header />
       <Hero />
       <About />

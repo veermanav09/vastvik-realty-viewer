@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-black.png";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let lastY = 0;
@@ -89,19 +91,63 @@ const Header = () => {
                 </a>
               ))}
             </div>
+
+            {/* Mobile Menu Button */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-6 mt-8">
+                  {leftNavItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                  <Button
+                    variant="ghost"
+                    className="text-foreground hover:text-secondary font-medium text-lg justify-start"
+                  >
+                    Overview
+                  </Button>
+                  {rightNavItems.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </nav>
         </div>
       </header>
 
       {/* Floating Contact Button - Above Chatbot */}
-      <div className="fixed bottom-20 right-6 z-40">
+      <div className="fixed bottom-20 right-6 z-[100]">
         <Button
           size="lg"
           className="bg-primary/90 backdrop-blur-xl text-white hover:bg-primary hover:shadow-xl font-medium rounded-full shadow-lg px-6 transition-all duration-300"
           onClick={() => window.location.href = 'tel:+918884545404'}
         >
           <Phone className="w-4 h-4 mr-2" />
-          <span>Get In Touch</span>
+          <span className="hidden sm:inline">Get In Touch</span>
+          <span className="sm:hidden">Call</span>
         </Button>
       </div>
     </>
