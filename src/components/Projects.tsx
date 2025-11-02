@@ -69,30 +69,32 @@ const Projects = () => {
               >
                 <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-500 ${isHovered ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]'}`}>
                   {/* Image Section */}
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="relative p-4">
+                    <div className={`relative h-56 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     
-                    {/* Badge */}
-                    <Badge
-                      variant={project.type === "ONGOING" ? "default" : "secondary"}
-                      className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white px-3 py-1 text-xs font-semibold`}
-                    >
-                      {project.type}
-                    </Badge>
+                      {/* Badge */}
+                      <Badge
+                        variant={project.type === "ONGOING" ? "default" : "secondary"}
+                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white px-3 py-1 text-xs font-semibold`}
+                      >
+                        {project.type}
+                      </Badge>
 
-                    {/* Title Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-heading font-bold text-2xl text-white mb-1">
-                        {project.name}
-                      </h3>
-                      <div className="flex items-center gap-1.5 text-white/90 text-sm">
-                        <MapPin className="w-4 h-4" />
-                        <span>{project.location}</span>
+                      {/* Title Overlay */}
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="font-heading font-bold text-2xl text-white mb-1">
+                          {project.name}
+                        </h3>
+                        <div className="flex items-center gap-1.5 text-white/90 text-sm">
+                          <MapPin className="w-4 h-4" />
+                          <span>{project.location}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
