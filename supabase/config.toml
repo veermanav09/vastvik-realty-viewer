@@ -1,1 +1,4 @@
 project_id = "lahntbtkexelailmzrew"
+
+[functions.vastvik-chat]
+verify_jwt = false

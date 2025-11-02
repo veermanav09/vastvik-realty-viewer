@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, Send, MessageCircle, Phone, User } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import vastvikLogo from "@/assets/vastvik-logo-new.png";
 
 const Chatbot = () => {
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedProject, setSelectedProject] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([
-    { role: "assistant", content: "Hello! I'm Vastvik AI assistant. How can I help you today?" }
+    { role: "assistant", content: "Hello! I'm Vastvik AI assistant. I can help you with information about our projects like Element and High Rise. How can I assist you today?" }
   ]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const projects = [
     "Element - Villas",
@@ -26,14 +32,51 @@ const Chatbot = () => {
     ]);
   };
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = async () => {
+    if (message.trim() && !isLoading) {
       const userMessage = message;
       setMessage("");
-      setMessages(prev => [...prev, 
-        { role: "user", content: userMessage },
-        { role: "assistant", content: "Thank you for your message. Our team will get back to you soon!" }
-      ]);
+      setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+      setIsLoading(true);
+
+      try {
+        const { data, error } = await supabase.functions.invoke('vastvik-chat', {
+          body: { 
+            messages: [...messages, { role: "user", content: userMessage }]
+          }
+        });
+
+        if (error) {
+          console.error('Error calling chat function:', error);
+          throw error;
+        }
+
+        const aiResponse = data?.choices?.[0]?.message?.content || 
+          "I'm sorry, I couldn't process that. Please try asking about our projects or contact us at +91 88845 45404.";
+
+        setMessages(prev => [...prev, { role: "assistant", content: aiResponse }]);
+      } catch (error) {
+        console.error('Chat error:', error);
+        toast({
+          title: "Error",
+          description: "Unable to process your message. Please try again.",
+          variant: "destructive",
+        });
+        setMessages(prev => [...prev, { 
+          role: "assistant", 
+          content: "I apologize, but I'm having trouble connecting right now. Please call us at +91 88845 45404 for immediate assistance." 
+        }]);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -60,14 +103,18 @@ const Chatbot = () => {
             <div className="bg-gradient-primary p-6 text-white">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-                    <span className="font-heading font-bold text-lg">V</span>
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-lg">
+                    <img 
+                      src={vastvikLogo} 
+                      alt="Vastvik Logo" 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Vastvik Realty</h3>
+                    <h3 className="font-bold text-lg">Vastvik AI</h3>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-sm">We are online to assist you</span>
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm">AI-powered assistant</span>
                     </div>
                   </div>
                 </div>
@@ -82,7 +129,7 @@ const Chatbot = () => {
               </div>
             </div>
 
-            <div className="p-6 pt-0 max-h-64 overflow-y-auto space-y-4 mb-4">
+            <div className="p-6 pt-0 max-h-80 overflow-y-auto space-y-4 mb-4">
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[80%] p-3 rounded-2xl ${
@@ -90,10 +137,22 @@ const Chatbot = () => {
                       ? 'bg-primary text-white'
                       : 'bg-accent/50 text-foreground'
                   }`}>
-                    <p className="text-sm">{msg.content}</p>
+                    <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-accent/50 p-3 rounded-2xl">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
 
             <div className="p-6 pt-0">
@@ -155,7 +214,7 @@ const Chatbot = () => {
                   onClick={handleSendMessage}
                   size="sm"
                   className="bg-gradient-primary rounded-full w-10 h-10 p-0"
-                  disabled={!message.trim()}
+                  disabled={!message.trim() || isLoading}
                 >
                   <Send className="w-4 h-4" />
                 </Button>
