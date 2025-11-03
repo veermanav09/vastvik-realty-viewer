@@ -42,92 +42,92 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-1 gap-12">
           <div className="lg:col-span-1">
-            <div className="bg-card rounded-3xl p-6 md:p-12 elevated-shadow premium-lift">
-              <h3 className="font-heading font-bold text-3xl md:text-5xl lg:text-6xl text-foreground mb-8 md:mb-16">
-                Send us a Message
-              </h3>
+          <div className="bg-card rounded-3xl p-4 md:p-6 elevated-shadow premium-lift">
+            <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-4 md:mb-6">
+              Send us a Message
+            </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
-                <div className="grid md:grid-cols-2 gap-6 md:gap-10">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-3">
-                      Full Name *
-                    </label>
-                    <Input
-                      name="name"
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="border-primary/30 focus:border-primary py-6 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-3">
-                      Phone Number *
-                    </label>
-                    <Input
-                      name="phone"
-                      placeholder="Your phone number"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="border-primary/30 focus:border-primary py-6 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-                </div>
-
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-3">
-                    Email Address *
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Full Name *
                   </label>
                   <Input
-                    name="email"
-                    type="email"
-                    placeholder="Your email address"
-                    value={formData.email}
+                    name="name"
+                    placeholder="Your full name"
+                    value={formData.name}
                     onChange={handleInputChange}
-                    className="border-primary/30 focus:border-primary py-6 text-lg rounded-2xl"
+                    className="border-primary/30 focus:border-primary rounded-xl"
                     required
                   />
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-3">
-                    Message
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Phone Number *
                   </label>
-                  <Textarea
-                    name="message"
-                    placeholder="Tell us about your requirements..."
-                    rows={5}
-                    value={formData.message}
+                  <Input
+                    name="phone"
+                    placeholder="Your phone number"
+                    value={formData.phone}
                     onChange={handleInputChange}
-                    className="border-primary/30 focus:border-primary resize-none text-lg rounded-2xl"
+                    className="border-primary/30 focus:border-primary rounded-xl"
+                    required
                   />
                 </div>
+              </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-5 sm:py-7 text-base sm:text-xl"
-                  >
-                    Send Message
-                  </Button>
-                  <Button
-                    type="button"
-                    size="lg"
-                    onClick={() => {
-                      const message = encodeURIComponent("Hi, I am interested to know more");
-                      window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
-                    }}
-                    className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-5 sm:py-7 text-base sm:text-xl"
-                  >
-                    <span className="hidden sm:inline">Schedule Visit via WhatsApp</span>
-                    <span className="sm:hidden">WhatsApp Visit</span>
-                  </Button>
-                </div>
-              </form>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Email Address *
+                </label>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Your email address"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="border-primary/30 focus:border-primary rounded-xl"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Message
+                </label>
+                <Textarea
+                  name="message"
+                  placeholder="Tell us about your requirements..."
+                  rows={3}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="border-primary/30 focus:border-primary resize-none rounded-xl"
+                />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300"
+                >
+                  Send Message
+                </Button>
+                <Button
+                  type="button"
+                  size="lg"
+                  onClick={() => {
+                    const message = encodeURIComponent("Hi, I am interested to know more");
+                    window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
+                  }}
+                  className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300"
+                >
+                  <span className="hidden sm:inline">Schedule Visit via WhatsApp</span>
+                  <span className="sm:hidden">WhatsApp Visit</span>
+                </Button>
+              </div>
+            </form>
             </div>
           </div>
         </div>
