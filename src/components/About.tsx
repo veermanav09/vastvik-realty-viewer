@@ -62,7 +62,7 @@ const About = () => {
   const totalChars = largeText.length;
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
       {/* 3D Background Elements */}
       <div className="absolute inset-0 opacity-30">
         <Canvas camera={{ position: [0, 0, 5] }}>
