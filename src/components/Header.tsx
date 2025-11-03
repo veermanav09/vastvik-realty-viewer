@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-black.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     let lastY = 0;
@@ -28,68 +30,82 @@ const Header = () => {
   }, []);
 
   const leftNavItems = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Blogs", href: "#blogs" }
+    { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Blogs", href: "/blogs" }
   ];
 
   const rightNavItems = [
     { name: "Referral", href: "/referral" },
-    { name: "Contact", href: "#contact" }
+    { name: "Contact", href: "/contact" }
   ];
 
   return (
     <>
-      {/* Header with Logo and Navigation */}
+      {/* Header with Logo and Navigation - Liquid Glass Effect */}
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
-          isVisible ? 'top-6 opacity-100' : '-top-24 opacity-0'
+          isVisible ? 'top-4 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-white/70 dark:bg-black/70 backdrop-blur-2xl rounded-2xl px-6 py-2 border border-white/20 shadow-xl">
-          <nav className="flex items-center justify-between gap-8">
+        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-full px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-all duration-300">
+          <nav className="flex items-center justify-between gap-6">
             {/* Left Navigation Items */}
-            <div className="hidden md:flex items-center gap-6">
-              {leftNavItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-secondary font-medium text-sm transition-all duration-300 relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
+            <div className="hidden md:flex items-center gap-5">
+              {leftNavItems.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group ${
+                      isActive ? 'text-secondary' : 'hover:text-secondary'
+                    }`}
+                  >
+                    {item.name}
+                    <span className={`absolute -bottom-1 left-0 h-px bg-secondary transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Logo - Center */}
-            <a href="#home" className="flex items-center px-4">
+            <Link to="/" className="flex items-center px-3">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-12 w-auto object-contain filter drop-shadow-md"
+                className="h-10 w-auto object-contain filter drop-shadow-md"
               />
-            </a>
+            </Link>
 
             {/* Right Navigation Items */}
-            <div className="hidden md:flex items-center gap-6">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-secondary font-medium text-sm"
+            <div className="hidden md:flex items-center gap-5">
+              <Link
+                to="/"
+                className="text-foreground hover:text-secondary font-medium text-sm transition-all duration-300 relative group"
               >
                 Overview
-              </Button>
-              {rightNavItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-secondary font-medium text-sm transition-all duration-300 relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              {rightNavItems.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group ${
+                      isActive ? 'text-secondary' : 'hover:text-secondary'
+                    }`}
+                  >
+                    {item.name}
+                    <span className={`absolute -bottom-1 left-0 h-px bg-secondary transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Mobile Menu Button */}
@@ -106,30 +122,31 @@ const Header = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-6 mt-8">
                   {leftNavItems.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
-                  <Button
-                    variant="ghost"
-                    className="text-foreground hover:text-secondary font-medium text-lg justify-start"
+                  <Link
+                    to="/"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
                   >
                     Overview
-                  </Button>
+                  </Link>
                   {rightNavItems.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </SheetContent>

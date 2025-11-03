@@ -9,6 +9,9 @@ import DownloadBrochure from "./pages/DownloadBrochure";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Referral from "./pages/Referral";
+import AboutPage from "./pages/AboutPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +24,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/project/:id" element={<ProjectDetails />} />
           <Route path="/download-brochure/:id" element={<DownloadBrochure />} />
           <Route path="/blogs" element={<Blogs />} />
