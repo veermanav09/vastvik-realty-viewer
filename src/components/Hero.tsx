@@ -31,22 +31,21 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative h-screen flex items-center justify-center overflow-hidden pt-20 px-4 md:px-8"
       style={{ opacity }}
     >
-      {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Video Container with Rounded Corners */}
+      <div className="absolute inset-8 md:inset-12 rounded-[32px] overflow-hidden">
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover"
           key="hero-video"
         >
-          <source src="https://cdn.pixabay.com/video/2022/04/05/113253-696298069_large.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
 

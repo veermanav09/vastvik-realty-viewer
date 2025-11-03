@@ -48,7 +48,7 @@ const Header = () => {
           isVisible ? 'top-4 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-full px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-all duration-300">
+        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-2xl px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-all duration-300">
           <nav className="flex items-center justify-between gap-6">
             {/* Left Navigation Items */}
             <div className="hidden md:flex items-center gap-5">
