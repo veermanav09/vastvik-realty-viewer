@@ -47,7 +47,6 @@ const Hero = () => {
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
 
         {/* 3D Floating Overlays */}
         <div className="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-float-slow"></div>

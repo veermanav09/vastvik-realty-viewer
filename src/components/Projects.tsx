@@ -76,7 +76,6 @@ const Projects = () => {
                         alt={project.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     
                       {/* Badge */}
                       <Badge
@@ -87,7 +86,7 @@ const Projects = () => {
                       </Badge>
 
                       {/* Title Overlay */}
-                      <div className="absolute bottom-4 left-4 right-4">
+                      <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-3">
                         <h3 className="font-heading font-bold text-2xl text-white mb-1">
                           {project.name}
                         </h3>
