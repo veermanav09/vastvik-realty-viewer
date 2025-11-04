@@ -7,6 +7,7 @@ import { Copy, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import referralImage from "@/assets/referral-image.jpg";
 
 const Referral = () => {
   const { toast } = useToast();
@@ -30,9 +31,18 @@ const Referral = () => {
             <h1 className="font-heading font-bold text-6xl md:text-7xl mb-6">Refer & Earn <span className="text-primary">Up to 2%</span></h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">Invite friends and earn up to 2% on every successful booking</p>
           </div>
+          
+          {/* Referral Image */}
+          <div className="flex justify-center mt-16">
+            <img 
+              src={referralImage} 
+              alt="Referral Program" 
+              className="w-full max-w-2xl h-auto rounded-3xl shadow-2xl object-cover"
+            />
+          </div>
         </div>
       </section>
-      <section className="py-20">
+      <section className="py-20 mt-8">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-card rounded-3xl p-8 md:p-12 card-shadow">
             <h3 className="font-heading font-bold text-3xl mb-10 text-center">Start Referring Today</h3>
