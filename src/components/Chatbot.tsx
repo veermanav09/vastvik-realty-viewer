@@ -86,14 +86,12 @@ const Chatbot = () => {
         <div className="fixed bottom-6 right-6 z-[100]">
           <Button
             onClick={() => setIsOpen(true)}
-            size="lg"
-            className="bg-primary/90 backdrop-blur-xl text-primary-foreground hover:bg-primary hover:shadow-2xl font-medium rounded-full px-6 transition-all duration-300 border border-background/70 shadow-xl"
+            size="icon"
+            className="w-14 h-14 bg-white/40 dark:bg-black/40 backdrop-blur-xl text-primary hover:bg-white/60 dark:hover:bg-black/60 hover:shadow-2xl rounded-full transition-all duration-300 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
           >
-            <MessageCircle className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Chat Help</span>
-            <span className="sm:hidden">Chat</span>
+            <MessageCircle className="w-5 h-5" />
           </Button>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-background animate-pulse" />
         </div>
       )}
 
