@@ -18,8 +18,8 @@ const Floating3DElements = () => {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    // Particle system for 3D floating elements
-    class Particle {
+    // Nature-inspired particle system
+    class NatureParticle {
       x: number;
       y: number;
       z: number;
@@ -27,34 +27,44 @@ const Floating3DElements = () => {
       speedX: number;
       speedY: number;
       speedZ: number;
+      rotation: number;
+      rotationSpeed: number;
       color: string;
       opacity: number;
+      type: 'leaf' | 'flower' | 'butterfly' | 'petal';
 
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
         this.z = Math.random() * 1000;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.speedZ = Math.random() * 2 + 1;
+        this.size = Math.random() * 15 + 10;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.speedZ = Math.random() * 1.5 + 0.5;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
         
-        // Use terracotta and sage colors from design system
+        // Nature-inspired colors
         const colors = [
-          'rgba(165, 111, 98, 0.6)',  // terracotta
-          'rgba(154, 163, 158, 0.6)',  // sage
-          'rgba(165, 111, 98, 0.3)',   // lighter terracotta
+          'rgba(134, 163, 118, 0.7)',  // sage green
+          'rgba(165, 111, 98, 0.7)',   // terracotta
+          'rgba(188, 147, 128, 0.6)',  // lighter terracotta
+          'rgba(106, 130, 94, 0.7)',   // darker green
+          'rgba(218, 181, 150, 0.6)',  // beige
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.5 + 0.3;
+        this.opacity = Math.random() * 0.6 + 0.3;
+        
+        const types = ['leaf', 'flower', 'butterfly', 'petal'] as const;
+        this.type = types[Math.floor(Math.random() * types.length)];
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
         this.z -= this.speedZ;
+        this.rotation += this.rotationSpeed;
 
-        // Reset particle when it goes out of bounds
         if (this.z < 1) {
           this.z = 1000;
           this.x = Math.random() * canvas!.width;
@@ -70,6 +80,68 @@ const Floating3DElements = () => {
         }
       }
 
+      drawLeaf(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(this.rotation);
+        ctx.beginPath();
+        ctx.moveTo(0, -size);
+        ctx.quadraticCurveTo(size * 0.6, -size * 0.3, size * 0.4, size * 0.2);
+        ctx.quadraticCurveTo(size * 0.2, size * 0.6, 0, size);
+        ctx.quadraticCurveTo(-size * 0.2, size * 0.6, -size * 0.4, size * 0.2);
+        ctx.quadraticCurveTo(-size * 0.6, -size * 0.3, 0, -size);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      drawFlower(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(this.rotation);
+        const petals = 5;
+        for (let i = 0; i < petals; i++) {
+          ctx.save();
+          ctx.rotate((Math.PI * 2 * i) / petals);
+          ctx.beginPath();
+          ctx.ellipse(0, -size * 0.4, size * 0.3, size * 0.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+        ctx.restore();
+      }
+
+      drawButterfly(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(this.rotation);
+        
+        // Left wing
+        ctx.beginPath();
+        ctx.ellipse(-size * 0.3, 0, size * 0.4, size * 0.6, -0.2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Right wing
+        ctx.beginPath();
+        ctx.ellipse(size * 0.3, 0, size * 0.4, size * 0.6, 0.2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+      }
+
+      drawPetal(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(this.rotation);
+        ctx.beginPath();
+        ctx.moveTo(0, -size);
+        ctx.quadraticCurveTo(size * 0.5, -size * 0.5, size * 0.3, 0);
+        ctx.quadraticCurveTo(size * 0.5, size * 0.5, 0, size);
+        ctx.quadraticCurveTo(-size * 0.5, size * 0.5, -size * 0.3, 0);
+        ctx.quadraticCurveTo(-size * 0.5, -size * 0.5, 0, -size);
+        ctx.fill();
+        ctx.restore();
+      }
+
       draw(ctx: CanvasRenderingContext2D) {
         const scale = 1000 / (1000 + this.z);
         const x2d = (this.x - canvas!.width / 2) * scale + canvas!.width / 2;
@@ -78,19 +150,32 @@ const Floating3DElements = () => {
 
         ctx.fillStyle = this.color;
         ctx.globalAlpha = this.opacity * scale;
-        ctx.beginPath();
-        ctx.arc(x2d, y2d, size2d, 0, Math.PI * 2);
-        ctx.fill();
+
+        switch (this.type) {
+          case 'leaf':
+            this.drawLeaf(ctx, x2d, y2d, size2d);
+            break;
+          case 'flower':
+            this.drawFlower(ctx, x2d, y2d, size2d);
+            break;
+          case 'butterfly':
+            this.drawButterfly(ctx, x2d, y2d, size2d);
+            break;
+          case 'petal':
+            this.drawPetal(ctx, x2d, y2d, size2d);
+            break;
+        }
+
         ctx.globalAlpha = 1;
       }
     }
 
-    // Create particles
-    const particles: Particle[] = [];
-    const particleCount = 120;
+    // Create nature particles
+    const particles: NatureParticle[] = [];
+    const particleCount = 80;
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+      particles.push(new NatureParticle());
     }
 
     // Animation loop
