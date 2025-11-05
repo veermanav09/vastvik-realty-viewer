@@ -84,7 +84,7 @@ const Chatbot = () => {
   return (
     <>
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-40 group">
+        <div className="fixed bottom-6 right-6 z-[200] group">
           <Button
             onClick={() => setIsOpen(true)}
             size="icon"
@@ -92,13 +92,13 @@ const Chatbot = () => {
           >
             <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
           </Button>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-pulse shadow-lg" />
-          <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping opacity-75" />
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-pulse shadow-lg pointer-events-none" />
+          <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping opacity-75 pointer-events-none" />
         </div>
       )}
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-2rem)] z-40 animate-in slide-in-from-bottom-8 duration-500">
+        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-2rem)] z-[200] animate-in slide-in-from-bottom-8 duration-500">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-primary/10">
             <div className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-6 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
