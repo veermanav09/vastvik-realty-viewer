@@ -42,13 +42,13 @@ const Header = () => {
 
   return (
     <>
-      {/* Header with Logo and Navigation - Liquid Glass Effect */}
+      {/* Header with Logo and Navigation - Permanent Liquid Glass Effect */}
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
           isVisible ? 'top-4 opacity-100' : '-top-24 opacity-0'
         }`}
       >
-        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-2xl px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-all duration-300">
+        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-2xl px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-shadow duration-300">
           <nav className="flex items-center justify-between gap-6">
             {/* Left Navigation Items */}
             <div className="hidden md:flex items-center gap-5">
@@ -156,7 +156,7 @@ const Header = () => {
       </header>
 
       {/* Floating Contact Button - Above Chatbot */}
-      <div className="fixed bottom-24 right-6 z-[100]">
+      <div className="fixed bottom-24 right-6 z-40">
         <Button
           size="icon"
           className="w-14 h-14 bg-black/90 backdrop-blur-xl text-[#86A376] hover:bg-black hover:shadow-2xl rounded-full transition-all duration-300 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
