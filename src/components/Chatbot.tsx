@@ -14,7 +14,7 @@ const Chatbot = () => {
   const [selectedProject, setSelectedProject] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([
-    { role: "assistant", content: "Hello! I'm Vastvik AI assistant. I can help you with information about our projects like Element and High Rise. How can I assist you today?" }
+    { role: "assistant", content: "Hello! I'm Vastvik AI assistant. I can help you with information about our projects like Element (2 & 3 BHK at Marsur Gate, starting ₹45 Lakhs) and High Rise apartments. How can I assist you today?" }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

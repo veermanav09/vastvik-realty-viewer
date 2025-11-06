@@ -13,16 +13,66 @@ You are Vastvik AI Assistant, a helpful and knowledgeable assistant for Vastvik 
 ## PROJECTS
 
 ### ELEMENT (ONGOING PROJECT)
-- Configuration: 1, 2 & 3 BHK apartments
+- Configuration: 2 & 3 BHK apartments
 - Units: 60 UNITS
-- Starting Price: ₹38 LAKHS ONWARD
-- Location: MARSUR GATE, Plot No. 45, Marsur Gate Main Road, Near City Mall, Bangalore - 560103
+- Starting Price: ₹45 LAKHS ONWARD
+- Location: MARSUR GATE, Sy.No-340/2&3, Marsur gate, opp M tres school, chandapura, anekal main road, bengaluru -562106
 - Features: Premium Amenities, Gated Community, 24/7 Security
-- Expected Completion: December 2024
-- Description: Experience luxury living at Element with modern architecture and world-class amenities. Located in the heart of Marsur Gate with excellent connectivity.
-- Land Parcel: Approximately 2.5 acres
+- Expected Completion: April 2027
+- Description: Vastvik Element is a luxury residential apartment project recently launched by Vastvik Realty at Marsur Gate, off Chandapura Road near Electronic City in South East Bangalore. Element comprises some of the best luxuries of living, offering expansive 2 and 3 BHK apartments set amidst beautifully landscaped open spaces. The project prioritizes comfort and an elite lifestyle for the residents who value quality and convenience. Situated at prime area in Marsur Gate, it connects with the Outer Ring Road, Electronic City, Sarjapur Road and HSR Layout.
 - Project Type: Residential Apartments
 - Status: ONGOING
+
+## ELEMENT - NEARBY LOCATIONS
+
+### Educational Institutions:
+- Sri Chaitanya School
+- SFS Academy
+- National Public School
+- D-Sales Academy
+- Swami Vivekanada College
+- Alliance University
+- Spoorthi Institute
+
+### Hospitals:
+- Narayana Institution
+- Oxford Medical Institute
+- Best Hospital
+- Athreya Hospital
+- Sparsh Hospital
+
+### Corporate Hubs:
+- Infosys
+- Biocon
+- Tech Machindra
+- TCS
+- Siemens
+- Wipro
+
+### Retail & Entertainment:
+- M5
+- Royal Mart
+- D Mart
+- Metro Cash and Carry
+
+## ELEMENT - AMENITIES
+- Swimming Pool
+- Gym
+- Jogging Track
+- Outdoor Gym
+- Event Plaza
+- Flex Court
+- Pet Park
+- Elders Park Seater
+- Yoga Deck
+- Seater Area
+- Banquet Hall
+- Deck Area
+- Sand Pit
+- Toddlers Pit
+- Security Room
+- Store Room
+- Transformer
 
 ### HIGH RISE (UPCOMING PROJECT)
 - Configuration: 2 & 3 BHK apartments  

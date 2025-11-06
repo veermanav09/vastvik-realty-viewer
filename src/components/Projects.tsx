@@ -18,15 +18,15 @@ const Projects = () => {
       id: 1,
       name: "ELEMENT",
       type: "ONGOING",
-      bedrooms: "1, 2 & 3 BHK",
+      bedrooms: "2 & 3 BHK",
       units: "60 UNITS",
-      price: "38 LAKHS ONWARD",
+      price: "45 LAKHS ONWARD",
       location: "MARSUR GATE",
       image: elementImage,
       features: ["Premium Amenities", "Gated Community", "24/7 Security"],
-      completion: "Dec 2024",
-      description: "Experience luxury living at Element with modern architecture and world-class amenities. Located in the heart of Marsur Gate with excellent connectivity.",
-      address: "Plot No. 45, Marsur Gate Main Road, Near City Mall, Bangalore - 560103"
+      completion: "April 2027",
+      description: "Vastvik Element is a luxury residential apartment project at Marsur Gate, offering expansive 2 and 3 BHK apartments amidst beautifully landscaped open spaces.",
+      address: "Sy.No-340/2&3, Marsur gate, opp M tres school, chandapura, anekal main road, bengaluru -562106"
     },
     {
       id: 2,
