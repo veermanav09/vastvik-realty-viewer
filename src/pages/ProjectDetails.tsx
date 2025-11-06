@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProjectMap from "@/components/ProjectMap";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -136,7 +137,7 @@ const ProjectDetails = () => {
                 </div>
               </div>
 
-              {project.nearbyEducation && (
+              {project.nearbyEducation && project.nearbyEducation.length > 0 && (
                 <div className="bg-card rounded-3xl p-8 card-shadow">
                   <h2 className="font-heading font-bold text-3xl mb-6">Nearby Locations</h2>
                   
@@ -190,6 +191,22 @@ const ProjectDetails = () => {
                     </div>
                   </div>
                 </div>
+              )}
+
+              {/* Interactive Map for Element Project */}
+              {project.id === 1 && (
+                <ProjectMap
+                  projectName={project.name}
+                  projectLocation={{ lat: 12.8184, lng: 77.7065 }}
+                  nearbyPlaces={[
+                    { name: "M tres School", category: "education", lat: 12.8190, lng: 77.7070 },
+                    { name: "National Public School", category: "education", lat: 12.8200, lng: 77.7100 },
+                    { name: "Narayana Hospital", category: "hospital", lat: 12.8150, lng: 77.7080 },
+                    { name: "Infosys", category: "corporate", lat: 12.8300, lng: 77.7200 },
+                    { name: "TCS", category: "corporate", lat: 12.8250, lng: 77.7150 },
+                    { name: "D Mart", category: "retail", lat: 12.8170, lng: 77.7090 },
+                  ]}
+                />
               )}
 
               <div className="bg-card rounded-3xl p-8 card-shadow">
