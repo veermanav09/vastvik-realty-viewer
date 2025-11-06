@@ -88,9 +88,9 @@ const Chatbot = () => {
           <Button
             onClick={() => setIsOpen(true)}
             size="icon"
-            className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 hover:scale-110 hover:shadow-2xl rounded-full transition-all duration-500 border-2 border-white shadow-xl group-hover:shadow-primary/50"
+            className="w-14 h-14 bg-black/90 backdrop-blur-xl text-[#86A376] hover:bg-black hover:shadow-2xl rounded-full transition-all duration-300 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
           >
-            <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+            <MessageCircle className="w-5 h-5" />
           </Button>
           <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-pulse shadow-lg pointer-events-none" />
           <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping opacity-75 pointer-events-none" />
