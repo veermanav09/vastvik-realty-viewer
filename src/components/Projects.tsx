@@ -84,22 +84,22 @@ const Projects = () => {
                       >
                         {project.type}
                       </Badge>
-
-                      {/* Title Overlay */}
-                      <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-3">
-                        <h3 className="font-heading font-bold text-2xl text-white mb-1">
-                          {project.name}
-                        </h3>
-                        <div className="flex items-center gap-1.5 text-white/90 text-sm">
-                          <MapPin className="w-4 h-4" />
-                          <span>{project.location}</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
                   {/* Info Card */}
                   <div className="p-6">
+                    {/* Project Title */}
+                    <div className="mb-4">
+                      <h3 className="font-heading font-bold text-3xl text-foreground mb-2">
+                        {project.name}
+                      </h3>
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <MapPin className="w-4 h-4 text-primary" />
+                        <span className="text-sm">{project.location}</span>
+                      </div>
+                    </div>
+
                     {/* Configuration and Price */}
                     <div className="flex items-center justify-between mb-4 pb-4 border-b border-border/50">
                       <div>
