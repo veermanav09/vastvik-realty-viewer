@@ -43,12 +43,14 @@ const Referral = () => {
         </div>
       </section>
       <section className="py-20 mt-8">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-card rounded-3xl p-8 md:p-12 card-shadow">
             <h3 className="font-heading font-bold text-3xl mb-10 text-center">Start Referring Today</h3>
             <form className="space-y-6">
-              <div><Label>Your Name</Label><Input placeholder="Enter your full name" className="h-12" /></div>
-              <div><Label>Email</Label><Input type="email" placeholder="your.email@example.com" className="h-12" /></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div><Label>Your Name</Label><Input placeholder="Enter your full name" className="h-12" /></div>
+                <div><Label>Email</Label><Input type="email" placeholder="your.email@example.com" className="h-12" /></div>
+              </div>
               <div><Label>Phone</Label><Input type="tel" placeholder="+91 98765 43210" className="h-12" /></div>
               <div className="bg-gradient-card rounded-2xl p-6 border border-primary/20">
                 <Label className="text-sm text-muted-foreground mb-3 block">Your Referral Code</Label>
