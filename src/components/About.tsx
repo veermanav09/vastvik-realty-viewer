@@ -1,6 +1,79 @@
 import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Float } from "@react-three/drei";
+import * as THREE from "three";
+
+// Nature and Real Estate inspired 3D components
+const Tree = ({ position }: { position: [number, number, number] }) => {
+  return (
+    <group position={position}>
+      {/* Tree trunk */}
+      <mesh position={[0, -0.5, 0]}>
+        <cylinderGeometry args={[0.1, 0.15, 0.8, 8]} />
+        <meshStandardMaterial color="#6B4423" roughness={0.8} />
+      </mesh>
+      {/* Tree foliage */}
+      <mesh position={[0, 0.3, 0]}>
+        <coneGeometry args={[0.6, 1.2, 8]} />
+        <meshStandardMaterial color="#2D5016" roughness={0.6} />
+      </mesh>
+      <mesh position={[0, 0.7, 0]}>
+        <coneGeometry args={[0.45, 0.9, 8]} />
+        <meshStandardMaterial color="#3A6B1F" roughness={0.6} />
+      </mesh>
+    </group>
+  );
+};
+
+const Building = ({ position }: { position: [number, number, number] }) => {
+  return (
+    <group position={position}>
+      {/* Building base */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.8, 1.2, 0.6]} />
+        <meshStandardMaterial color="#B57B66" roughness={0.3} metalness={0.2} />
+      </mesh>
+      {/* Roof */}
+      <mesh position={[0, 0.8, 0]}>
+        <coneGeometry args={[0.6, 0.5, 4]} />
+        <meshStandardMaterial color="#8B5A3C" roughness={0.5} />
+      </mesh>
+      {/* Windows */}
+      <mesh position={[0, 0.2, 0.31]}>
+        <boxGeometry args={[0.2, 0.3, 0.02]} />
+        <meshStandardMaterial color="#87CEEB" metalness={0.8} roughness={0.1} />
+      </mesh>
+      <mesh position={[0, -0.2, 0.31]}>
+        <boxGeometry args={[0.3, 0.35, 0.02]} />
+        <meshStandardMaterial color="#6B8E23" roughness={0.7} />
+      </mesh>
+    </group>
+  );
+};
+
+const Leaf = ({ position }: { position: [number, number, number] }) => {
+  const leafShape = new THREE.Shape();
+  leafShape.moveTo(0, 0);
+  leafShape.quadraticCurveTo(0.3, 0.1, 0.4, 0.4);
+  leafShape.quadraticCurveTo(0.3, 0.7, 0, 0.8);
+  leafShape.quadraticCurveTo(-0.3, 0.7, -0.4, 0.4);
+  leafShape.quadraticCurveTo(-0.3, 0.1, 0, 0);
+
+  const extrudeSettings = {
+    depth: 0.05,
+    bevelEnabled: true,
+    bevelThickness: 0.02,
+    bevelSize: 0.02,
+    bevelSegments: 2
+  };
+
+  return (
+    <mesh position={position} rotation={[Math.PI / 2, 0, 0]}>
+      <extrudeGeometry args={[leafShape, extrudeSettings]} />
+      <meshStandardMaterial color="#7CB342" roughness={0.4} />
+    </mesh>
+  );
+};
 
 const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -63,43 +136,41 @@ const About = () => {
 
   return (
     <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
-      {/* 3D Background Elements */}
-      <div className="absolute inset-0 opacity-30">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-            <Sphere args={[1, 32, 32]} position={[-3, 2, 0]}>
-              <MeshDistortMaterial
-                color="#B57B66"
-                attach="material"
-                distort={0.3}
-                speed={2}
-                roughness={0.4}
-              />
-            </Sphere>
+      {/* 3D Background Elements - Nature & Real Estate */}
+      <div className="absolute inset-0 opacity-40">
+        <Canvas camera={{ position: [0, 0, 6] }}>
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[10, 10, 5]} intensity={1.2} />
+          <pointLight position={[-10, -10, -5]} intensity={0.5} color="#B57B66" />
+          
+          {/* Floating Buildings */}
+          <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.6}>
+            <Building position={[-3.5, 1.5, -1]} />
           </Float>
-          <Float speed={1.8} rotationIntensity={0.6} floatIntensity={0.7}>
-            <Sphere args={[0.7, 32, 32]} position={[3, -1, -1]}>
-              <MeshDistortMaterial
-                color="#A1A79E"
-                attach="material"
-                distort={0.4}
-                speed={1.5}
-                roughness={0.3}
-              />
-            </Sphere>
+          <Float speed={1.4} rotationIntensity={0.4} floatIntensity={0.5}>
+            <Building position={[3, -1.5, -2]} />
           </Float>
-          <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
-            <Sphere args={[0.5, 32, 32]} position={[2, 3, -2]}>
-              <MeshDistortMaterial
-                color="#B57B66"
-                attach="material"
-                distort={0.35}
-                speed={1.8}
-                roughness={0.5}
-              />
-            </Sphere>
+          
+          {/* Floating Trees */}
+          <Float speed={1.6} rotationIntensity={0.5} floatIntensity={0.7}>
+            <Tree position={[-2, -2, 0]} />
+          </Float>
+          <Float speed={1.3} rotationIntensity={0.4} floatIntensity={0.6}>
+            <Tree position={[3.5, 2, -1.5]} />
+          </Float>
+          <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
+            <Tree position={[-4, 0, -2]} />
+          </Float>
+          
+          {/* Floating Leaves */}
+          <Float speed={2} rotationIntensity={0.8} floatIntensity={0.9}>
+            <Leaf position={[1.5, 3, 0]} />
+          </Float>
+          <Float speed={1.8} rotationIntensity={0.7} floatIntensity={0.8}>
+            <Leaf position={[-1, 2.5, -1]} />
+          </Float>
+          <Float speed={2.2} rotationIntensity={0.6} floatIntensity={0.7}>
+            <Leaf position={[4, 0.5, -0.5]} />
           </Float>
         </Canvas>
       </div>
