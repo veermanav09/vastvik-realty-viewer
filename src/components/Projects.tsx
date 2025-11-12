@@ -69,8 +69,8 @@ const Projects = () => {
               >
                 <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-500 ${isHovered ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]'}`}>
                   {/* Image Section */}
-                  <div className="relative p-4">
-                    <div className={`relative h-56 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
+                  <div className="relative p-6">
+                    <div className={`relative h-96 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
                       <img
                         src={project.image}
                         alt={project.name}
