@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
 import elementImage from "@/assets/element-project.png";
+import highriseImage from "@/assets/highrise-project.jpg";
 
 const Projects = () => {
   const [brochureDialog, setBrochureDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
@@ -36,7 +37,7 @@ const Projects = () => {
       units: "120 UNITS",
       price: "60 LAKHS ONWARD",
       location: "CHANDAPURA MAIN ROAD",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
+      image: highriseImage,
       features: ["Sky Lounge", "Swimming Pool", "Gym & Spa"],
       completion: "Q2 2025",
       description: "Elevate your lifestyle with High Rise, featuring panoramic views and premium amenities. A perfect blend of luxury and convenience on Chandapura Main Road.",
@@ -45,13 +46,13 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-16 bg-gradient-subtle">
+    <section id="projects" className="py-8 bg-gradient-subtle">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
+        <div className="text-center mb-8">
+          <h2 className="font-heading font-bold text-4xl md:text-5xl text-foreground mb-4">
             OUR PROJECTS
           </h2>
-          <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Discover our carefully crafted residential projects that blend luxury with modern living
           </p>
         </div>
@@ -69,8 +70,8 @@ const Projects = () => {
               >
                 <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-500 ${isHovered ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]'}`}>
                   {/* Image Section */}
-                  <div className="relative p-6">
-                    <div className={`relative h-96 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
+                  <div className="relative p-3">
+                    <div className={`relative h-48 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
                       <img
                         src={project.image}
                         alt={project.name}
@@ -88,10 +89,10 @@ const Projects = () => {
                   </div>
 
                   {/* Info Card */}
-                  <div className="p-6">
+                  <div className="p-4">
                     {/* Project Title */}
-                    <div className="mb-4">
-                      <h3 className="font-heading font-bold text-3xl text-foreground mb-2">
+                    <div className="mb-3">
+                      <h3 className="font-heading font-bold text-2xl text-foreground mb-1">
                         {project.name}
                       </h3>
                       <div className="flex items-center gap-2 text-muted-foreground">
@@ -101,7 +102,7 @@ const Projects = () => {
                     </div>
 
                     {/* Configuration and Price */}
-                    <div className="flex items-center justify-between mb-4 pb-4 border-b border-border/50">
+                    <div className="flex items-center justify-between mb-3 pb-3 border-b border-border/50">
                       <div>
                         <p className="text-xs text-muted-foreground mb-1">Configuration</p>
                         <p className="font-semibold text-foreground flex items-center gap-1.5">
@@ -119,20 +120,20 @@ const Projects = () => {
                     </div>
 
                     {/* Expandable Content */}
-                    <div className={`overflow-hidden transition-all duration-500 ${isHovered ? 'max-h-96 opacity-100 mb-4' : 'max-h-0 opacity-0'}`}>
+                    <div className={`overflow-hidden transition-all duration-500 ${isHovered ? 'max-h-64 opacity-100 mb-3' : 'max-h-0 opacity-0'}`}>
                       {/* Description */}
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      <p className="text-xs text-muted-foreground leading-relaxed mb-2">
                         {project.description}
                       </p>
                       
                       {/* Address */}
-                      <div className="flex items-start gap-2 mb-3 p-3 rounded-lg bg-accent/30">
-                        <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2 mb-2 p-2 rounded-lg bg-accent/30">
+                        <MapPin className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
                         <p className="text-xs text-foreground">{project.address}</p>
                       </div>
 
                       {/* Additional Info */}
-                      <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div className="grid grid-cols-2 gap-2 mb-2">
                         <div className="flex items-center gap-2 text-xs">
                           <Users className="w-4 h-4 text-primary" />
                           <span className="text-muted-foreground">{project.units}</span>
@@ -165,7 +166,7 @@ const Projects = () => {
                     </div>
 
                     {/* View More Indicator */}
-                    <div className="flex justify-center mt-4">
+                    <div className="flex justify-center mt-2">
                       <div className={`flex items-center gap-1 text-xs text-muted-foreground transition-all duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
                         <span>Hover to view more</span>
                         <ChevronDown className="w-3 h-3 animate-bounce" />
@@ -178,8 +179,8 @@ const Projects = () => {
           })}
         </div>
 
-        <div className="text-center mt-20">
-          <p className="text-2xl text-muted-foreground mb-10">
+        <div className="text-center mt-8">
+          <p className="text-lg text-muted-foreground mb-6">
             Interested in learning more about our projects?
           </p>
           <Button
@@ -187,8 +188,8 @@ const Projects = () => {
               const contactSection = document.getElementById('contact');
               contactSection?.scrollIntoView({ behavior: 'smooth' });
             }}
-            size="lg"
-            className="bg-primary text-primary-foreground px-16 py-6 text-xl minimal-shadow hover:elevated-shadow transition-all duration-300"
+            size="default"
+            className="bg-primary text-primary-foreground px-12 py-5 text-lg minimal-shadow hover:elevated-shadow transition-all duration-300"
           >
             View All Projects
           </Button>
