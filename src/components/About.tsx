@@ -88,9 +88,24 @@ const About = () => {
   return (
     <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
       {/* Unicorn Studio Background Animation */}
-      <div className="absolute inset-0 opacity-50">
-        <div data-us-project="hWiiySIsonejCpuRxzHT" style={{ width: '100%', height: '100%' }}></div>
+      <div className="absolute inset-0 opacity-70">
+        <div 
+          data-us-project="hWiiySIsonejCpuRxzHT" 
+          style={{ width: '100%', height: '100%' }}
+        ></div>
       </div>
+      
+      {/* Hide Unicorn Studio watermark and unwanted elements */}
+      <style>{`
+        [data-us-project] canvas ~ div,
+        [data-us-project] a[href*="unicorn"],
+        [data-us-project] .watermark,
+        [data-us-project] > div > a {
+          display: none !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
+      `}</style>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
