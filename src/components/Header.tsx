@@ -4,10 +4,12 @@ import { Phone, Menu, X } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-black.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "react-router-dom";
+import ContactDialog from "./ContactDialog";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contactDialogOpen, setContactDialogOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -36,8 +38,7 @@ const Header = () => {
   ];
 
   const rightNavItems = [
-    { name: "Referral", href: "/referral" },
-    { name: "Contact", href: "/contact" }
+    { name: "Referral", href: "/referral" }
   ];
 
   return (
@@ -106,6 +107,13 @@ const Header = () => {
                   </Link>
                 );
               })}
+              <button
+                onClick={() => setContactDialogOpen(true)}
+                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-secondary"
+              >
+                Contact
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -148,6 +156,15 @@ const Header = () => {
                       {item.name}
                     </Link>
                   ))}
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setContactDialogOpen(true);
+                    }}
+                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors text-left"
+                  >
+                    Contact
+                  </button>
                 </nav>
               </SheetContent>
             </Sheet>
@@ -165,6 +182,11 @@ const Header = () => {
           <Phone className="w-5 h-5" />
         </Button>
       </div>
+      
+      <ContactDialog 
+        isOpen={contactDialogOpen} 
+        onClose={() => setContactDialogOpen(false)} 
+      />
     </>
   );
 };
