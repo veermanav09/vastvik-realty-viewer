@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText } from "lucide-react";
+import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText, Waves, Dumbbell, Route, PartyPopper, CircleDot, Dog, Armchair, Sparkles, Baby, Shield, Building2, Laptop, Car, ChevronUp, ChevronDown } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectMap from "@/components/ProjectMap";
@@ -9,6 +9,10 @@ import elementImage from "@/assets/element-project.png";
 import highriseImage from "@/assets/highrise-project.png";
 import { useState } from "react";
 import ExpressionOfInterestDialog from "@/components/ExpressionOfInterestDialog";
+
+const iconMap: Record<string, React.ElementType> = {
+  Waves, Dumbbell, Route, PartyPopper, CircleDot, Dog, Armchair, Sparkles, Baby, Shield, Building2, Laptop, Car, Users
+};
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -18,6 +22,7 @@ const ProjectDetails = () => {
     projectName: "",
     projectId: 0,
   });
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const projects = [
     { 
@@ -34,12 +39,24 @@ const ProjectDetails = () => {
       description: "Vastvik Element is a luxury residential apartment project recently launched by Vastvik Realty at Marsur Gate, off Chandapura Road near Electronic City in South East Bangalore. Element comprises some of the best luxuries of living, offering expansive 2 and 3 BHK apartments set amidst beautifully landscaped open spaces. The project prioritizes comfort and an elite lifestyle for the residents who value quality and convenience.",
       fullDescription: "Situated at prime area in Marsur Gate, it connects with the Outer Ring Road, Electronic City, Sarjapur Road and HSR Layout and, thus connects perfect residential neighborhoods to main business areas.",
       address: "Sy.No-340/2&3, Marsur gate, opp M tres school, chandapura, anekal main road, bengaluru -562106",
-      amenities: ["Swimming Pool", "Gym", "Jogging Track", "Outdoor Gym", "Event Plaza", "Flex Court", "Pet Park", "Elders Park Seater", "Yoga Deck", "Seater Area", "Banquet Hall", "Deck Area", "Sand Pit", "Toddlers Pit", "Security Room", "Store Room", "Transformer"],
+      amenities: [
+        { name: "Swimming Pool", icon: "Waves" },
+        { name: "Gym", icon: "Dumbbell" },
+        { name: "Jogging Track", icon: "Route" },
+        { name: "Event Plaza", icon: "PartyPopper" },
+        { name: "Sports Court", icon: "CircleDot" },
+        { name: "Pet Park", icon: "Dog" },
+        { name: "Elders Seating", icon: "Armchair" },
+        { name: "Yoga Deck", icon: "Sparkles" },
+        { name: "Banquet Hall", icon: "Users" },
+        { name: "Children's Play Area", icon: "Baby" },
+        { name: "24/7 Security", icon: "Shield" }
+      ],
       nearbyEducation: ["Sri Chaitanya School", "SFS Academy", "National Public School", "D-Sales Academy", "Swami Vivekanada College", "Alliance University", "Spoorthi Institute"],
       nearbyHospitals: ["Narayana Institution", "Oxford Medical Institute", "Best Hospital", "Athreya Hospital", "Sparsh Hospital"],
       nearbyCorporate: ["Infosys", "Biocon", "Tech Machindra", "TCS", "Siemens", "Wipro"],
       nearbyRetail: ["M5", "Royal Mart", "D Mart", "Metro Cash and Carry"],
-      gallery: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop", "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop", "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"] 
+      gallery: [elementImage, elementImage, elementImage, elementImage] 
     },
     { 
       id: 2, 
@@ -55,12 +72,19 @@ const ProjectDetails = () => {
       description: "HIGH RISE offers luxury high-rise living with stunning city views and world-class amenities.", 
       fullDescription: "A perfect blend of luxury and convenience on Chandapura Main Road, designed for those who seek elevated living experiences.",
       address: "Survey No. 128, Chandapura Main Road, Near Tech Park, Bangalore - 560099",
-      amenities: ["Sky Lounge", "Infinity Pool", "Spa & Wellness", "Co-working Space", "Multi-purpose Hall", "Reserved Parking"], 
+      amenities: [
+        { name: "Sky Lounge", icon: "Building2" },
+        { name: "Infinity Pool", icon: "Waves" },
+        { name: "Spa & Wellness", icon: "Sparkles" },
+        { name: "Co-working Space", icon: "Laptop" },
+        { name: "Multi-purpose Hall", icon: "Users" },
+        { name: "Reserved Parking", icon: "Car" }
+      ],
       nearbyEducation: [],
       nearbyHospitals: [],
       nearbyCorporate: [],
       nearbyRetail: [],
-      gallery: ["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop", "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop", "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop"] 
+      gallery: [highriseImage, highriseImage, highriseImage, highriseImage] 
     }
   ];
 
@@ -157,13 +181,16 @@ const ProjectDetails = () => {
 
               <div className="bg-card rounded-3xl p-8 card-shadow">
                 <h2 className="font-heading font-bold text-3xl mb-6">Amenities</h2>
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-                  {project.amenities.map((amenity, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 rounded-lg bg-accent/30">
-                      <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-sm">{amenity}</span>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {project.amenities.map((amenity: {name: string, icon: string}, index: number) => {
+                    const IconComponent = iconMap[amenity.icon];
+                    return (
+                      <div key={index} className="flex flex-col items-center gap-3 p-4 rounded-lg bg-accent/10 hover:bg-accent/20 transition-colors">
+                        {IconComponent && <IconComponent className="w-12 h-12 stroke-[2.5]" />}
+                        <span className="text-sm font-medium text-center leading-tight">{amenity.name}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -248,6 +275,56 @@ const ProjectDetails = () => {
               </div>
             </div>
             <div className="lg:col-span-1">
+              {/* Vertical Image Carousel */}
+              <div className="bg-card rounded-3xl p-6 card-shadow sticky top-24 mb-6">
+                <h3 className="font-heading font-bold text-2xl mb-4">Project Gallery</h3>
+                <div className="relative">
+                  {/* Main Image */}
+                  <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+                    <img 
+                      src={project.gallery[currentImageIndex]} 
+                      alt={`${project.name} view ${currentImageIndex + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  {/* Navigation Buttons */}
+                  <div className="flex gap-2 justify-center mb-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentImageIndex(prev => prev === 0 ? project.gallery.length - 1 : prev - 1)}
+                      className="h-10 w-10 p-0"
+                    >
+                      <ChevronUp className="h-5 w-5" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentImageIndex(prev => prev === project.gallery.length - 1 ? 0 : prev + 1)}
+                      className="h-10 w-10 p-0"
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </Button>
+                  </div>
+                  
+                  {/* Thumbnail Strip */}
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {project.gallery.map((img: string, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentImageIndex(idx)}
+                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === idx ? 'border-primary scale-105' : 'border-transparent opacity-60 hover:opacity-100'
+                        }`}
+                      >
+                        <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
               <div className="bg-card rounded-3xl p-8 card-shadow sticky top-24">
                 <h3 className="font-heading font-bold text-2xl mb-6">Interested?</h3>
                 {project.id === 2 ? (
