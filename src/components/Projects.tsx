@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
 import elementImage from "@/assets/element-project.png";
-import highriseImage from "@/assets/highrise-project.jpg";
+import highriseImage from "@/assets/highrise-project.png";
 
 const Projects = () => {
   const [brochureDialog, setBrochureDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
