@@ -173,7 +173,7 @@ const Header = () => {
       </header>
 
       {/* Floating Contact Button - Above Chatbot */}
-      <div className="fixed bottom-24 right-6 z-40">
+      <div className="fixed bottom-28 right-6 z-[150]">
         <Button
           size="icon"
           className="w-14 h-14 bg-black/90 backdrop-blur-xl text-[#86A376] hover:bg-black hover:shadow-2xl rounded-full transition-all duration-300 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
