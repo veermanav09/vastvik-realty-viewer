@@ -61,8 +61,60 @@ const About = () => {
 
   return (
     <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
-      {/* Simple Overlay Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-50"></div>
+      {/* Animated Shadow Gradient Overlay */}
+      <div className="absolute inset-0 animate-gradient-shift">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10"></div>
+      </div>
+      
+      {/* CSS Keyframes for gradient animation */}
+      <style>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            opacity: 0.3;
+            transform: scale(1) rotate(0deg);
+          }
+          25% {
+            opacity: 0.5;
+            transform: scale(1.05) rotate(1deg);
+          }
+          50% {
+            opacity: 0.4;
+            transform: scale(1.02) rotate(-1deg);
+          }
+          75% {
+            opacity: 0.6;
+            transform: scale(1.03) rotate(0.5deg);
+          }
+        }
+        
+        .animate-gradient-shift {
+          animation: gradient-shift 15s ease-in-out infinite;
+          background: linear-gradient(
+            135deg,
+            hsl(var(--primary) / 0.08),
+            hsl(var(--secondary) / 0.12),
+            hsl(var(--accent) / 0.1),
+            hsl(var(--primary) / 0.15)
+          );
+          background-size: 400% 400%;
+          animation: gradient-shift 15s ease-in-out infinite, gradient-move 20s ease infinite;
+        }
+        
+        @keyframes gradient-move {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          25% {
+            background-position: 100% 50%;
+          }
+          50% {
+            background-position: 100% 100%;
+          }
+          75% {
+            background-position: 0% 100%;
+          }
+        }
+      `}</style>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
