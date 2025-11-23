@@ -62,14 +62,14 @@ const Hero = () => {
           {/* Main heading with 3D effect */}
           <div className="mb-12 leo9-slide-up depth-3d-item">
             <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-tight tracking-tight drop-shadow-2xl hero-text-3d">
-              Design Transform Elevate
+              Where Dreams Find Home
             </h1>
           </div>
 
           {/* Subtitle */}
           <div className="leo9-reveal depth-3d-item">
-            <p className="text-xl md:text-2xl text-white/90 mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
-              Redefining premium living through architectural excellence and strategic real estate investments in Bangalore
+            <p className="text-xl md:text-2xl text-white/90 mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-lg font-body">
+              Crafting architectural masterpieces that redefine luxury living. Experience where timeless elegance meets modern sophistication in Bangalore's most coveted addresses.
             </p>
           </div>
 

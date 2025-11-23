@@ -33,10 +33,10 @@ const Contact = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
           <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
-            CONTACT US
+            Let's Connect
           </h2>
-          <p className="text-2xl text-muted-foreground max-w-4xl mx-auto depth-layer-3 leading-relaxed">
-            Ready to find your dream home? Get in touch with our expert team today.
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto depth-layer-3 leading-relaxed font-body">
+            Your dream home awaits. Reach out to our dedicated team and let's bring your vision to life.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ const Contact = () => {
           <div className="lg:col-span-1">
           <div className="bg-card rounded-3xl p-4 md:p-6 elevated-shadow premium-lift">
             <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-4 md:mb-6">
-              Send us a Message
+              Start Your Journey
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4">

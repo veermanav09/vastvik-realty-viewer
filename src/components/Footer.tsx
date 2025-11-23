@@ -36,12 +36,11 @@ const Footer = () => {
                 alt="Vastvik Realty"
                 className="h-16 w-auto object-contain mb-2"
               />
-              <p className="text-sm opacity-75">Premium Homes & Smart Investments</p>
+              <p className="text-sm opacity-75 font-body">Where Vision Meets Reality</p>
             </div>
 
-            <p className="text-white/80 leading-relaxed mb-6">
-              Your gateway to premium homes and exclusive living experiences in Bangalore.
-              We specialize in crafting homes that blend aesthetic beauty with modern functionality.
+            <p className="text-white/80 leading-relaxed mb-6 font-body">
+              Your trusted partner in discovering exceptional homes and exclusive living experiences. We specialize in creating residences where architectural artistry meets contemporary luxury.
             </p>
 
             <div className="space-y-3">
@@ -117,9 +116,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-xl mb-6">Stay Updated</h4>
-            <p className="text-white/80 text-sm mb-4">
-              Subscribe to get the latest updates on new projects and exclusive offers.
+            <h4 className="font-heading font-bold text-xl mb-6">Stay Informed</h4>
+            <p className="text-white/80 text-sm mb-4 font-body">
+              Subscribe for exclusive updates on new luxury projects and insider opportunities.
             </p>
 
             <div className="space-y-3 mb-6">
