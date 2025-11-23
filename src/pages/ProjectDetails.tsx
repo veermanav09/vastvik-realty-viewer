@@ -1,16 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download } from "lucide-react";
+import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectMap from "@/components/ProjectMap";
 import elementImage from "@/assets/element-project.png";
 import highriseImage from "@/assets/highrise-project.png";
+import { useState } from "react";
+import ExpressionOfInterestDialog from "@/components/ExpressionOfInterestDialog";
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [eoiDialog, setEoiDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
+    isOpen: false,
+    projectName: "",
+    projectId: 0,
+  });
 
   const projects = [
     { 
@@ -243,13 +250,39 @@ const ProjectDetails = () => {
             <div className="lg:col-span-1">
               <div className="bg-card rounded-3xl p-8 card-shadow sticky top-24">
                 <h3 className="font-heading font-bold text-2xl mb-6">Interested?</h3>
-                <Button onClick={() => navigate(`/download-brochure/${project.id}`)} className="w-full bg-primary mb-4" size="lg"><Download className="mr-2 h-5 w-5" />Download Brochure</Button>
+                {project.id === 2 ? (
+                  <Button 
+                    onClick={() => setEoiDialog({isOpen: true, projectName: project.name, projectId: project.id})} 
+                    className="w-full bg-primary mb-4" 
+                    size="lg"
+                  >
+                    <FileText className="mr-2 h-5 w-5" />
+                    Express Interest
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={() => navigate(`/download-brochure/${project.id}`)} 
+                    className="w-full bg-primary mb-4" 
+                    size="lg"
+                  >
+                    <Download className="mr-2 h-5 w-5" />
+                    Download Brochure
+                  </Button>
+                )}
                 <Button onClick={() => window.open('https://wa.me/918884545404', '_blank')} variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white" size="lg">WhatsApp Us</Button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <ExpressionOfInterestDialog
+        isOpen={eoiDialog.isOpen}
+        onClose={() => setEoiDialog({isOpen: false, projectName: "", projectId: 0})}
+        projectName={eoiDialog.projectName}
+        projectId={eoiDialog.projectId}
+      />
+      
       <Footer />
     </div>
   );
