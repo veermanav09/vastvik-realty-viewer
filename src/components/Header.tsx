@@ -38,7 +38,7 @@ const Header = () => {
   ];
 
   const rightNavItems = [
-    { name: "Overview", href: "/" },
+    { name: "Overview", href: "/overview" },
     { name: "Referral", href: "/referral" }
   ];
 
