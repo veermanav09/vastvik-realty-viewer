@@ -126,7 +126,7 @@ const ProjectDetails = () => {
       
       {/* Content Section */}
       <div className="pb-16 bg-gradient-subtle">
-        <div className="container mx-auto px-4 lg:px-8 -mt-20 relative z-10">
+        <div className="container mx-auto px-4 lg:px-8 pt-8 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-card rounded-3xl p-8 card-shadow">
@@ -274,9 +274,9 @@ const ProjectDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 space-y-6">
               {/* Vertical Image Carousel */}
-              <div className="bg-card rounded-3xl p-6 card-shadow sticky top-24 mb-6">
+              <div className="bg-card rounded-3xl p-6 card-shadow">
                 <h3 className="font-heading font-bold text-2xl mb-4">Project Gallery</h3>
                 <div className="relative">
                   {/* Main Image */}
@@ -325,7 +325,7 @@ const ProjectDetails = () => {
                 </div>
               </div>
               
-              <div className="bg-card rounded-3xl p-8 card-shadow sticky top-24">
+              <div className="bg-card rounded-3xl p-8 card-shadow lg:sticky lg:top-24">
                 <h3 className="font-heading font-bold text-2xl mb-6">Interested?</h3>
                 {project.id === 2 ? (
                   <Button 
