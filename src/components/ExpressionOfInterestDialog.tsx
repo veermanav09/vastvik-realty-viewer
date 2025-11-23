@@ -103,98 +103,96 @@ const ExpressionOfInterestDialog = ({ isOpen, onClose, projectName, projectId }:
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-heading">Expression of Interest</DialogTitle>
-          <DialogDescription>
-            Register your interest in {projectName}. Our team will get in touch with you soon.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name *</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              placeholder="Enter your full name"
-              maxLength={100}
-              required
-              className={errors.name ? "border-destructive" : ""}
-            />
-            {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-          </div>
+      <DialogContent className="max-w-4xl p-0 gap-0">
+        <div className="p-8 md:p-12">
+          <DialogHeader>
+            <DialogTitle className="font-heading font-bold text-4xl md:text-5xl mb-3">Expression of Interest</DialogTitle>
+            <DialogDescription className="text-lg text-muted-foreground">
+              Register your interest in {projectName}. Our team will get in touch with you soon.
+            </DialogDescription>
+          </DialogHeader>
 
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address *</Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              placeholder="your.email@example.com"
-              maxLength={255}
-              required
-              className={errors.email ? "border-destructive" : ""}
-            />
-            {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-          </div>
+          <div className="mt-10">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="name" className="text-sm uppercase tracking-wider text-muted-foreground mb-3 block">Full Name</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleChange("name", e.target.value)}
+                    placeholder="Enter your full name"
+                    maxLength={100}
+                    required
+                    className={`h-14 text-base ${errors.name ? "border-destructive" : ""}`}
+                  />
+                  {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+                </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number *</Label>
-            <Input
-              id="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              placeholder="+91 9876543210"
-              maxLength={15}
-              required
-              className={errors.phone ? "border-destructive" : ""}
-            />
-            {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
-          </div>
+                <div>
+                  <Label htmlFor="phone" className="text-sm uppercase tracking-wider text-muted-foreground mb-3 block">Mobile Number</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleChange("phone", e.target.value)}
+                    placeholder="+91 9876543210"
+                    maxLength={15}
+                    required
+                    className={`h-14 text-base ${errors.phone ? "border-destructive" : ""}`}
+                  />
+                  {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
+                </div>
+              </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="message">Additional Message (Optional)</Label>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => handleChange("message", e.target.value)}
-              placeholder="Any specific requirements or questions..."
-              maxLength={1000}
-              rows={4}
-              className={errors.message ? "border-destructive" : ""}
-            />
-            {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
-          </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="email" className="text-sm uppercase tracking-wider text-muted-foreground mb-3 block">Email ID</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    placeholder="your.email@example.com"
+                    maxLength={255}
+                    required
+                    className={`h-14 text-base ${errors.email ? "border-destructive" : ""}`}
+                  />
+                  {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                </div>
 
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              className="flex-1"
-              disabled={isSubmitting}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="flex-1 bg-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                "Submit Interest"
-              )}
-            </Button>
+                <div>
+                  <Label htmlFor="message" className="text-sm uppercase tracking-wider text-muted-foreground mb-3 block">Write a Message</Label>
+                  <Textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => handleChange("message", e.target.value)}
+                    placeholder="Any specific requirements or questions..."
+                    maxLength={1000}
+                    className={`min-h-14 text-base ${errors.message ? "border-destructive" : ""}`}
+                    rows={1}
+                  />
+                  {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="bg-primary text-primary-foreground h-14 px-8 text-base font-semibold uppercase tracking-wider"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  "Submit Interest"
+                )}
+              </Button>
+            </form>
           </div>
-        </form>
+        </div>
       </DialogContent>
     </Dialog>
   );
