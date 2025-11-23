@@ -5,6 +5,8 @@ import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download } from "
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectMap from "@/components/ProjectMap";
+import elementImage from "@/assets/element-project.png";
+import highriseImage from "@/assets/highrise-project.png";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -19,7 +21,7 @@ const ProjectDetails = () => {
       units: "60 UNITS", 
       price: "45 LAKHS ONWARD", 
       location: "MARSUR GATE", 
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop", 
+      image: elementImage,
       features: ["Premium Amenities", "Gated Community", "24/7 Security"], 
       completion: "April 2027", 
       description: "Vastvik Element is a luxury residential apartment project recently launched by Vastvik Realty at Marsur Gate, off Chandapura Road near Electronic City in South East Bangalore. Element comprises some of the best luxuries of living, offering expansive 2 and 3 BHK apartments set amidst beautifully landscaped open spaces. The project prioritizes comfort and an elite lifestyle for the residents who value quality and convenience.",
@@ -40,7 +42,7 @@ const ProjectDetails = () => {
       units: "120 UNITS", 
       price: "60 LAKHS ONWARD", 
       location: "CHANDAPURA MAIN ROAD", 
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop", 
+      image: highriseImage,
       features: ["Sky Lounge", "Swimming Pool", "Gym & Spa"], 
       completion: "Q2 2025", 
       description: "HIGH RISE offers luxury high-rise living with stunning city views and world-class amenities.", 
@@ -61,18 +63,39 @@ const ProjectDetails = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-24 pb-16 bg-gradient-subtle">
-        <div className="container mx-auto px-4 lg:px-8">
-          <Button onClick={() => navigate(-1)} variant="ghost" className="mb-8"><ArrowLeft className="mr-2 h-4 w-4" />Back to Projects</Button>
-          <div className="relative h-96 rounded-3xl overflow-hidden mb-12">
-            <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <div className="absolute bottom-8 left-8">
-              <Badge className={`${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white mb-4`}>{project.type}</Badge>
-              <h1 className="font-heading font-bold text-5xl text-white mb-2">{project.name}</h1>
-              <div className="flex items-center text-white/90 text-xl"><MapPin className="w-5 h-5 mr-2" />{project.location}</div>
+      {/* Full-page Hero Image */}
+      <div className="relative h-screen w-full">
+        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        
+        {/* Hero Content */}
+        <div className="absolute inset-0 flex flex-col justify-between">
+          {/* Back Button */}
+          <div className="container mx-auto px-4 lg:px-8 pt-8">
+            <Button onClick={() => navigate(-1)} variant="ghost" className="text-white hover:bg-white/20">
+              <ArrowLeft className="mr-2 h-4 w-4" />Back to Projects
+            </Button>
+          </div>
+          
+          {/* Project Info */}
+          <div className="container mx-auto px-4 lg:px-8 pb-16">
+            <Badge className={`${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white mb-4 text-base px-4 py-2`}>
+              {project.type}
+            </Badge>
+            <h1 className="font-heading font-bold text-6xl md:text-7xl lg:text-8xl text-white mb-4">
+              {project.name}
+            </h1>
+            <div className="flex items-center text-white/90 text-2xl">
+              <MapPin className="w-6 h-6 mr-3" />
+              {project.location}
             </div>
           </div>
+        </div>
+      </div>
+      
+      {/* Content Section */}
+      <div className="pb-16 bg-gradient-subtle">
+        <div className="container mx-auto px-4 lg:px-8 -mt-20 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-card rounded-3xl p-8 card-shadow">
