@@ -3,11 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
+import ExpressionOfInterestDialog from "./ExpressionOfInterestDialog";
 import elementImage from "@/assets/element-project.png";
 import highriseImage from "@/assets/highrise-project.png";
 
 const Projects = () => {
   const [brochureDialog, setBrochureDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
+    isOpen: false,
+    projectName: "",
+    projectId: 0,
+  });
+  const [eoiDialog, setEoiDialog] = useState<{isOpen: boolean, projectName: string, projectId: number}>({
     isOpen: false,
     projectName: "",
     projectId: 0,
@@ -156,12 +162,18 @@ const Projects = () => {
                         <ExternalLink className="w-4 h-4 ml-2" />
                       </Button>
                       <Button
-                        onClick={() => setBrochureDialog({isOpen: true, projectName: project.name, projectId: project.id})}
+                        onClick={() => {
+                          if (project.id === 2) {
+                            setEoiDialog({isOpen: true, projectName: project.name, projectId: project.id});
+                          } else {
+                            setBrochureDialog({isOpen: true, projectName: project.name, projectId: project.id});
+                          }
+                        }}
                         variant="outline"
                         className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                         size="sm"
                       >
-                        Download Brochure
+                        {project.id === 2 ? "Express Interest" : "Download Brochure"}
                       </Button>
                     </div>
 
@@ -201,6 +213,13 @@ const Projects = () => {
         onClose={() => setBrochureDialog({isOpen: false, projectName: "", projectId: 0})}
         projectName={brochureDialog.projectName}
         projectId={brochureDialog.projectId}
+      />
+      
+      <ExpressionOfInterestDialog
+        isOpen={eoiDialog.isOpen}
+        onClose={() => setEoiDialog({isOpen: false, projectName: "", projectId: 0})}
+        projectName={eoiDialog.projectName}
+        projectId={eoiDialog.projectId}
       />
     </section>
   );
