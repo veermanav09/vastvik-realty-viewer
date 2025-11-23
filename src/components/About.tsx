@@ -1,15 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-// Declare UnicornStudio on window
-declare global {
-  interface Window {
-    UnicornStudio?: {
-      isInitialized: boolean;
-      init?: () => void;
-    };
-  }
-}
-
 const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -69,43 +59,10 @@ const About = () => {
   const largeText = "LIFE DESIGNED";
   const totalChars = largeText.length;
 
-  useEffect(() => {
-    // Load Unicorn Studio script
-    if (!window.UnicornStudio) {
-      window.UnicornStudio = { isInitialized: false };
-      const script = document.createElement("script");
-      script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.34/dist/unicornStudio.umd.js";
-      script.onload = () => {
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init?.();
-          window.UnicornStudio.isInitialized = true;
-        }
-      };
-      (document.head || document.body).appendChild(script);
-    }
-  }, []);
-
   return (
     <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
-      {/* Unicorn Studio Background Animation */}
-      <div className="absolute inset-0 opacity-70">
-        <div 
-          data-us-project="hWiiySIsonejCpuRxzHT" 
-          style={{ width: '100%', height: '100%' }}
-        ></div>
-      </div>
-      
-      {/* Hide Unicorn Studio watermark and unwanted elements */}
-      <style>{`
-        [data-us-project] canvas ~ div,
-        [data-us-project] a[href*="unicorn"],
-        [data-us-project] .watermark,
-        [data-us-project] > div > a {
-          display: none !important;
-          opacity: 0 !important;
-          pointer-events: none !important;
-        }
-      `}</style>
+      {/* Simple Overlay Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-50"></div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
