@@ -51,16 +51,16 @@ const Header = () => {
         }`}
       >
         <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-2xl px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-shadow duration-300">
-          <nav className="flex items-center justify-between gap-6">
-            {/* Left Navigation Items */}
-            <div className="hidden md:flex items-center gap-5">
+          <nav className="flex items-center justify-center gap-6">
+            {/* Left Navigation Items - Flex with equal width */}
+            <div className="hidden md:flex items-center justify-end gap-5 w-80">
               {leftNavItems.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group ${
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap ${
                       isActive ? 'text-secondary' : 'hover:text-secondary'
                     }`}
                   >
@@ -73,8 +73,8 @@ const Header = () => {
               })}
             </div>
 
-            {/* Logo - Center */}
-            <Link to="/" className="flex items-center px-3">
+            {/* Logo - Center with fixed width */}
+            <Link to="/" className="flex items-center justify-center px-6 flex-shrink-0">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
@@ -82,15 +82,15 @@ const Header = () => {
               />
             </Link>
 
-            {/* Right Navigation Items */}
-            <div className="hidden md:flex items-center gap-5">
+            {/* Right Navigation Items - Flex with equal width */}
+            <div className="hidden md:flex items-center justify-start gap-5 w-80">
               {rightNavItems.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group ${
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap ${
                       isActive ? 'text-secondary' : 'hover:text-secondary'
                     }`}
                   >
@@ -103,7 +103,7 @@ const Header = () => {
               })}
               <button
                 onClick={() => setContactDialogOpen(true)}
-                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-secondary"
+                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-secondary whitespace-nowrap"
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
