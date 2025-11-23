@@ -38,6 +38,7 @@ const Header = () => {
   ];
 
   const rightNavItems = [
+    { name: "Overview", href: "/" },
     { name: "Referral", href: "/referral" }
   ];
 
@@ -83,13 +84,6 @@ const Header = () => {
 
             {/* Right Navigation Items */}
             <div className="hidden md:flex items-center gap-5">
-              <Link
-                to="/"
-                className="text-foreground hover:text-secondary font-medium text-sm transition-all duration-300 relative group"
-              >
-                Overview
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
-              </Link>
               {rightNavItems.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
@@ -173,7 +167,7 @@ const Header = () => {
       </header>
 
       {/* Floating Contact Button - Above Chatbot */}
-      <div className="fixed bottom-28 right-6 z-[150]">
+      <div className="fixed bottom-24 right-6 z-[60]">
         <Button
           size="icon"
           className="w-14 h-14 bg-black/90 backdrop-blur-xl text-[#86A376] hover:bg-black hover:shadow-2xl rounded-full transition-all duration-300 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
