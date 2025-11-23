@@ -67,6 +67,21 @@ All colors MUST be HSL.
     --sidebar-border: 102 8% 88%;
     --sidebar-ring: 16 34% 55%;
   }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    letter-spacing: 0.01em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    letter-spacing: -0.02em;
+  }
 
   .dark {
     --background: 102 8% 12%;

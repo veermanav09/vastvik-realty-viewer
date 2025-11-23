@@ -32,7 +32,7 @@ const Projects = () => {
       image: elementImage,
       features: ["Premium Amenities", "Gated Community", "24/7 Security"],
       completion: "April 2027",
-      description: "Vastvik Element is a luxury residential apartment project at Marsur Gate, offering expansive 2 and 3 BHK apartments amidst beautifully landscaped open spaces.",
+      description: "Vastvik Element is an exclusive residential sanctuary at Marsur Gate, featuring expansive 2 and 3 BHK residences surrounded by lush landscaped gardens. Experience premium living where every detail reflects sophistication.",
       address: "Sy.No-340/2&3, Marsur gate, opp M tres school, chandapura, anekal main road, bengaluru -562106"
     },
     {
@@ -46,7 +46,7 @@ const Projects = () => {
       image: highriseImage,
       features: ["Sky Lounge", "Swimming Pool", "Gym & Spa"],
       completion: "Q2 2025",
-      description: "Elevate your lifestyle with High Rise, featuring panoramic views and premium amenities. A perfect blend of luxury and convenience on Chandapura Main Road.",
+      description: "Elevate your lifestyle at High Rise, where panoramic city vistas meet world-class amenities. The perfect fusion of luxury, convenience, and architectural brilliance on Chandapura Main Road.",
       address: "Survey No. 128, Chandapura Main Road, Near Tech Park, Bangalore - 560099"
     }
   ];
@@ -56,10 +56,10 @@ const Projects = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
           <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
-            OUR PROJECTS
+            Our Portfolio
           </h2>
-          <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Discover our carefully crafted residential projects that blend luxury with modern living
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-body">
+            Discover meticulously crafted residences where luxury meets lifestyle, designed to exceed expectations
           </p>
         </div>
 
@@ -192,8 +192,8 @@ const Projects = () => {
         </div>
 
         <div className="text-center mt-20">
-          <p className="text-2xl text-muted-foreground mb-10">
-            Interested in learning more about our projects?
+          <p className="text-xl md:text-2xl text-muted-foreground mb-10 font-body">
+            Ready to explore your dream home? Let's begin your journey.
           </p>
           <Button
             onClick={() => {
@@ -203,7 +203,7 @@ const Projects = () => {
             size="lg"
             className="bg-primary text-primary-foreground px-16 py-6 text-xl minimal-shadow hover:elevated-shadow transition-all duration-300"
           >
-            View All Projects
+            Schedule a Viewing
           </Button>
         </div>
       </div>

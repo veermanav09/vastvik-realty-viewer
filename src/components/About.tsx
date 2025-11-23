@@ -31,28 +31,28 @@ const About = () => {
 
   const philosophyItems = [
     {
-      title: "Design",
-      description: "Architectural excellence that blends modern innovation with timeless elegance, creating spaces that inspire and endure."
+      title: "Design Excellence",
+      description: "Architectural mastery that harmonizes contemporary innovation with enduring elegance, creating spaces that inspire daily and endure eternally."
     },
     {
-      title: "Development",
-      description: "Quality construction with meticulous project management, ensuring every detail meets our exacting standards."
+      title: "Quality Craftsmanship",
+      description: "Uncompromising construction standards with meticulous oversight, ensuring every detail exceeds our exacting benchmarks of perfection."
     },
     {
       title: "Personalized Living",
-      description: "Tailored homes that reflect your unique preferences and lifestyle, offering the freedom to create your perfect living space."
+      description: "Bespoke residences tailored to your unique vision and lifestyle, offering the freedom to curate your ideal sanctuary."
     },
     {
       title: "Innovative Design",
-      description: "Modern amenities seamlessly integrated with classic sophistication, delivering living spaces that set new standards."
+      description: "Cutting-edge amenities seamlessly integrated with timeless sophistication, delivering living experiences that set industry standards."
     },
     {
-      title: "Exceptional Amenities",
-      description: "An array of world-class amenities that enhance comfort, convenience, and elevate your everyday living experience."
+      title: "World-Class Amenities",
+      description: "Curated collection of premium facilities that elevate comfort, enhance convenience, and transform everyday living into extraordinary experiences."
     },
     {
-      title: "Investment",
-      description: "Strategic guidance and market insights to help you make informed decisions for long-term wealth creation."
+      title: "Strategic Investment",
+      description: "Expert guidance backed by market intelligence to help you make informed decisions for sustained wealth creation and long-term value appreciation."
     }
   ];
 
@@ -120,9 +120,12 @@ const About = () => {
         
         {/* Header */}
         <div className="text-center mb-24">
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
-            About us
+          <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground mb-4">
+            Our Philosophy
           </h2>
+          <p className="text-xl text-muted-foreground font-body max-w-2xl mx-auto">
+            Building more than homes—we create legacies
+          </p>
         </div>
 
         {/* Main Content Grid */}
@@ -160,8 +163,8 @@ const About = () => {
                 })}
               </h3>
               
-              <p className="mt-8 text-muted-foreground text-lg leading-relaxed max-w-xl">
-                LifeDesigned® is our guiding philosophy of drawing inspiration from and influencing the lives we touch through our built environments which are meticulously perfected to understand, nurture and enrich your life from now till forever.
+              <p className="mt-8 text-muted-foreground text-lg leading-relaxed max-w-xl font-body">
+                LifeDesigned® is our commitment to excellence—a philosophy that transforms spaces into sanctuaries. Every detail is meticulously crafted to understand, nurture, and enrich the lives we touch, creating homes that stand the test of time.
               </p>
             </div>
           </div>

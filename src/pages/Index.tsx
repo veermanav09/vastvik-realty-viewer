@@ -82,8 +82,8 @@ const Index = () => {
           <h2 className="font-heading font-bold text-4xl md:text-5xl mb-6">
             Refer & Earn Up to <span className="text-primary">2%</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join our referral program and earn rewards for every successful booking you refer
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto font-body">
+            Share the gift of exceptional living and earn generous rewards with every successful referral
           </p>
           <Button
             size="lg"

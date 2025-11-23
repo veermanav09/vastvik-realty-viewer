@@ -29,7 +29,7 @@ const Referral = () => {
           <div className="text-center mb-12">
             <Badge variant="outline" className="mb-6 text-primary border-primary">Referral Program</Badge>
             <h1 className="font-heading font-bold text-6xl md:text-7xl mb-6">Refer & Earn <span className="text-primary">Up to 2%</span></h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">Invite friends and earn up to 2% on every successful booking</p>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-body">Share the excellence, reap the rewards. Earn up to 2% on every successful referral when you introduce friends and family to exceptional living.</p>
           </div>
           
           {/* Referral Image */}
@@ -45,7 +45,7 @@ const Referral = () => {
       <section className="py-20 mt-8">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-card rounded-3xl p-8 md:p-12 card-shadow">
-            <h3 className="font-heading font-bold text-3xl mb-10 text-center">Start Referring Today</h3>
+            <h3 className="font-heading font-bold text-3xl mb-10 text-center">Begin Your Referral Journey</h3>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div><Label>Your Name</Label><Input placeholder="Enter your full name" className="h-12" /></div>
