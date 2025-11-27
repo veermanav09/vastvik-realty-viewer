@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        heading: ['Cormorant Garamond', 'Georgia', 'serif'],
-        body: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Urbanist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        heading: ['Urbanist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['Urbanist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

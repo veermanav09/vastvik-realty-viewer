@@ -61,9 +61,12 @@ const Hero = () => {
 
           {/* Main heading with 3D effect */}
           <div className="mb-12 leo9-slide-up depth-3d-item">
-            <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-tight tracking-tight drop-shadow-2xl hero-text-3d">
-              Where Dreams Find Home
-            </h1>
+            <div className="inline-block relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 blur-2xl opacity-50"></div>
+              <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-tight tracking-tight drop-shadow-2xl hero-text-3d relative">
+                Where Dreams Find Home
+              </h1>
+            </div>
           </div>
 
           {/* Subtitle */}

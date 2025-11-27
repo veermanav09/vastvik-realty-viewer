@@ -32,9 +32,13 @@ const Contact = () => {
     <section id="contact" className="py-16 bg-gradient-mesh building-3d">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
-            Let's Connect
-          </h2>
+          <div className="inline-block relative mb-8">
+            <div className="absolute inset-0 bg-primary/5 rounded-2xl rotate-1"></div>
+            <div className="absolute inset-0 bg-primary/5 rounded-2xl -rotate-1"></div>
+            <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground relative px-6 py-2">
+              Let's Connect
+            </h2>
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto depth-layer-3 leading-relaxed font-body">
             Your dream home awaits. Reach out to our dedicated team and let's bring your vision to life.
           </p>

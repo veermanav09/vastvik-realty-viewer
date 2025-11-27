@@ -37,9 +37,12 @@ const BlogsSection = () => {
     <section id="blogs" className="py-16 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
-            Expert Insights
-          </h2>
+          <div className="inline-block relative mb-8">
+            <div className="absolute -bottom-2 left-0 right-0 h-3 bg-primary/20 -skew-x-12 rounded"></div>
+            <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground relative">
+              Expert Insights
+            </h2>
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-body">
             Industry intelligence and market wisdom to empower your property decisions
           </p>
