@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { MapPin } from 'lucide-react';
 
 interface ProjectMapProps {
@@ -22,14 +20,12 @@ interface ProjectMapProps {
 const ProjectMap = ({ projectName, projectLocation, nearbyPlaces = [] }: ProjectMapProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [tokenSubmitted, setTokenSubmitted] = useState(false);
 
   useEffect(() => {
-    if (!mapContainer.current || !tokenSubmitted || !mapboxToken) return;
+    if (!mapContainer.current) return;
 
     try {
-      mapboxgl.accessToken = mapboxToken;
+      mapboxgl.accessToken = 'pk.eyJ1IjoidmVlcm1hbmF2IiwiYSI6ImNtaG42emxocjI1dTMya3M3Nno3NWFsOWsifQ.kCFCoF-9Xo5MG0SKEFpDpg';
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -101,49 +97,7 @@ const ProjectMap = ({ projectName, projectLocation, nearbyPlaces = [] }: Project
     return () => {
       map.current?.remove();
     };
-  }, [tokenSubmitted, mapboxToken, projectName, projectLocation, nearbyPlaces]);
-
-  if (!tokenSubmitted) {
-    return (
-      <div className="bg-card rounded-3xl p-8 card-shadow">
-        <h2 className="font-heading font-bold text-3xl mb-4 flex items-center gap-2">
-          <MapPin className="w-8 h-8 text-primary" />
-          Interactive Location Map
-        </h2>
-        <div className="space-y-4">
-          <p className="text-muted-foreground">
-            To view the interactive map with project location and nearby landmarks, please enter your Mapbox public token.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Get your free token at{' '}
-            <a
-              href="https://account.mapbox.com/access-tokens/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              mapbox.com/account/access-tokens
-            </a>
-          </p>
-          <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="pk.eyJ1IjoieW91cl91c2VybmFtZSIsImEiOiJjb..."
-              value={mapboxToken}
-              onChange={(e) => setMapboxToken(e.target.value)}
-              className="flex-1"
-            />
-            <Button
-              onClick={() => setTokenSubmitted(true)}
-              disabled={!mapboxToken.trim()}
-            >
-              Load Map
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  }, [projectName, projectLocation, nearbyPlaces]);
 
   return (
     <div className="bg-card rounded-3xl p-8 card-shadow">
