@@ -3,6 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { Loader2 } from "lucide-react";
+import { z } from "zod";
+
+const formSchema = z.object({
+  name: z.string().trim().min(1, { message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
+  email: z.string().trim().email({ message: "Invalid email address" }).max(255, { message: "Email must be less than 255 characters" }),
+  phone: z.string().trim().min(10, { message: "Phone number must be at least 10 digits" }).max(15, { message: "Phone number must be less than 15 digits" }).regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" }),
+  message: z.string().trim().max(1000, { message: "Message must be less than 1000 characters" }).optional(),
+});
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +21,8 @@ const Contact = () => {
     phone: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -18,14 +30,68 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error for this field when user starts typing
+    if (errors[e.target.name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[e.target.name];
+        return newErrors;
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you soon.",
-    });
+    
+    // Validate form data
+    try {
+      formSchema.parse(formData);
+      setErrors({});
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors: Record<string, string> = {};
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0].toString()] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("leads").insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim() || null,
+        project_name: null,
+        project_id: null,
+        source: "contact_form",
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -62,9 +128,11 @@ const Contact = () => {
                     placeholder="Your full name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="border-primary/30 focus:border-primary rounded-xl"
+                    className={`border-primary/30 focus:border-primary rounded-xl ${errors.name ? "border-destructive" : ""}`}
+                    maxLength={100}
                     required
                   />
+                  {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
@@ -72,12 +140,15 @@ const Contact = () => {
                   </label>
                   <Input
                     name="phone"
+                    type="tel"
                     placeholder="Your phone number"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="border-primary/30 focus:border-primary rounded-xl"
+                    className={`border-primary/30 focus:border-primary rounded-xl ${errors.phone ? "border-destructive" : ""}`}
+                    maxLength={15}
                     required
                   />
+                  {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -91,9 +162,11 @@ const Contact = () => {
                   placeholder="Your email address"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="border-primary/30 focus:border-primary rounded-xl"
+                  className={`border-primary/30 focus:border-primary rounded-xl ${errors.email ? "border-destructive" : ""}`}
+                  maxLength={255}
                   required
                 />
+                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
               </div>
 
               <div>
@@ -106,8 +179,10 @@ const Contact = () => {
                   rows={3}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="border-primary/30 focus:border-primary resize-none rounded-xl"
+                  className={`border-primary/30 focus:border-primary resize-none rounded-xl ${errors.message ? "border-destructive" : ""}`}
+                  maxLength={1000}
                 />
+                {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
@@ -115,8 +190,16 @@ const Contact = () => {
                   type="submit"
                   size="lg"
                   className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
                 <Button
                   type="button"
