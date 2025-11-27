@@ -71,9 +71,18 @@ const DownloadBrochureDialog = ({ isOpen, onClose, projectName, projectId }: Dow
       setStep("otp");
     } catch (error) {
       console.error("Error submitting form:", error);
+      
+      // Check if it's a rate limit error
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const isRateLimit = errorMessage.includes('Rate limit exceeded') || 
+                          errorMessage.includes('rate limit') ||
+                          errorMessage.includes('too many requests');
+      
       toast({
-        title: "Submission Failed",
-        description: "There was an error. Please try again.",
+        title: isRateLimit ? "Too Many Submissions" : "Submission Failed",
+        description: isRateLimit 
+          ? "You've submitted too many forms recently. Please try again in an hour."
+          : "There was an error submitting your form. Please try again.",
         variant: "destructive",
       });
     } finally {

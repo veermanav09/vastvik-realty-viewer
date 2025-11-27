@@ -93,9 +93,18 @@ const Referral = () => {
       });
     } catch (error) {
       console.error("Error submitting form:", error);
+      
+      // Check if it's a rate limit error
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const isRateLimit = errorMessage.includes('only create one referral') || 
+                          errorMessage.includes('rate limit') ||
+                          errorMessage.includes('24 hours');
+      
       toast({
-        title: "Submission Failed",
-        description: "There was an error generating your referral code. Please try again.",
+        title: isRateLimit ? "Referral Code Already Created" : "Submission Failed",
+        description: isRateLimit 
+          ? "You can only create one referral code per 24 hours. Please try again tomorrow."
+          : "There was an error generating your referral code. Please try again.",
         variant: "destructive",
       });
     } finally {

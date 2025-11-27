@@ -233,6 +233,9 @@ const BlogDetail = () => {
           </div>
 
           {/* Content */}
+          {/* SECURITY NOTE: dangerouslySetInnerHTML is safe here because blog.content 
+              is hardcoded in this component, not user-generated. If this ever changes 
+              to load from a database with user input, you MUST sanitize with DOMPurify */}
           <div 
             className="prose prose-lg max-w-none mb-12"
             dangerouslySetInnerHTML={{ __html: blog.content }}
