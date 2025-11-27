@@ -120,9 +120,12 @@ const About = () => {
         
         {/* Header */}
         <div className="text-center mb-24">
-          <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground mb-4">
-            Our Philosophy
-          </h2>
+          <div className="inline-block relative mb-4">
+            <div className="absolute inset-0 bg-primary/10 -skew-y-1 rounded-lg transform scale-105"></div>
+            <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground relative px-8 py-2">
+              About us
+            </h2>
+          </div>
           <p className="text-xl text-muted-foreground font-body max-w-2xl mx-auto">
             Building more than homes—we create legacies
           </p>

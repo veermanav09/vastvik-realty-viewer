@@ -55,9 +55,12 @@ const Projects = () => {
     <section id="projects" className="py-16 bg-gradient-subtle">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-8">
-            Our Portfolio
-          </h2>
+          <div className="inline-block relative mb-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 blur-xl"></div>
+            <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground relative">
+              Our Projects
+            </h2>
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-body">
             Discover meticulously crafted residences where luxury meets lifestyle, designed to exceed expectations
           </p>
