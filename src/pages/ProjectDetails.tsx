@@ -254,14 +254,20 @@ const ProjectDetails = () => {
               {project.id === 1 && (
                 <ProjectMap
                   projectName={project.name}
-                  projectLocation={{ lat: 12.8184, lng: 77.7065 }}
+                  projectLocation={{ lat: 12.7900, lng: 77.7080 }}
                   nearbyPlaces={[
-                    { name: "M tres School", category: "education", lat: 12.8190, lng: 77.7070 },
-                    { name: "National Public School", category: "education", lat: 12.8200, lng: 77.7100 },
-                    { name: "Narayana Hospital", category: "hospital", lat: 12.8150, lng: 77.7080 },
-                    { name: "Infosys", category: "corporate", lat: 12.8300, lng: 77.7200 },
-                    { name: "TCS", category: "corporate", lat: 12.8250, lng: 77.7150 },
-                    { name: "D Mart", category: "retail", lat: 12.8170, lng: 77.7090 },
+                    { name: "M Tres School", category: "education", lat: 12.7905, lng: 77.7085 },
+                    { name: "National Public School", category: "education", lat: 12.798, lng: 77.710 },
+                    { name: "Sri Chaitanya School", category: "education", lat: 12.795, lng: 77.708 },
+                    { name: "SFS Academy", category: "education", lat: 12.802, lng: 77.714 },
+                    { name: "Narayana Hospital", category: "hospital", lat: 12.816, lng: 77.692 },
+                    { name: "Sparsh Hospital", category: "hospital", lat: 12.825, lng: 77.685 },
+                    { name: "Infosys Electronic City", category: "corporate", lat: 12.841, lng: 77.676 },
+                    { name: "TCS Electronic City", category: "corporate", lat: 12.843, lng: 77.662 },
+                    { name: "Biocon", category: "corporate", lat: 12.848, lng: 77.668 },
+                    { name: "Wipro", category: "corporate", lat: 12.845, lng: 77.664 },
+                    { name: "D Mart", category: "retail", lat: 12.800, lng: 77.714 },
+                    { name: "Metro Cash & Carry", category: "retail", lat: 12.810, lng: 77.700 },
                   ]}
                 />
               )}
