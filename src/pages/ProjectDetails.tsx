@@ -254,20 +254,20 @@ const ProjectDetails = () => {
               {project.id === 1 && (
                 <ProjectMap
                   projectName={project.name}
-                  projectLocation={{ lat: 12.7900, lng: 77.7080 }}
+                  projectLocation={{ lat: 12.768313, lng: 77.699938 }}
                   nearbyPlaces={[
-                    { name: "M Tres School", category: "education", lat: 12.7905, lng: 77.7085 },
-                    { name: "National Public School", category: "education", lat: 12.798, lng: 77.710 },
-                    { name: "Sri Chaitanya School", category: "education", lat: 12.795, lng: 77.708 },
-                    { name: "SFS Academy", category: "education", lat: 12.802, lng: 77.714 },
-                    { name: "Narayana Hospital", category: "hospital", lat: 12.816, lng: 77.692 },
-                    { name: "Sparsh Hospital", category: "hospital", lat: 12.825, lng: 77.685 },
-                    { name: "Infosys Electronic City", category: "corporate", lat: 12.841, lng: 77.676 },
-                    { name: "TCS Electronic City", category: "corporate", lat: 12.843, lng: 77.662 },
-                    { name: "Biocon", category: "corporate", lat: 12.848, lng: 77.668 },
-                    { name: "Wipro", category: "corporate", lat: 12.845, lng: 77.664 },
-                    { name: "D Mart", category: "retail", lat: 12.800, lng: 77.714 },
-                    { name: "Metro Cash & Carry", category: "retail", lat: 12.810, lng: 77.700 },
+                    { name: "M Tres School", category: "education", lat: 12.769, lng: 77.701 },
+                    { name: "National Public School", category: "education", lat: 12.776, lng: 77.706 },
+                    { name: "Sri Chaitanya School", category: "education", lat: 12.773, lng: 77.704 },
+                    { name: "SFS Academy", category: "education", lat: 12.780, lng: 77.710 },
+                    { name: "Narayana Hospital", category: "hospital", lat: 12.794, lng: 77.688 },
+                    { name: "Sparsh Hospital", category: "hospital", lat: 12.803, lng: 77.681 },
+                    { name: "Infosys Electronic City", category: "corporate", lat: 12.819, lng: 77.672 },
+                    { name: "TCS Electronic City", category: "corporate", lat: 12.821, lng: 77.658 },
+                    { name: "Biocon", category: "corporate", lat: 12.826, lng: 77.664 },
+                    { name: "Wipro", category: "corporate", lat: 12.823, lng: 77.660 },
+                    { name: "D Mart", category: "retail", lat: 12.778, lng: 77.710 },
+                    { name: "Metro Cash & Carry", category: "retail", lat: 12.788, lng: 77.696 },
                   ]}
                 />
               )}
