@@ -46,26 +46,27 @@ const Header = () => {
     <>
       {/* Header with Logo and Navigation - Permanent Liquid Glass Effect */}
       <header
-        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
-          isVisible ? 'top-4 opacity-100' : '-top-24 opacity-0'
+        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-out ${
+          isVisible ? 'top-4 opacity-100 translate-y-0' : '-top-24 opacity-0 -translate-y-4'
         }`}
       >
-        <div className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl rounded-2xl px-8 py-1.5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.16)] transition-shadow duration-300">
+        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-8 py-2 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
           <nav className="flex items-center justify-center gap-6">
             {/* Left Navigation Items - Flex with equal width */}
-            <div className="hidden md:flex items-center justify-end gap-5 w-64">
-              {leftNavItems.map((item) => {
+            <div className="hidden md:flex items-center justify-end gap-6 w-64">
+              {leftNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap ${
-                      isActive ? 'text-secondary' : 'hover:text-secondary'
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
+                      isActive ? 'text-primary' : 'hover:text-primary'
                     }`}
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {item.name}
-                    <span className={`absolute -bottom-1 left-0 h-px bg-secondary transition-all duration-300 ${
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary rounded-full transition-all duration-300 ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}></span>
                   </Link>
@@ -74,28 +75,28 @@ const Header = () => {
             </div>
 
             {/* Logo - Center with fixed width */}
-            <Link to="/" className="flex items-center justify-center px-6 flex-shrink-0">
+            <Link to="/" className="flex items-center justify-center px-6 flex-shrink-0 group">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain filter drop-shadow-md"
+                className="h-10 w-auto object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
             {/* Right Navigation Items - Flex with equal width */}
-            <div className="hidden md:flex items-center justify-start gap-5 w-64">
-              {rightNavItems.map((item) => {
+            <div className="hidden md:flex items-center justify-start gap-6 w-64">
+              {rightNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap ${
-                      isActive ? 'text-secondary' : 'hover:text-secondary'
+                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
+                      isActive ? 'text-primary' : 'hover:text-primary'
                     }`}
                   >
                     {item.name}
-                    <span className={`absolute -bottom-1 left-0 h-px bg-secondary transition-all duration-300 ${
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary rounded-full transition-all duration-300 ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}></span>
                   </Link>
@@ -103,10 +104,10 @@ const Header = () => {
               })}
               <button
                 onClick={() => setContactDialogOpen(true)}
-                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-secondary whitespace-nowrap"
+                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-primary whitespace-nowrap hover:-translate-y-0.5"
               >
                 Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
               </button>
             </div>
 
@@ -170,10 +171,10 @@ const Header = () => {
       <div className="fixed bottom-24 right-6 z-[60]">
         <Button
           size="icon"
-          className="w-14 h-14 bg-black/90 backdrop-blur-xl text-[#86A376] hover:bg-black hover:shadow-2xl rounded-full transition-all duration-300 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+          className="w-14 h-14 bg-foreground/90 backdrop-blur-xl text-background hover:bg-foreground hover:shadow-2xl rounded-full transition-all duration-500 border border-background/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:scale-110 group"
           onClick={() => window.location.href = 'tel:+918884545404'}
         >
-          <Phone className="w-5 h-5" />
+          <Phone className="w-5 h-5 group-hover:animate-pulse" />
         </Button>
       </div>
       

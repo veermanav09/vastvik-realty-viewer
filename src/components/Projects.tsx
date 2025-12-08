@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink } from "lucide-react";
+import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink, ArrowRight } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
 import ExpressionOfInterestDialog from "./ExpressionOfInterestDialog";
 import elementImage from "@/assets/element-project.png";
@@ -52,12 +52,18 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-16 bg-gradient-subtle">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="projects" className="py-24 bg-gradient-subtle relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute top-40 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-40 left-0 w-72 h-72 bg-secondary/5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <div className="inline-block relative mb-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 blur-xl"></div>
-            <h2 className="font-heading font-bold text-5xl md:text-6xl text-foreground relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 blur-2xl animate-pulse-soft"></div>
+            <h2 className="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-foreground relative">
               Our Projects
             </h2>
           </div>
@@ -66,8 +72,8 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {projects.map((project) => {
+        <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+          {projects.map((project, index) => {
             const isHovered = hoveredProject === project.id;
 
             return (
@@ -76,15 +82,24 @@ const Projects = () => {
                 className="group relative"
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-500 ${isHovered ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgb(0,0,0,0.12)]'}`}>
+                <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-700 ease-out ${
+                  isHovered 
+                    ? 'shadow-[0_25px_80px_-15px_rgba(0,0,0,0.25)] scale-[1.02]' 
+                    : 'shadow-[0_8px_40px_rgb(0,0,0,0.08)]'
+                }`}>
                   {/* Image Section */}
                   <div className="relative p-6">
-                    <div className={`relative h-96 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-500 ${isHovered ? 'shadow-[0_12px_40px_rgba(0,0,0,0.25)] -translate-y-2' : ''}`}>
+                    <div className={`relative h-96 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
+                      isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
+                    }`}>
                       <img
                         src={project.image}
                         alt={project.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className={`w-full h-full object-cover transition-all duration-1000 ease-out ${
+                          isHovered ? 'scale-110' : 'scale-100'
+                        }`}
                       />
                     
                       {/* Badge */}
@@ -158,11 +173,11 @@ const Projects = () => {
                     <div className="flex gap-3">
                       <Button
                         onClick={() => window.open(`/project/${project.id}`, '_blank')}
-                        className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                        className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:shadow-lg active:scale-95"
                         size="sm"
                       >
                         More Details
-                        <ExternalLink className="w-4 h-4 ml-2" />
+                        <ExternalLink className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5" />
                       </Button>
                       <Button
                         onClick={() => {
@@ -173,7 +188,7 @@ const Projects = () => {
                           }
                         }}
                         variant="outline"
-                        className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                        className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:shadow-lg active:scale-95"
                         size="sm"
                       >
                         {project.id === 2 ? "Express Interest" : "Download Brochure"}
@@ -194,8 +209,8 @@ const Projects = () => {
           })}
         </div>
 
-        <div className="text-center mt-20">
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 font-body">
+        <div className="text-center mt-24">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 font-body">
             Ready to explore your dream home? Let's begin your journey.
           </p>
           <Button
@@ -204,9 +219,10 @@ const Projects = () => {
               contactSection?.scrollIntoView({ behavior: 'smooth' });
             }}
             size="lg"
-            className="bg-primary text-primary-foreground px-16 py-6 text-xl minimal-shadow hover:elevated-shadow transition-all duration-300"
+            className="bg-primary text-primary-foreground px-16 py-6 text-xl card-shadow hover:elevated-shadow transition-all duration-500 hover:scale-105 active:scale-95 group"
           >
             Schedule a Viewing
+            <ArrowRight className="w-5 h-5 ml-3 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </div>
