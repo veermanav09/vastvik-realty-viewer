@@ -5,6 +5,68 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Rate limiting: Track requests per IP
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_MAX = 15; // Max requests per window
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
+
+// Message limits
+const MAX_MESSAGE_LENGTH = 1000;
+const MAX_CONVERSATION_HISTORY = 20;
+
+function checkRateLimit(clientIP: string): boolean {
+  const now = Date.now();
+  const clientData = rateLimitMap.get(clientIP);
+
+  if (!clientData || now > clientData.resetTime) {
+    rateLimitMap.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (clientData.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  clientData.count++;
+  return true;
+}
+
+function validateMessages(messages: unknown): { valid: boolean; error?: string } {
+  if (!Array.isArray(messages)) {
+    return { valid: false, error: "Messages must be an array" };
+  }
+
+  if (messages.length === 0) {
+    return { valid: false, error: "Messages array cannot be empty" };
+  }
+
+  if (messages.length > MAX_CONVERSATION_HISTORY) {
+    return { valid: false, error: `Too many messages. Maximum ${MAX_CONVERSATION_HISTORY} allowed.` };
+  }
+
+  for (const msg of messages) {
+    if (typeof msg !== 'object' || msg === null) {
+      return { valid: false, error: "Invalid message format" };
+    }
+
+    const message = msg as { role?: unknown; content?: unknown };
+
+    if (typeof message.role !== 'string' || !['user', 'assistant', 'system'].includes(message.role)) {
+      return { valid: false, error: "Invalid message role" };
+    }
+
+    if (typeof message.content !== 'string') {
+      return { valid: false, error: "Message content must be a string" };
+    }
+
+    if (message.content.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `Message too long. Maximum ${MAX_MESSAGE_LENGTH} characters allowed.` };
+    }
+  }
+
+  return { valid: true };
+}
+
 const WEBSITE_CONTEXT = `
 You are Vastvik AI Assistant, a helpful and knowledgeable assistant for Vastvik Realty - a premium real estate company in Bangalore.
 
@@ -117,14 +179,44 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
+                     req.headers.get('cf-connecting-ip') || 
+                     'unknown';
+
+    // Check rate limit
+    if (!checkRateLimit(clientIP)) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(JSON.stringify({ 
+        error: "Too many requests. Please wait a moment before trying again." 
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const body = await req.json();
+    const { messages } = body;
+
+    // Validate messages
+    const validation = validateMessages(messages);
+    if (!validation.valid) {
+      console.log(`Validation failed: ${validation.error}`);
+      return new Response(JSON.stringify({ 
+        error: validation.error 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log('Processing chat request with', messages.length, 'messages');
+    console.log('Processing chat request with', messages.length, 'messages from IP:', clientIP);
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
