@@ -138,7 +138,7 @@ All colors MUST be HSL.
 @layer utilities {
   /* Animation classes */
   .leo9-slide-up {
-    animation: slideUp 0.8s ease-out;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .leo9-reveal {
@@ -148,7 +148,7 @@ All colors MUST be HSL.
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(40px);
     }
     to {
       opacity: 1;
@@ -223,22 +223,28 @@ All colors MUST be HSL.
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
+  .glass-shadow {
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
   /* Premium lift effects */
   .premium-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .premium-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   }
 
   .premium-lift-subtle {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
   .premium-lift-subtle:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 
   /* Gradient backgrounds */
@@ -248,6 +254,84 @@ All colors MUST be HSL.
 
   .gradient-card {
     background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  .gradient-subtle {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.3) 100%);
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-strong {
+    background: hsl(var(--card) / 0.85);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Section transitions */
+  .section-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+
+  /* Interactive elements */
+  .interactive-scale {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .interactive-scale:hover {
+    transform: scale(1.02);
+  }
+
+  .interactive-scale:active {
+    transform: scale(0.98);
+  }
+
+  /* Text animations */
+  .text-glow {
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+  }
+
+  /* Shimmer effect for loading states */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted) / 0.3) 0%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted) / 0.3) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 
   /* Infinite horizontal scroll animation */
@@ -262,5 +346,16 @@ All colors MUST be HSL.
 
   .animate-scroll-horizontal {
     animation: scroll-horizontal 30s linear infinite;
+  }
+
+  /* Focus states */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Divider lines with gradient */
+  .divider-gradient {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
   }
 }

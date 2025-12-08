@@ -60,11 +60,15 @@ const About = () => {
   const totalChars = largeText.length;
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-24 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
       {/* Animated Shadow Gradient Overlay */}
       <div className="absolute inset-0 animate-gradient-shift">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10"></div>
       </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float-slower" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow" />
       
       {/* CSS Keyframes for gradient animation */}
       <style>{`
@@ -120,19 +124,19 @@ const About = () => {
         
         {/* Header */}
         <div className="text-center mb-24">
-          <div className="inline-block relative mb-4">
-            <div className="absolute inset-0 bg-primary/10 -skew-y-1 rounded-lg transform scale-105"></div>
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-foreground relative px-8 py-2">
+          <div className="inline-block relative mb-6">
+            <div className="absolute inset-0 bg-primary/10 -skew-y-1 rounded-xl transform scale-110 blur-sm"></div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-foreground relative px-8 py-3">
               About us
             </h2>
           </div>
-          <p className="text-xl text-muted-foreground font-body max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground font-body max-w-2xl mx-auto leading-relaxed">
             Building more than homes—we create legacies
           </p>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start max-w-7xl mx-auto">
           
           {/* Left Side - Large Text with Letter Animation */}
           <div className="lg:pr-12">
@@ -173,7 +177,7 @@ const About = () => {
           </div>
 
           {/* Right Side - Hoverable Items */}
-          <div className="space-y-4">
+          <div className="space-y-2">
             {philosophyItems.map((item, index) => (
               <div
                 key={index}
@@ -181,19 +185,24 @@ const About = () => {
                 onMouseEnter={() => setHoveredItem(index)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className="border-b border-border py-4 transition-all duration-300 group-hover:border-secondary/50">
-                  <h4 className="text-2xl md:text-3xl font-light text-muted-foreground group-hover:text-secondary transition-colors duration-300">
+                <div className={`border-b border-border/50 py-5 transition-all duration-500 ${
+                  hoveredItem === index ? 'border-primary/50 bg-primary/5 -mx-4 px-4 rounded-xl' : ''
+                }`}>
+                  <h4 className={`text-2xl md:text-3xl font-light transition-all duration-500 ${
+                    hoveredItem === index ? 'text-primary translate-x-2' : 'text-muted-foreground'
+                  }`}>
                     {item.title}
                   </h4>
                   
                   <div
-                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                    className="overflow-hidden transition-all duration-500 ease-out"
                     style={{
                       maxHeight: hoveredItem === index ? '200px' : '0px',
-                      opacity: hoveredItem === index ? 1 : 0
+                      opacity: hoveredItem === index ? 1 : 0,
+                      transform: hoveredItem === index ? 'translateY(0)' : 'translateY(-10px)'
                     }}
                   >
-                    <p className="text-muted-foreground mt-3 leading-relaxed">
+                    <p className="text-muted-foreground mt-4 leading-relaxed pl-2 border-l-2 border-primary/30">
                       {item.description}
                     </p>
                   </div>
