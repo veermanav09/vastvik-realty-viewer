@@ -70,7 +70,7 @@ const Contact = () => {
         message: formData.message.trim() || null,
         project_name: null,
         project_id: null,
-        source: "contact_form",
+        source: "contact",
       });
 
       if (error) throw error;

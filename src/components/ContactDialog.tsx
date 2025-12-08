@@ -62,7 +62,7 @@ const ContactDialog = ({ isOpen, onClose }: ContactDialogProps) => {
         message: formData.message.trim(),
         project_name: null,
         project_id: null,
-        source: "contact_form",
+        source: "contact",
       });
 
       if (error) throw error;

@@ -62,7 +62,7 @@ const DownloadBrochureDialog = ({ isOpen, onClose, projectName, projectId }: Dow
         message: formData.message.trim() || null,
         project_name: projectName,
         project_id: projectId.toString(),
-        source: "download_brochure",
+        source: "brochure_download",
       });
 
       if (error) throw error;
