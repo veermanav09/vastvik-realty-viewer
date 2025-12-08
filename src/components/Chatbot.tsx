@@ -86,7 +86,42 @@ const Chatbot = () => {
 
       if (error) {
         console.error('Error calling chat function:', error);
+        
+        // Handle specific error status codes
+        const errorMessage = error.message?.toLowerCase() || '';
+        if (errorMessage.includes('429') || errorMessage.includes('too many requests') || errorMessage.includes('rate limit')) {
+          toast({
+            title: "Too many requests",
+            description: "Please wait a moment before sending another message.",
+            variant: "destructive",
+          });
+          setMessages(prev => [...prev, { 
+            role: "assistant", 
+            content: "You're sending messages too quickly. Please wait a moment and try again." 
+          }]);
+          return;
+        }
+        
+        if (errorMessage.includes('402') || errorMessage.includes('payment')) {
+          toast({
+            title: "Service unavailable",
+            description: "Our AI service is temporarily unavailable.",
+            variant: "destructive",
+          });
+          setMessages(prev => [...prev, { 
+            role: "assistant", 
+            content: "I'm temporarily unavailable. Please contact us directly at +91 88845 45404 for assistance." 
+          }]);
+          return;
+        }
+        
         throw error;
+      }
+
+      // Check for error in the response data
+      if (data?.error) {
+        console.error('API error in response:', data.error);
+        throw new Error(data.error);
       }
 
       const aiResponse = data?.choices?.[0]?.message?.content || 
