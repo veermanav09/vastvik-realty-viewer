@@ -7,6 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import vastvikLogo from "@/assets/vastvik-logo-new.png";
 
+// Input validation constants
+const MAX_MESSAGE_LENGTH = 1000;
+const MAX_CONVERSATION_HISTORY = 20;
+
 const Chatbot = () => {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
@@ -41,43 +45,67 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
+  const validateMessage = (msg: string): { valid: boolean; error?: string } => {
+    const trimmed = msg.trim();
+    if (!trimmed) {
+      return { valid: false, error: "Please enter a message" };
+    }
+    if (trimmed.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `Message too long. Maximum ${MAX_MESSAGE_LENGTH} characters allowed.` };
+    }
+    return { valid: true };
+  };
+
   const handleSendMessage = async () => {
-    if (message.trim() && !isLoading) {
-      const userMessage = message;
-      setMessage("");
-      setMessages(prev => [...prev, { role: "user", content: userMessage }]);
-      setIsLoading(true);
-
-      try {
-        const { data, error } = await supabase.functions.invoke('vastvik-chat', {
-          body: { 
-            messages: [...messages, { role: "user", content: userMessage }]
-          }
-        });
-
-        if (error) {
-          console.error('Error calling chat function:', error);
-          throw error;
-        }
-
-        const aiResponse = data?.choices?.[0]?.message?.content || 
-          "I'm sorry, I couldn't process that. Please try asking about our projects or contact us at +91 88845 45404.";
-
-        setMessages(prev => [...prev, { role: "assistant", content: aiResponse }]);
-      } catch (error) {
-        console.error('Chat error:', error);
+    const validation = validateMessage(message);
+    if (!validation.valid || isLoading) {
+      if (validation.error) {
         toast({
-          title: "Error",
-          description: "Unable to process your message. Please try again.",
+          title: "Invalid message",
+          description: validation.error,
           variant: "destructive",
         });
-        setMessages(prev => [...prev, { 
-          role: "assistant", 
-          content: "I apologize, but I'm having trouble connecting right now. Please call us at +91 88845 45404 for immediate assistance." 
-        }]);
-      } finally {
-        setIsLoading(false);
       }
+      return;
+    }
+
+    const userMessage = message.trim();
+    setMessage("");
+    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+    setIsLoading(true);
+
+    try {
+      // Limit conversation history sent to server
+      const recentMessages = messages.slice(-MAX_CONVERSATION_HISTORY);
+      
+      const { data, error } = await supabase.functions.invoke('vastvik-chat', {
+        body: { 
+          messages: [...recentMessages, { role: "user", content: userMessage }]
+        }
+      });
+
+      if (error) {
+        console.error('Error calling chat function:', error);
+        throw error;
+      }
+
+      const aiResponse = data?.choices?.[0]?.message?.content || 
+        "I'm sorry, I couldn't process that. Please try asking about our projects or contact us at +91 88845 45404.";
+
+      setMessages(prev => [...prev, { role: "assistant", content: aiResponse }]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      toast({
+        title: "Error",
+        description: "Unable to process your message. Please try again.",
+        variant: "destructive",
+      });
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: "I apologize, but I'm having trouble connecting right now. Please call us at +91 88845 45404 for immediate assistance." 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -215,8 +243,9 @@ const Chatbot = () => {
                 <Input
                   placeholder="Type your message..."
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) => setMessage(e.target.value.slice(0, MAX_MESSAGE_LENGTH))}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  maxLength={MAX_MESSAGE_LENGTH}
                   className="flex-1 border-0 bg-white focus-visible:ring-1 focus-visible:ring-primary rounded-full shadow-sm px-4"
                 />
                 <Button
