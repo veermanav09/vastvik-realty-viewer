@@ -50,9 +50,55 @@ const Header = () => {
           isVisible ? 'top-4 opacity-100 translate-y-0' : '-top-24 opacity-0 -translate-y-4'
         }`}
       >
-        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-8 py-2 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
-          <nav className="flex items-center justify-center gap-6">
-            {/* Left Navigation Items - Flex with equal width */}
+        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-4 md:px-8 py-2 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
+          <nav className="flex items-center justify-between md:justify-center gap-4 md:gap-6">
+            {/* Mobile Menu Button - Left side on mobile */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden flex-shrink-0"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-6 mt-8">
+                  {leftNavItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  {rightNavItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setContactDialogOpen(true);
+                    }}
+                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors text-left"
+                  >
+                    Contact
+                  </button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+
+            {/* Left Navigation Items - Desktop only */}
             <div className="hidden md:flex items-center justify-end gap-6 w-64">
               {leftNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
@@ -74,16 +120,19 @@ const Header = () => {
               })}
             </div>
 
-            {/* Logo - Center with fixed width */}
-            <Link to="/" className="flex items-center justify-center px-6 flex-shrink-0 group">
+            {/* Logo - Center */}
+            <Link to="/" className="flex items-center justify-center md:px-6 flex-shrink-0 group">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-10 w-auto object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105"
+                className="h-8 md:h-10 w-auto object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
-            {/* Right Navigation Items - Flex with equal width */}
+            {/* Invisible spacer for mobile to balance the menu button */}
+            <div className="md:hidden w-10 flex-shrink-0"></div>
+
+            {/* Right Navigation Items - Desktop only */}
             <div className="hidden md:flex items-center justify-start gap-6 w-64">
               {rightNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
@@ -110,59 +159,6 @@ const Header = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
               </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="md:hidden"
-                >
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-6 mt-8">
-                  {leftNavItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <Link
-                    to="/"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
-                  >
-                    Overview
-                  </Link>
-                  {rightNavItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      setContactDialogOpen(true);
-                    }}
-                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors text-left"
-                  >
-                    Contact
-                  </button>
-                </nav>
-              </SheetContent>
-            </Sheet>
           </nav>
         </div>
       </header>
