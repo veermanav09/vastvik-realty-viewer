@@ -8,6 +8,14 @@ const BlogsSection = () => {
 
   const featuredBlogs = [
     {
+      id: 4,
+      title: "Real Estate Investment in 2025 — A Smart Guide for Home Buyers & Investors",
+      excerpt: "Real estate remains one of the safest and most rewarding asset classes in 2025. Unlike volatile markets, property investment offers stability, rental income, and long-term appreciation.",
+      image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=800&h=600&fit=crop",
+      category: "Investment Guide",
+      date: "Dec 27, 2025",
+    },
+    {
       id: 1,
       title: "Essential Guide: Smart Strategies for First-Time Homebuyers",
       excerpt: "Navigate your first property purchase with confidence. Discover proven strategies that transform complex decisions into clear, actionable steps toward your dream home.",
@@ -22,14 +30,6 @@ const BlogsSection = () => {
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
       category: "Investment",
       date: "Sep 28, 2025",
-    },
-    {
-      id: 3,
-      title: "Sustainable Luxury: The Future of Urban Living",
-      excerpt: "Discover how premium residences are pioneering eco-conscious design. Explore the intersection of environmental responsibility and refined living.",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-      category: "Lifestyle",
-      date: "Sep 25, 2025",
     },
   ];
 

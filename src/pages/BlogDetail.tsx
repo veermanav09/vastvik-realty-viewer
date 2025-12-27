@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, ArrowLeft, ExternalLink } from "lucide-react";
+import { Calendar, User, ArrowLeft, ExternalLink, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const BlogDetail = () => {
@@ -10,6 +11,111 @@ const BlogDetail = () => {
   const navigate = useNavigate();
 
   const blogData: Record<string, any> = {
+    "4": {
+      title: "Real Estate Investment in 2025 — A Smart Guide for Home Buyers & Investors",
+      image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&h=600&fit=crop",
+      category: "Investment Guide",
+      author: "Vastvik Team",
+      date: "Dec 27, 2025",
+      readTime: "10 min",
+      shortContent: `
+        <p>Real estate remains one of the safest and most rewarding asset classes in 2025. Unlike volatile markets, property investment offers stability, rental income, and long-term appreciation. The demand for residential housing in India is steadily increasing due to urban migration, improved infrastructure, and evolving lifestyle expectations. Investors today look beyond city centres toward emerging micro-markets where land prices remain affordable, yet future growth is assured through connectivity upgrades.</p>
+
+        <p>A well-planned investment strategy includes evaluating builder credibility, legal compliance, development timeline, and proximity to upcoming infrastructure. Bangalore remains a top investment destination, driven by IT expansion, industrial corridors, and new transit projects. Particularly, South Bangalore is gaining attention due to spillover demand from Electronic City, planned metro routes, and expressway connectivity.</p>
+
+        <p>In emerging markets, timing is critical. Early investors often capture maximum appreciation before price cycles accelerate. Buyers should also consider rental viability, especially near business hubs and transit corridors, as rental income acts as an additional inflation hedge.</p>
+
+        <p>A prime example of a future-growth investment opportunity in South Bangalore is <strong>Elements by Vastvik Realty</strong>, located near Marsur Gate, Chandapura. Backed by a trusted builder brand, this project offers a strong balance between lifestyle appeal and investment upside. Whether you are a home buyer seeking smart living or an investor eyeing ROI, projects like Elements provide early entry advantage in a region poised for long-term valuation growth.</p>
+      `,
+      content: `
+        <p class="lead">The real estate market in 2025 is evolving into a more mature, transparent, and infrastructure-driven investment ecosystem. For home buyers and investors, real estate is no longer just about owning land or a home; it's about identifying growth pockets that will shape the next decade.</p>
+
+        <h2>Why Real Estate Still Matters</h2>
+        <p>Real estate is one of the few asset classes that:</p>
+        <ul>
+          <li>Protects wealth against inflation</li>
+          <li>Generates rental income that increases annually</li>
+          <li>Offers resale liquidity when located strategically</li>
+          <li>Allows leverage through home loans</li>
+          <li>Benefits from infrastructure announcements</li>
+          <li>Provides tangible ownership, unlike digital assets</li>
+        </ul>
+
+        <h2>Bangalore's Investment Strength</h2>
+        <p>Bangalore remains one of India's strongest real estate markets due to:</p>
+        <ul>
+          <li>Expansion of IT parks and startup ecosystem</li>
+          <li>Continuous influx of skilled professionals</li>
+          <li>Growing demand for residential and commercial assets</li>
+          <li>Strong rental market</li>
+          <li>Limited land availability in city center pushing outward expansion</li>
+          <li>Infrastructure-led price momentum</li>
+        </ul>
+
+        <h2>Shift Toward South Bangalore</h2>
+        <p>South Bangalore is outperforming expectations due to:</p>
+        <ul>
+          <li>Proximity to Electronic City — a massive IT employment hub</li>
+          <li>Industrial migration southward</li>
+          <li>Affordable pricing compared to North Bangalore</li>
+          <li>Planned metro expansions</li>
+          <li>New expressway and ring road ecosystems (SRR & ORR)</li>
+          <li>Improved highway networks like Hosur Road</li>
+          <li>Rising investor interest in micro-markets like the Marsur-Chandapura belt</li>
+        </ul>
+
+        <h2>Investment Strategy Checklist 2025</h2>
+        <p>To invest smart, buyers must evaluate:</p>
+        <table class="investment-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Importance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Builder credibility</td>
+              <td>Ensures project reliability and resale confidence</td>
+            </tr>
+            <tr>
+              <td>Legal compliance (RERA, land approvals)</td>
+              <td>Protects buyer investment</td>
+            </tr>
+            <tr>
+              <td>Infrastructure adjacency</td>
+              <td>Drives appreciation and rental demand</td>
+            </tr>
+            <tr>
+              <td>Pricing entry point</td>
+              <td>Early entry = higher appreciation %</td>
+            </tr>
+            <tr>
+              <td>Rental viability</td>
+              <td>Ensures cash flow during holding period</td>
+            </tr>
+            <tr>
+              <td>Resale liquidity</td>
+              <td>Demand confidence improves resale cycles</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Audience Relevance</h2>
+        <p>Elements fit every audience segment:</p>
+        <ul>
+          <li><strong>Families & End-users</strong> → Liveability + future commute reliability</li>
+          <li><strong>Rental Investors</strong> → Growing workforce housing demand</li>
+          <li><strong>ROI Investors</strong> → Positioned before price cycle surge</li>
+          <li><strong>Young professionals</strong> → South Bangalore adjacency benefits</li>
+          <li><strong>General market readers</strong> → Growth narrative + smart investment thesis</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>Real estate investment in 2025 favours buyers who think beyond today's market into tomorrow's infrastructure ecosystem. Bangalore, especially the southern corridor, is absorbing demand rapidly. Projects like <strong>Elements by Vastvik Realty</strong> near Marsur Gate, Chandapura offer a rare mix of affordability, credibility, and future growth relevance — making it one of the smartest early-stage investments for 2025 and beyond.</p>
+      `,
+      externalLink: null
+    },
     "1": {
       title: "Top 10 Tips for First-Time Home Buyers in Bangalore",
       image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=600&fit=crop",
@@ -174,6 +280,7 @@ const BlogDetail = () => {
     }
   };
 
+  const [showFullContent, setShowFullContent] = useState(false);
   const blog = blogData[id || "1"];
 
   if (!blog) {
@@ -186,6 +293,9 @@ const BlogDetail = () => {
       </div>
     );
   }
+
+  const hasShortContent = !!blog.shortContent;
+  const displayContent = hasShortContent && !showFullContent ? blog.shortContent : blog.content;
 
   return (
     <div className="min-h-screen bg-background">
@@ -210,7 +320,7 @@ const BlogDetail = () => {
               {blog.title}
             </h1>
             
-            <div className="flex items-center gap-6 text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-4 md:gap-6 text-muted-foreground">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
                 <span>{blog.author}</span>
@@ -224,7 +334,7 @@ const BlogDetail = () => {
           </div>
 
           {/* Featured Image */}
-          <div className="relative h-[400px] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] mb-12">
+          <div className="relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] mb-12">
             <img
               src={blog.image}
               alt={blog.title}
@@ -237,25 +347,41 @@ const BlogDetail = () => {
               is hardcoded in this component, not user-generated. If this ever changes 
               to load from a database with user input, you MUST sanitize with DOMPurify */}
           <div 
-            className="prose prose-lg max-w-none mb-12"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
+            className="prose prose-lg max-w-none mb-8 blog-content"
+            dangerouslySetInnerHTML={{ __html: displayContent }}
             style={{
               color: 'hsl(var(--foreground))',
             }}
           />
 
-          {/* Read in Detail Link */}
-          <div className="border-t border-border pt-8">
-            <Button
-              onClick={() => window.open(blog.externalLink, '_blank')}
-              variant="outline"
-              size="lg"
-              className="w-full md:w-auto"
-            >
-              Read in Detail
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
+          {/* Read More Button for blogs with short content */}
+          {hasShortContent && !showFullContent && (
+            <div className="text-center mb-12">
+              <Button
+                onClick={() => setShowFullContent(true)}
+                size="lg"
+                className="bg-primary text-primary-foreground px-12 py-6 text-lg"
+              >
+                Read Full Article
+                <ChevronDown className="w-5 h-5 ml-2" />
+              </Button>
+            </div>
+          )}
+
+          {/* External Link (only for blogs that have it) */}
+          {blog.externalLink && (
+            <div className="border-t border-border pt-8">
+              <Button
+                onClick={() => window.open(blog.externalLink, '_blank')}
+                variant="outline"
+                size="lg"
+                className="w-full md:w-auto"
+              >
+                Read in Detail
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          )}
         </div>
       </article>
 

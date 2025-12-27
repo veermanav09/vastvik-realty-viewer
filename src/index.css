@@ -358,4 +358,57 @@ All colors MUST be HSL.
     height: 1px;
     background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
   }
+
+  /* Blog content styling */
+  .blog-content h2 {
+    @apply text-2xl font-heading font-bold mt-8 mb-4 text-foreground;
+  }
+
+  .blog-content h3 {
+    @apply text-xl font-heading font-semibold mt-6 mb-3 text-foreground;
+  }
+
+  .blog-content p {
+    @apply mb-4 leading-relaxed text-foreground/90;
+  }
+
+  .blog-content p.lead {
+    @apply text-xl leading-relaxed mb-6 text-foreground font-medium;
+  }
+
+  .blog-content ul {
+    @apply list-disc pl-6 mb-6 space-y-2;
+  }
+
+  .blog-content ul li {
+    @apply text-foreground/90;
+  }
+
+  .blog-content table {
+    @apply w-full my-8 border-collapse rounded-xl overflow-hidden;
+  }
+
+  .blog-content table thead {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .blog-content table th {
+    @apply px-4 py-3 text-left font-semibold;
+  }
+
+  .blog-content table td {
+    @apply px-4 py-3 border-b border-border;
+  }
+
+  .blog-content table tbody tr {
+    @apply bg-card hover:bg-muted/50 transition-colors;
+  }
+
+  .blog-content table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .blog-content strong {
+    @apply font-semibold text-primary;
+  }
 }

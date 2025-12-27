@@ -7,8 +7,10 @@ import Footer from "@/components/Footer";
 const Blogs = () => {
   const navigate = useNavigate();
   const blogs = [
+    { id: 4, title: "Real Estate Investment in 2025 — A Smart Guide for Home Buyers & Investors", excerpt: "Real estate remains one of the safest and most rewarding asset classes in 2025. Unlike volatile markets, property investment offers stability, rental income, and long-term appreciation.", image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=800&h=600&fit=crop", category: "Investment Guide", author: "Vastvik Team", date: "Dec 27, 2025", readTime: "10 min" },
     { id: 1, title: "Top 10 Tips for First-Time Home Buyers", excerpt: "Essential tips for smooth home buying.", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop", category: "Buying Guide", author: "Vastvik Team", date: "Oct 1, 2025", readTime: "5 min" },
-    { id: 2, title: "Understanding Real Estate Investment Returns", excerpt: "Calculate and maximize your returns.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop", category: "Investment", author: "Vastvik Team", date: "Sep 28, 2025", readTime: "7 min" }
+    { id: 2, title: "Understanding Real Estate Investment Returns", excerpt: "Calculate and maximize your returns.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop", category: "Investment", author: "Vastvik Team", date: "Sep 28, 2025", readTime: "7 min" },
+    { id: 3, title: "The Future of Sustainable Living in Urban Areas", excerpt: "Modern urban apartments are incorporating eco-friendly features that benefit both residents and the planet.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop", category: "Lifestyle", author: "Vastvik Team", date: "Sep 25, 2025", readTime: "6 min" }
   ];
 
   return (
