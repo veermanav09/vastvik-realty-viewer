@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, ArrowLeft, ExternalLink, ChevronDown } from "lucide-react";
+import { Calendar, User, ArrowLeft, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const BlogDetail = () => {
@@ -280,7 +279,6 @@ const BlogDetail = () => {
     }
   };
 
-  const [showFullContent, setShowFullContent] = useState(false);
   const blog = blogData[id || "1"];
 
   if (!blog) {
@@ -294,8 +292,10 @@ const BlogDetail = () => {
     );
   }
 
-  const hasShortContent = !!blog.shortContent;
-  const displayContent = hasShortContent && !showFullContent ? blog.shortContent : blog.content;
+  // Combine short content and full content for complete article
+  const fullContent = blog.shortContent 
+    ? `${blog.shortContent}<hr class="my-8 border-border" />${blog.content}` 
+    : blog.content;
 
   return (
     <div className="min-h-screen bg-background">
@@ -348,25 +348,11 @@ const BlogDetail = () => {
               to load from a database with user input, you MUST sanitize with DOMPurify */}
           <div 
             className="prose prose-lg max-w-none mb-8 blog-content"
-            dangerouslySetInnerHTML={{ __html: displayContent }}
+            dangerouslySetInnerHTML={{ __html: fullContent }}
             style={{
               color: 'hsl(var(--foreground))',
             }}
           />
-
-          {/* Read More Button for blogs with short content */}
-          {hasShortContent && !showFullContent && (
-            <div className="text-center mb-12">
-              <Button
-                onClick={() => setShowFullContent(true)}
-                size="lg"
-                className="bg-primary text-primary-foreground px-12 py-6 text-lg"
-              >
-                Read Full Article
-                <ChevronDown className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
-          )}
 
           {/* External Link (only for blogs that have it) */}
           {blog.externalLink && (
