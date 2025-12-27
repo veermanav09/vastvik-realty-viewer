@@ -12,6 +12,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 import DownloadBrochure from "./pages/DownloadBrochure";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
+import BlogFullArticle from "./pages/BlogFullArticle";
 import Referral from "./pages/Referral";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/download-brochure/:id" element={<DownloadBrochure />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
+            <Route path="/blog/:id/full" element={<BlogFullArticle />} />
             <Route path="/referral" element={<Referral />} />
             <Route path="/auth" element={<Auth />} />
             <Route 
