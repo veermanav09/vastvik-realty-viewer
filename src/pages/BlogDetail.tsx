@@ -292,10 +292,9 @@ const BlogDetail = () => {
     );
   }
 
-  // Combine short content and full content for complete article
-  const fullContent = blog.shortContent 
-    ? `${blog.shortContent}<hr class="my-8 border-border" />${blog.content}` 
-    : blog.content;
+  // Determine if this blog has short content (meaning it has a separate full article page)
+  const hasFullArticle = !!blog.shortContent;
+  const displayContent = blog.shortContent || blog.content;
 
   return (
     <div className="min-h-screen bg-background">
@@ -348,11 +347,25 @@ const BlogDetail = () => {
               to load from a database with user input, you MUST sanitize with DOMPurify */}
           <div 
             className="prose prose-lg max-w-none mb-8 blog-content"
-            dangerouslySetInnerHTML={{ __html: fullContent }}
+            dangerouslySetInnerHTML={{ __html: displayContent }}
             style={{
               color: 'hsl(var(--foreground))',
             }}
           />
+
+          {/* Read in Detail Button - opens full article in new tab */}
+          {hasFullArticle && (
+            <div className="border-t border-border pt-8">
+              <Button
+                onClick={() => window.open(`/blog/${id}/full`, '_blank')}
+                size="lg"
+                className="w-full md:w-auto bg-primary text-primary-foreground"
+              >
+                Read in Detail
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          )}
 
           {/* External Link (only for blogs that have it) */}
           {blog.externalLink && (
@@ -363,7 +376,7 @@ const BlogDetail = () => {
                 size="lg"
                 className="w-full md:w-auto"
               >
-                Read in Detail
+                Read Full Article
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
             </div>
