@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, ArrowRight } from "lucide-react";
-import PortfolioCarousel from "./PortfolioCarousel";
+import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [showPortfolio, setShowPortfolio] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -88,22 +85,6 @@ const Hero = () => {
               Crafting architectural masterpieces that redefine luxury living. Experience where timeless elegance meets modern sophistication in Bangalore's most coveted addresses.
             </p>
           </div>
-
-          {/* CTA with spring animation */}
-          <div 
-            className={`depth-3d-item transition-all duration-1000 delay-500 ${
-              isLoaded ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'
-            }`}
-          >
-            <Button
-              onClick={() => setShowPortfolio(true)}
-              size="lg"
-              className="bg-background/95 backdrop-blur-md text-foreground border-2 border-foreground px-12 py-6 text-lg font-semibold glass-shadow hover:bg-foreground hover:text-background hover:shadow-2xl transition-all duration-500 group premium-lift-subtle hover:scale-105 focus-ring"
-            >
-              Explore Our Portfolio
-              <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-            </Button>
-          </div>
         </div>
 
         {/* Minimal scroll indicator with improved animation */}
@@ -120,9 +101,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
-      {/* Portfolio Carousel Modal */}
-      <PortfolioCarousel isOpen={showPortfolio} onClose={() => setShowPortfolio(false)} />
     </section>
   );
 };
