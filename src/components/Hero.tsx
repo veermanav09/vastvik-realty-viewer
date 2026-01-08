@@ -89,7 +89,7 @@ const Hero = () => {
 
         {/* Minimal scroll indicator with improved animation */}
         <div 
-          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 transition-all duration-1000 delay-700 ${
+          className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 transition-all duration-1000 delay-700 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
