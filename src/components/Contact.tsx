@@ -119,8 +119,8 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-1 gap-12">
-          <div className="lg:col-span-1">
+        <div className="flex justify-center">
+          <div className="w-full md:max-w-2xl lg:max-w-3xl">
           <div className="bg-card rounded-3xl p-4 md:p-6 elevated-shadow premium-lift">
             <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-4 md:mb-6">
               Start Your Journey
@@ -194,11 +194,11 @@ const Contact = () => {
                 {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3">
                 <Button
                   type="submit"
                   size="lg"
-                  className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300"
+                  className="flex-1 bg-primary text-primary-foreground hover:elevated-shadow transition-all duration-300 py-4 sm:py-3 text-sm sm:text-base"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -217,10 +217,10 @@ const Contact = () => {
                     const message = encodeURIComponent("Hi, I am interested to know more");
                     window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
                   }}
-                  className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300"
+                  className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-4 sm:py-3 text-sm sm:text-base"
                 >
                   <span className="hidden sm:inline">Schedule Visit via WhatsApp</span>
-                  <span className="sm:hidden">WhatsApp Visit</span>
+                  <span className="sm:hidden">WhatsApp</span>
                 </Button>
               </div>
             </form>
