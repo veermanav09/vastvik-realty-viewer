@@ -60,7 +60,7 @@ const Hero = () => {
 
           {/* Subtitle with delayed animation */}
           <div className={`depth-3d-item transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-xl md:text-2xl text-white/90 mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-lg font-body">
+            <p className="text-base md:text-lg lg:text-xl text-white/90 mb-16 max-w-2xl mx-auto leading-relaxed drop-shadow-lg font-body px-4">
               Crafting architectural masterpieces that redefine luxury living. Experience where timeless elegance meets modern sophistication in Bangalore's most coveted addresses.
             </p>
           </div>
