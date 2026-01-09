@@ -90,14 +90,14 @@ const Projects = () => {
                     : 'shadow-[0_8px_40px_rgb(0,0,0,0.08)]'
                 }`}>
                   {/* Image Section */}
-                  <div className="relative p-6">
-                    <div className={`relative h-96 overflow-hidden rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
+                  <div className="relative p-3 sm:p-4 md:p-6">
+                    <div className={`relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-[16px] sm:rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
                       isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
                     }`}>
                       <img
                         src={project.image}
                         alt={project.name}
-                        className={`w-full h-full object-cover transition-all duration-1000 ease-out ${
+                        className={`w-full h-full object-cover object-center transition-all duration-1000 ease-out ${
                           isHovered ? 'scale-110' : 'scale-100'
                         }`}
                       />
