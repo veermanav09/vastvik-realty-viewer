@@ -67,7 +67,7 @@ const Hero = () => {
         </div>
 
         {/* Minimal scroll indicator with improved animation */}
-        <div className={`absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 text-white/80 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white/80 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <div className="flex flex-col items-center space-y-2 group cursor-pointer">
             <span className="text-xs uppercase tracking-wider font-medium group-hover:text-white transition-colors">Scroll</span>
             <div className="w-6 h-10 rounded-full border-2 border-white/50 p-1.5 group-hover:border-white/80 transition-colors items-center justify-center flex flex-col gap-0 py-[10px]">
