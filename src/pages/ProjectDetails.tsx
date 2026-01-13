@@ -101,15 +101,17 @@ const ProjectDetails = () => {
     <div className="min-h-screen">
       <Header />
       {/* Full-page Hero Image Gallery */}
-      <div className="relative h-screen w-full overflow-hidden">
-        {/* Main Image with transition */}
-        <div className="absolute inset-0">
-          <img 
-            src={project.gallery[currentImageIndex]} 
-            alt={project.name} 
-            className="w-full h-full object-cover transition-all duration-700 ease-out"
-          />
-        </div>
+      <div className="relative h-[85vh] md:h-screen w-full p-3 md:p-6 overflow-hidden">
+        {/* Main Image Container with rounded corners */}
+        <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden">
+          {/* Main Image with transition */}
+          <div className="absolute inset-0">
+            <img 
+              src={project.gallery[currentImageIndex]} 
+              alt={project.name} 
+              className="w-full h-full object-cover transition-all duration-700 ease-out"
+            />
+          </div>
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
@@ -174,6 +176,7 @@ const ProjectDetails = () => {
               </button>
             ))}
           </div>
+        </div>
         </div>
       </div>
       
