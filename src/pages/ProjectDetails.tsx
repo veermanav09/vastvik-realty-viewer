@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText, Waves, Dumbbell, Route, PartyPopper, CircleDot, Dog, Armchair, Sparkles, Baby, Shield, Building2, Laptop, Car, ChevronUp, ChevronDown } from "lucide-react";
+import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText, Waves, Dumbbell, Route, PartyPopper, CircleDot, Dog, Armchair, Sparkles, Baby, Shield, Building2, Laptop, Car } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectMap from "@/components/ProjectMap";
 import elementImage from "@/assets/element-project.png";
 import highriseImage from "@/assets/highrise-project.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExpressionOfInterestDialog from "@/components/ExpressionOfInterestDialog";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -91,35 +91,88 @@ const ProjectDetails = () => {
   const project = projects.find(p => p.id === parseInt(id || "1"));
   if (!project) return <div>Project not found</div>;
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
-      {/* Full-page Hero Image */}
-      <div className="relative h-screen w-full">
-        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+      {/* Full-page Hero Image Gallery */}
+      <div className="relative h-screen w-full overflow-hidden">
+        {/* Main Image with transition */}
+        <div className="absolute inset-0">
+          <img 
+            src={project.gallery[currentImageIndex]} 
+            alt={project.name} 
+            className="w-full h-full object-cover transition-all duration-700 ease-out"
+          />
+        </div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
         
         {/* Hero Content */}
         <div className="absolute inset-0 flex flex-col justify-between">
           {/* Back Button */}
           <div className="container mx-auto px-4 lg:px-8 pt-8">
-            <Button onClick={() => navigate(-1)} variant="ghost" className="text-white hover:bg-white/20">
+            <Button 
+              onClick={() => navigate(-1)} 
+              variant="ghost" 
+              className={`text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-700 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />Back to Projects
             </Button>
           </div>
           
           {/* Project Info */}
-          <div className="container mx-auto px-4 lg:px-8 pb-16">
-            <Badge className={`${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white mb-4 text-base px-4 py-2`}>
+          <div className="container mx-auto px-4 lg:px-8 pb-32 md:pb-40">
+            <Badge 
+              className={`${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white mb-4 text-sm md:text-base px-4 py-2 transition-all duration-700 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            >
               {project.type}
             </Badge>
-            <h1 className="font-heading font-bold text-6xl md:text-7xl lg:text-8xl text-white mb-4">
+            <h1 
+              className={`font-heading font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-3 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            >
               {project.name}
             </h1>
-            <div className="flex items-center text-white/90 text-2xl">
-              <MapPin className="w-6 h-6 mr-3" />
+            <div 
+              className={`flex items-center text-white/90 text-lg md:text-2xl transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            >
+              <MapPin className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3" />
               {project.location}
             </div>
+          </div>
+        </div>
+
+        {/* Thumbnail Gallery at Bottom Center */}
+        <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <div 
+            className={`flex gap-2 md:gap-3 p-2 md:p-3 bg-white/10 backdrop-blur-md rounded-2xl transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            {project.gallery.map((img: string, idx: number) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentImageIndex(idx)}
+                className={`relative flex-shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-xl overflow-hidden transition-all duration-300 ${
+                  currentImageIndex === idx 
+                    ? 'ring-2 ring-white ring-offset-2 ring-offset-transparent scale-105' 
+                    : 'opacity-70 hover:opacity-100 hover:scale-105'
+                }`}
+              >
+                <img 
+                  src={img} 
+                  alt={`View ${idx + 1}`} 
+                  className="w-full h-full object-cover"
+                />
+                {currentImageIndex === idx && (
+                  <div className="absolute inset-0 border-2 border-white rounded-xl"></div>
+                )}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -290,55 +343,6 @@ const ProjectDetails = () => {
               </div>
             </div>
             <div className="lg:col-span-1 space-y-6">
-              {/* Vertical Image Carousel */}
-              <div className="bg-card rounded-3xl p-6 card-shadow">
-                <h3 className="font-heading font-bold text-2xl mb-4">Project Gallery</h3>
-                <div className="relative">
-                  {/* Main Image */}
-                  <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-                    <img 
-                      src={project.gallery[currentImageIndex]} 
-                      alt={`${project.name} view ${currentImageIndex + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  
-                  {/* Navigation Buttons */}
-                  <div className="flex gap-2 justify-center mb-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentImageIndex(prev => prev === 0 ? project.gallery.length - 1 : prev - 1)}
-                      className="h-10 w-10 p-0"
-                    >
-                      <ChevronUp className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentImageIndex(prev => prev === project.gallery.length - 1 ? 0 : prev + 1)}
-                      className="h-10 w-10 p-0"
-                    >
-                      <ChevronDown className="h-5 w-5" />
-                    </Button>
-                  </div>
-                  
-                  {/* Thumbnail Strip */}
-                  <div className="flex gap-2 overflow-x-auto pb-2">
-                    {project.gallery.map((img: string, idx: number) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentImageIndex(idx)}
-                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                          currentImageIndex === idx ? 'border-primary scale-105' : 'border-transparent opacity-60 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
               
               <div className="bg-card rounded-3xl p-8 card-shadow lg:sticky lg:top-24">
                 <h3 className="font-heading font-bold text-2xl mb-6">Interested?</h3>
