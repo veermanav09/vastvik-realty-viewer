@@ -56,7 +56,7 @@ const About = () => {
     }
   ];
 
-  const largeText = "LIFE DESIGNED";
+  const largeText = "Live Beyond Ordinary";
   const totalChars = largeText.length;
 
   return (
@@ -171,7 +171,7 @@ const About = () => {
               </h3>
               
               <p className="mt-8 text-muted-foreground text-lg leading-relaxed max-w-xl font-body">
-                LifeDesigned® is our commitment to excellence—a philosophy that transforms spaces into sanctuaries. Every detail is meticulously crafted to understand, nurture, and enrich the lives we touch, creating homes that stand the test of time.
+                Live Beyond Ordinary™ is our promise to you—a vision that transcends conventional living. We design spaces that inspire greatness, foster connection, and elevate every moment of your daily life into something truly extraordinary.
               </p>
             </div>
           </div>
