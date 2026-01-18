@@ -47,11 +47,11 @@ const Header = () => {
       {/* Header with Logo and Navigation - Permanent Liquid Glass Effect */}
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-out ${
-          isVisible ? 'top-4 opacity-100 translate-y-0' : '-top-24 opacity-0 -translate-y-4'
+          isVisible ? 'top-6 opacity-100 translate-y-0' : '-top-24 opacity-0 -translate-y-4'
         }`}
       >
-        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-4 md:px-8 py-2 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
-          <nav className="flex items-center justify-between md:justify-center gap-4 md:gap-6">
+        <div className="bg-white/70 dark:bg-black/50 backdrop-blur-2xl rounded-full px-6 md:px-12 py-4 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.1)] hover:bg-white/80 dark:hover:bg-black/60 transition-all duration-500">
+          <nav className="flex items-center justify-between md:justify-center gap-4 md:gap-10">
             {/* Mobile Menu Button - Left side on mobile */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -99,14 +99,14 @@ const Header = () => {
             </Sheet>
 
             {/* Left Navigation Items - Desktop only */}
-            <div className="hidden md:flex items-center justify-end gap-6 w-64">
+            <div className="hidden md:flex items-center justify-end gap-10 min-w-[280px]">
               {leftNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
+                    className={`text-foreground font-medium text-base transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
                       isActive ? 'text-primary' : 'hover:text-primary'
                     }`}
                     style={{ animationDelay: `${index * 50}ms` }}
@@ -121,11 +121,11 @@ const Header = () => {
             </div>
 
             {/* Logo - Center */}
-            <Link to="/" className="flex items-center justify-center md:px-6 flex-shrink-0 group">
+            <Link to="/" className="flex items-center justify-center md:px-10 flex-shrink-0 group">
               <img
                 src={vastwikLogo}
                 alt="Vastvik Realty"
-                className="h-8 md:h-10 w-auto object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105"
+                className="h-10 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
@@ -133,14 +133,14 @@ const Header = () => {
             <div className="md:hidden w-10 flex-shrink-0"></div>
 
             {/* Right Navigation Items - Desktop only */}
-            <div className="hidden md:flex items-center justify-start gap-6 w-64">
+            <div className="hidden md:flex items-center justify-start gap-10 min-w-[280px]">
               {rightNavItems.map((item, index) => {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-foreground font-medium text-sm transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
+                    className={`text-foreground font-medium text-base transition-all duration-300 relative group whitespace-nowrap hover:-translate-y-0.5 ${
                       isActive ? 'text-primary' : 'hover:text-primary'
                     }`}
                   >
@@ -153,7 +153,7 @@ const Header = () => {
               })}
               <button
                 onClick={() => setContactDialogOpen(true)}
-                className="text-foreground font-medium text-sm transition-all duration-300 relative group hover:text-primary whitespace-nowrap hover:-translate-y-0.5"
+                className="text-foreground font-medium text-base transition-all duration-300 relative group hover:text-primary whitespace-nowrap hover:-translate-y-0.5"
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
