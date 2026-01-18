@@ -50,8 +50,8 @@ const Header = () => {
           isVisible ? 'top-4 opacity-100 translate-y-0' : '-top-24 opacity-0 -translate-y-4'
         }`}
       >
-        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-4 md:px-8 py-2 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
-          <nav className="flex items-center justify-between md:justify-center gap-4 md:gap-6">
+        <div className="bg-white/50 dark:bg-black/50 backdrop-blur-2xl rounded-2xl px-4 md:px-10 py-3 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-black/60 transition-all duration-500">
+          <nav className="flex items-center justify-between md:justify-center gap-4 md:gap-8">
             {/* Mobile Menu Button - Left side on mobile */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
