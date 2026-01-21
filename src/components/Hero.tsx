@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -52,7 +52,7 @@ const Hero = () => {
           <div className={`mb-12 depth-3d-item transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="inline-block relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 blur-2xl opacity-50 animate-pulse-soft"></div>
-              <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-tight tracking-tight drop-shadow-2xl hero-text-3d relative">
+              <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-9xl text-white mb-8 leading-tight tracking-tight relative" style={{ textShadow: '0 8px 16px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3)' }}>
                 Where Dreams Find Home
               </h1>
             </div>
@@ -60,21 +60,12 @@ const Hero = () => {
 
           {/* Subtitle with delayed animation */}
           <div className={`depth-3d-item transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-base md:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-lg font-body px-4">
+            <p className="text-base md:text-lg lg:text-xl text-white/85 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md font-body px-4">
               Crafting architectural masterpieces that redefine luxury living. Experience where timeless elegance meets modern sophistication in Bangalore's most coveted addresses.
             </p>
           </div>
         </div>
 
-        {/* Minimal scroll indicator with improved animation */}
-        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white/80 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="flex flex-col items-center space-y-2 group cursor-pointer">
-            <span className="text-xs uppercase tracking-wider font-medium group-hover:text-white transition-colors">Scroll</span>
-            <div className="w-6 h-10 rounded-full border-2 border-white/50 p-1.5 group-hover:border-white/80 transition-colors items-center justify-center flex flex-col gap-0 py-[10px]">
-              <div className="w-1.5 h-3 bg-white/80 rounded-full animate-bounce" />
-            </div>
-          </div>
-        </div>
       </div>
     </section>;
 };
