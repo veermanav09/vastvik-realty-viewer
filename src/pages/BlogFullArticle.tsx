@@ -10,6 +10,94 @@ const BlogFullArticle = () => {
   const navigate = useNavigate();
 
   const blogData: Record<string, any> = {
+    "5": {
+      title: "Why Real Estate is the Best Inflation-Beating Asset in 2025",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=600&fit=crop",
+      category: "Investment",
+      author: "Vastvik Team",
+      date: "Jan 15, 2026",
+      readTime: "8 min",
+      content: `
+        <p class="lead">Inflation impacts nearly every aspect of the economy, but its most visible and measurable influence appears in real estate. Property values are directly linked to construction material cost, labor wages, fuel and logistics cost, land valuation, demand-supply imbalance, and infrastructure sentiment.</p>
+
+        <h2>Why Real Estate Outperforms Inflation</h2>
+        <p>Unlike gold or fixed deposits, real estate delivers dual inflation protection:</p>
+        <ul>
+          <li>Asset value increase due to rising replacement cost</li>
+          <li>Annual rental income hikes creating compounding cash flow protection</li>
+        </ul>
+
+        <h2>Bangalore's Inflation-Driven Market Strength</h2>
+        <p>Bangalore is a city where inflation acts as a growth catalyst rather than a threat because:</p>
+        <ul>
+          <li>Land is scarce in core city zones</li>
+          <li>Demand exceeds supply</li>
+          <li>Infrastructure is expanding rapidly</li>
+          <li>Migration into the city is continuous</li>
+          <li>Rental demand is extremely strong</li>
+        </ul>
+
+        <h2>South Bangalore — The Next Inflation-Driven Growth Belt</h2>
+        <p>South Bangalore benefits due to:</p>
+        <ul>
+          <li>Electronic City adjacency</li>
+          <li>Industrial and manufacturing expansion southward</li>
+          <li>Upcoming metro planning</li>
+          <li>ORR & SRR road ecosystems</li>
+          <li>Affordable pricing compared to North Bangalore</li>
+          <li>Growing residential density</li>
+        </ul>
+
+        <h2>Emerging Micro-Markets Win the Most</h2>
+        <p>Micro-markets like Marsur Gate — Chandapura corridor outperform inflation because:</p>
+        <ul>
+          <li>Land cost is still rising (not peaked)</li>
+          <li>Replacement cost surge pushes price cycles faster</li>
+          <li>Investors enter early anticipating infra sentiment</li>
+          <li>Rental occupancy improves as population density increases</li>
+          <li>Resale liquidity becomes stronger</li>
+        </ul>
+
+        <h2>Elements by Vastvik Realty — Positioned to Beat Inflation</h2>
+        <p>This project stands out because:</p>
+        <ul>
+          <li>Trusted builder brand — Vastvik Realty</li>
+          <li>Residential asset in an emerging land appreciation belt</li>
+          <li>Affordable entry point before inflation pushes prices further</li>
+          <li>Strong livability ensuring rental demand and resale confidence</li>
+          <li>Located near Marsur Gate on Chandapura road — a fast-absorbing growth node</li>
+          <li>Benefits from macro-infra optimism cycles</li>
+          <li>Appeals to all audiences: families, rental buyers, and ROI investors</li>
+        </ul>
+
+        <h2>Audience Relevance</h2>
+        <table class="investment-table">
+          <thead>
+            <tr>
+              <th>Segment</th>
+              <th>Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Families</td>
+              <td>Lifestyle stability + future price security</td>
+            </tr>
+            <tr>
+              <td>Rental Investors</td>
+              <td>High occupancy + annual rent hikes</td>
+            </tr>
+            <tr>
+              <td>ROI Investors</td>
+              <td>Early appreciation cycles outperform inflation %</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Conclusion</h2>
+        <p>Inflation makes future property more expensive, but it also makes today's early entry real estate purchases more valuable. <strong>Elements</strong> offers a strategic opportunity to invest before inflation accelerates land and replacement cost cycles across the southern belt.</p>
+      `
+    },
     "4": {
       title: "Real Estate Investment in 2025 — A Smart Guide for Home Buyers & Investors",
       image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&h=600&fit=crop",
