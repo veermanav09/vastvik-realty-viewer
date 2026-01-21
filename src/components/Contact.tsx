@@ -121,7 +121,7 @@ const Contact = () => {
 
         <div className="flex justify-center">
           <div className="w-full md:max-w-2xl lg:max-w-3xl">
-          <div className="bg-card rounded-3xl p-4 md:p-6 elevated-shadow premium-lift">
+          <div className="bg-card rounded-3xl p-5 md:p-8 elevated-shadow premium-lift">
             <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-4 md:mb-6">
               Start Your Journey
             </h3>
