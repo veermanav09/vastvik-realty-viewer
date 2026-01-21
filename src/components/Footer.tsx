@@ -37,7 +37,7 @@ const Footer = () => {
                 alt="Vastvik Realty"
                 className="h-10 md:h-12 lg:h-14 w-auto object-contain"
               />
-              <p className="text-xs opacity-75 font-body">Where Vision Meets Reality</p>
+              
             </div>
 
             <p className="text-white/80 text-xs md:text-sm leading-relaxed mb-3 font-body hidden md:block">
