@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-white.png";
 
 const Footer = () => {
@@ -18,11 +18,9 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "#", name: "Facebook" },
-    { icon: Instagram, href: "#", name: "Instagram" },
-    { icon: Twitter, href: "#", name: "Twitter" },
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
-    { icon: Youtube, href: "#", name: "YouTube" },
+    { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61583999404017", name: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/vastvik_realty/?utm_source=ig_web_button_share_sheet", name: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/vastvikrealty/", name: "LinkedIn" },
   ];
 
   return (
