@@ -42,7 +42,7 @@ const Footer = () => {
               Your trusted partner in discovering exceptional homes and exclusive living experiences.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm">
+            <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-xs md:text-sm">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-white flex-shrink-0" />
                 <button
@@ -61,15 +61,15 @@ const Footer = () => {
                   info@vastvikrealty.com
                 </button>
               </div>
-              <div className="flex items-start space-x-2 col-span-1 md:col-span-2">
-                <MapPin className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
-                <button
-                  onClick={() => window.open('https://maps.google.com/?q=Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106', '_blank')}
-                  className="text-xs text-white/90 hover:text-white transition-colors text-left"
-                >
-                  Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106
-                </button>
-              </div>
+            </div>
+            <div className="flex items-start space-x-2 mt-2">
+              <MapPin className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
+              <button
+                onClick={() => window.open('https://maps.google.com/?q=Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106', '_blank')}
+                className="text-xs text-white/90 hover:text-white transition-colors text-left"
+              >
+                Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106
+              </button>
             </div>
           </div>
 
