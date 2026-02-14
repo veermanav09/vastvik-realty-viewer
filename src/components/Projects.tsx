@@ -105,7 +105,7 @@ const Projects = () => {
                       {/* Badge */}
                       <Badge
                         variant={project.type === "ONGOING" ? "default" : "secondary"}
-                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-green-500" : "bg-primary"} text-white px-3 py-1 text-xs font-semibold`}
+                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold`}
                       >
                         {project.type}
                       </Badge>

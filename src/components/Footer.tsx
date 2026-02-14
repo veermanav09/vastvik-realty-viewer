@@ -24,7 +24,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-white pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-14 lg:pb-8">
+    <footer className="bg-primary text-primary-foreground pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-14 lg:pb-8">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8">
           {/* Logo & Contact - Full width on mobile */}
@@ -38,35 +38,35 @@ const Footer = () => {
               
             </div>
 
-            <p className="text-white/80 text-xs md:text-sm leading-relaxed mb-3 font-body hidden md:block">
+            <p className="text-primary-foreground/80 text-xs md:text-sm leading-relaxed mb-3 font-body hidden md:block">
               Your trusted partner in discovering exceptional homes and exclusive living experiences.
             </p>
 
             <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-xs md:text-sm">
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4 text-white flex-shrink-0" />
+                <Phone className="w-4 h-4 text-primary-foreground flex-shrink-0" />
                 <button
                   onClick={() => window.location.href = 'tel:8884545404'}
-                  className="font-semibold text-white hover:text-white/80 transition-colors"
+                  className="font-semibold text-primary-foreground hover:text-primary-foreground/80 transition-colors"
                 >
                   8884545404
                 </button>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4 text-white flex-shrink-0" />
+                <Mail className="w-4 h-4 text-primary-foreground flex-shrink-0" />
                 <button
                   onClick={() => window.location.href = 'mailto:info@vastvikrealty.com'}
-                  className="text-white hover:text-white/80 transition-colors truncate"
+                  className="text-primary-foreground hover:text-primary-foreground/80 transition-colors truncate"
                 >
                   info@vastvikrealty.com
                 </button>
               </div>
             </div>
             <div className="flex items-start space-x-2 mt-2">
-              <MapPin className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
+              <MapPin className="w-4 h-4 text-primary-foreground mt-0.5 flex-shrink-0" />
               <button
                 onClick={() => window.open('https://maps.google.com/?q=Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106', '_blank')}
-                className="text-xs text-white/90 hover:text-white transition-colors text-left"
+                className="text-xs text-primary-foreground/90 hover:text-primary-foreground transition-colors text-left"
               >
                 Marsur Gate, Chandapura-Anekal Main Road, Bengaluru-562106
               </button>
@@ -79,7 +79,7 @@ const Footer = () => {
             <ul className="space-y-1 text-xs md:text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-white/80 hover:text-white transition-colors">
+                  <a href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                     {link.name}
                   </a>
                 </li>
@@ -90,13 +90,13 @@ const Footer = () => {
             <ul className="space-y-1 text-xs md:text-sm">
               {projects.map((project) => (
                 <li key={project.name} className="flex items-center space-x-2">
-                  <span className="text-white/80">{project.name}</span>
+                  <span className="text-primary-foreground/80">{project.name}</span>
                   <Badge
                     variant="outline"
                     className={`text-[10px] px-1 py-0 ${
                       project.status === "Ongoing"
-                        ? "border-green-400 text-green-400"
-                        : "border-white text-white"
+                        ? "border-success text-success"
+                        : "border-primary-foreground text-primary-foreground"
                     }`}
                   >
                     {project.status}
@@ -112,9 +112,9 @@ const Footer = () => {
             <div className="space-y-2 mb-3">
               <Input
                 placeholder="Your email"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-8 text-xs"
+                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-8 text-xs"
               />
-              <Button className="w-full bg-white text-primary hover:bg-white/90 h-8 text-xs">
+              <Button className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 h-8 text-xs">
                 Subscribe
               </Button>
             </div>
@@ -125,7 +125,7 @@ const Footer = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-7 h-7 md:w-8 md:h-8 bg-white/10 rounded-md flex items-center justify-center hover:bg-white hover:text-primary transition-all duration-300"
+                  className="w-7 h-7 md:w-8 md:h-8 bg-primary-foreground/10 rounded-md flex items-center justify-center hover:bg-primary-foreground hover:text-primary transition-all duration-300"
                   aria-label={social.name}
                 >
                   <social.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
@@ -135,13 +135,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-4">
+        <div className="border-t border-primary-foreground/20 pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 text-xs">
-            <p className="text-white/60">© 2024 Vastvik Realty. All rights reserved.</p>
+            <p className="text-primary-foreground/60">© 2025 Vastvik Realty. All rights reserved.</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">Terms</a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">RERA</a>
+              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Privacy</a>
+              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Terms</a>
+              <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">RERA</a>
             </div>
           </div>
         </div>

@@ -217,7 +217,7 @@ const Contact = () => {
                     const message = encodeURIComponent("Hi, I am interested to know more");
                     window.open(`https://wa.me/918884545404?text=${message}`, '_blank');
                   }}
-                  className="flex-1 bg-green-600 text-white hover:bg-green-700 hover:elevated-shadow transition-all duration-300 py-4 sm:py-3 text-sm sm:text-base"
+                  className="flex-1 bg-success text-success-foreground hover:bg-success/90 hover:elevated-shadow transition-all duration-300 py-4 sm:py-3 text-sm sm:text-base"
                 >
                   <span className="hidden sm:inline">Schedule Visit via WhatsApp</span>
                   <span className="sm:hidden">WhatsApp</span>
