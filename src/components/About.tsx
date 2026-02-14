@@ -141,16 +141,24 @@ const About = () => {
           {/* Left Side - Large Text with Letter Animation */}
           <div className="lg:pr-12">
             <div ref={largeTextRef} className="relative">
+              {/* Nature-inspired decorative leaf accent */}
+              <div className="absolute -top-6 -left-4 w-16 h-16 opacity-20">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <path d="M32 4C32 4 8 20 8 40C8 52 18 60 32 60C32 60 32 40 32 4Z" fill="hsl(var(--primary))" opacity="0.5"/>
+                  <path d="M32 4C32 4 56 20 56 40C56 52 46 60 32 60C32 60 32 40 32 4Z" fill="hsl(142, 50%, 40%)" opacity="0.4"/>
+                </svg>
+              </div>
+              
               <h3 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight whitespace-nowrap">
                 {largeText.split('').map((char, index) => {
                   const charProgress = (scrollProgress * totalChars * 1.2) - index;
                   const opacity = Math.max(0, Math.min(1, charProgress));
                   
-                  // Calculate gradient color based on character position
+                  // Nature-inspired gradient: deep forest green → sage → warm amber
                   const colorProgress = index / totalChars;
-                  const hue1 = 25; // Orange
-                  const hue2 = 10; // Red-orange
-                  const currentHue = hue1 + (hue2 - hue1) * colorProgress;
+                  const hue = 142 - (colorProgress * 120); // Green (142) → Warm amber (22)
+                  const saturation = 55 + (colorProgress * 15); // Slightly increasing saturation
+                  const lightness = 35 + (opacity * 15) + (colorProgress * 8);
                   
                   return (
                     <span
@@ -158,7 +166,7 @@ const About = () => {
                       className={char === ' ' ? 'inline-block w-3 md:w-4' : 'inline-block transition-all duration-500 ease-out'}
                       style={{
                         color: opacity > 0.1 
-                          ? `hsl(${currentHue}, 70%, ${45 + opacity * 15}%)`
+                          ? `hsl(${hue}, ${saturation}%, ${lightness}%)`
                           : 'hsl(var(--muted-foreground) / 0.2)',
                         transform: `translateY(${(1 - opacity) * 10}px)`,
                         filter: `blur(${(1 - opacity) * 2}px)`
@@ -169,6 +177,16 @@ const About = () => {
                   );
                 })}
               </h3>
+              
+              {/* Nature-inspired underline accent */}
+              <div 
+                className="h-1 rounded-full mt-4 transition-all duration-1000 ease-out"
+                style={{
+                  width: `${scrollProgress * 100}%`,
+                  background: `linear-gradient(90deg, hsl(142, 55%, 38%), hsl(102, 40%, 45%), hsl(var(--primary)))`,
+                  opacity: scrollProgress > 0.1 ? 0.6 : 0,
+                }}
+              />
               
               <p className="mt-8 text-muted-foreground text-lg leading-relaxed max-w-xl font-body">
                 Live Beyond Ordinary™ is our promise to you—a vision that transcends conventional living. We design spaces that inspire greatness, foster connection, and elevate every moment of your daily life into something truly extraordinary.
