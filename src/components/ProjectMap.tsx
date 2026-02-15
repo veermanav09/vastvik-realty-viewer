@@ -51,7 +51,7 @@ const ProjectMap = ({ projectName, projectLocation, nearbyPlaces = [] }: Project
     if (!mapContainer.current) return;
 
     try {
-      mapboxgl.accessToken = 'pk.eyJ1IjoidmVlcm1hbmF2IiwiYSI6ImNtaG42emxocjI1dTMya3M3Nno3NWFsOWsifQ.kCFCoF-9Xo5MG0SKEFpDpg';
+      mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN || '';
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
