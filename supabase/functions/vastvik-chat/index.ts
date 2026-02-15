@@ -283,8 +283,11 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error("Error in vastvik-chat:", error);
+    // Don't leak internal error details to clients
+    const safeMessage = "An unexpected error occurred. Please try again later.";
+    console.error("Internal error:", error instanceof Error ? error.message : "Unknown error");
     return new Response(JSON.stringify({ 
-      error: error instanceof Error ? error.message : "Unknown error" 
+      error: safeMessage 
     }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
