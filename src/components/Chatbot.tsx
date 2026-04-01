@@ -23,7 +23,7 @@ const Chatbot = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const projects = [
-    "Element - Villas",
+    "Element",
     "High Rise Apartments",
     "Upcoming Projects",
     "Request a call"
