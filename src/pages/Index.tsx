@@ -9,7 +9,6 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
-import Floating3DElements from "@/components/Floating3DElements";
 
 const Index = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
