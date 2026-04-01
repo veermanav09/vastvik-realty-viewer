@@ -53,7 +53,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      <Floating3DElements />
+      
       <Header />
       <Hero />
       <div 
