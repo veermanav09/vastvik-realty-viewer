@@ -10,6 +10,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [contactDialogOpen, setContactDialogOpen] = useState(false);
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
