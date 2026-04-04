@@ -123,7 +123,7 @@ const About = () => {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-12 md:mb-16">
           <div className="inline-block relative mb-6">
             <div className="absolute inset-0 bg-primary/10 -skew-y-1 rounded-xl transform scale-110 blur-sm"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-foreground relative px-8 py-3">
