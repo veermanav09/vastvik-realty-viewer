@@ -206,8 +206,8 @@ const DownloadBrochureDialog = ({ isOpen, onClose, projectName, projectId }: Dow
                 </div>
                 <div className="flex justify-center">
                   <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-                    <InputOTPGroup className="gap-3">
-                      {[0, 1, 2, 3, 4, 5].map((i) => <InputOTPSlot key={i} index={i} className="w-14 h-14 text-xl" />)}
+                    <InputOTPGroup className="gap-2 sm:gap-3">
+                      {[0, 1, 2, 3, 4, 5].map((i) => <InputOTPSlot key={i} index={i} className="w-10 h-10 text-lg sm:w-14 sm:h-14 sm:text-xl" />)}
                     </InputOTPGroup>
                   </InputOTP>
                 </div>
