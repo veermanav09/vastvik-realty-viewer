@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, ChevronDown } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-black.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "react-router-dom";
@@ -10,6 +10,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [contactDialogOpen, setContactDialogOpen] = useState(false);
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -64,23 +65,53 @@ const Header = () => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-6 mt-8">
+                <nav className="flex flex-col gap-2 mt-8">
                   {leftNavItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                    item.name === "Projects" ? (
+                      <div key={item.name}>
+                        <button
+                          onClick={() => setProjectsExpanded(!projectsExpanded)}
+                          className="flex items-center justify-between w-full text-foreground hover:text-secondary font-medium text-lg transition-colors py-2"
+                        >
+                          Projects
+                          <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${projectsExpanded ? 'rotate-180' : ''}`} />
+                        </button>
+                        <div className={`overflow-hidden transition-all duration-300 ${projectsExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                          <div className="flex flex-col border-l-2 border-primary/30 ml-2 pl-4 gap-1">
+                            <Link
+                              to="/project/1"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="text-muted-foreground hover:text-secondary font-medium text-base transition-colors py-2"
+                            >
+                              Element
+                            </Link>
+                            <Link
+                              to="/project/2"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="text-muted-foreground hover:text-secondary font-medium text-base transition-colors py-2"
+                            >
+                              High Rise
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-foreground hover:text-secondary font-medium text-lg transition-colors py-2"
+                      >
+                        {item.name}
+                      </Link>
+                    )
                   ))}
                   {rightNavItems.map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors"
+                      className="text-foreground hover:text-secondary font-medium text-lg transition-colors py-2"
                     >
                       {item.name}
                     </Link>
@@ -90,7 +121,7 @@ const Header = () => {
                       setMobileMenuOpen(false);
                       setContactDialogOpen(true);
                     }}
-                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors text-left"
+                    className="text-foreground hover:text-secondary font-medium text-lg transition-colors text-left py-2"
                   >
                     Contact
                   </button>
