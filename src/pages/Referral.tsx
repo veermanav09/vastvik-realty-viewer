@@ -133,7 +133,7 @@ const Referral = () => {
           </div>
         </div>
       </section>
-      <section className="py-20 mt-8">
+      <section className="py-10">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-card rounded-3xl p-8 md:p-12 card-shadow">
             <h3 className="font-heading font-bold text-3xl mb-10 text-center">Begin Your Referral Journey</h3>
