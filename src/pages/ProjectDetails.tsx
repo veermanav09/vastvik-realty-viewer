@@ -306,36 +306,6 @@ const ProjectDetails = () => {
                 </div>
               )}
 
-              {/* Interactive Map for Element Project */}
-              {project.id === 1 && (
-                <ProjectMap
-                  projectName={project.name}
-                  projectLocation={{ lat: 12.768313, lng: 77.699938 }}
-                  nearbyPlaces={[
-                    { name: "M Tres School", category: "education", lat: 12.769, lng: 77.701 },
-                    { name: "Sri Chaitanya School", category: "education", lat: 12.844, lng: 77.702 },
-                    { name: "SFS Academy", category: "education", lat: 12.833, lng: 77.681 },
-                    { name: "National Public School", category: "education", lat: 12.829, lng: 77.682 },
-                    { name: "D-Sales Academy", category: "education", lat: 12.833, lng: 77.681 },
-                    { name: "Swami Vivekanada College", category: "education", lat: 12.800, lng: 77.653 },
-                    { name: "Alliance University", category: "education", lat: 12.631, lng: 77.706 },
-                    { name: "Spoorthi Institute", category: "education", lat: 12.738, lng: 77.701 },
-                    { name: "Narayana Hospital", category: "hospital", lat: 12.810, lng: 77.696 },
-                    { name: "Oxford Medical Institute", category: "hospital", lat: 12.738, lng: 77.757 },
-                    { name: "Best Hospital", category: "hospital", lat: 12.801, lng: 77.658 },
-                    { name: "Athreya Hospital", category: "hospital", lat: 12.744, lng: 77.757 },
-                    { name: "Sparsh Hospital", category: "hospital", lat: 12.809, lng: 77.700 },
-                    { name: "Infosys Electronic City", category: "corporate", lat: 12.841, lng: 77.676 },
-                    { name: "TCS Electronic City", category: "corporate", lat: 12.843, lng: 77.662 },
-                    { name: "Biocon", category: "corporate", lat: 12.848, lng: 77.668 },
-                    { name: "Wipro", category: "corporate", lat: 12.845, lng: 77.664 },
-                    { name: "M5", category: "retail", lat: 12.842, lng: 77.726 },
-                    { name: "Royal Mart", category: "retail", lat: 12.827, lng: 77.673 },
-                    { name: "D Mart Bommasandra", category: "retail", lat: 12.818, lng: 77.691 },
-                    { name: "Metro Cash & Carry", category: "retail", lat: 12.862, lng: 77.661 },
-                  ]}
-                />
-              )}
 
               <div className="bg-card rounded-3xl p-8 card-shadow">
                 <h2 className="font-heading font-bold text-3xl mb-4">Location</h2>
