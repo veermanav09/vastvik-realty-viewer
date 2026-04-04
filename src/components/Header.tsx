@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, ChevronDown } from "lucide-react";
 import vastwikLogo from "@/assets/vastvik-logo-black.png";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, useLocation } from "react-router-dom";
