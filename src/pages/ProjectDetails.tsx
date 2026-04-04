@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Bed, Users, IndianRupee, Calendar, Download, FileText, Waves, Dumbbell, Route, PartyPopper, CircleDot, Dog, Armchair, Sparkles, Baby, Shield, Building2, Laptop, Car } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ProjectMap from "@/components/ProjectMap";
+
 import elementImage from "@/assets/element-project.png";
 import highriseImage from "@/assets/highrise-project.png";
 import { useState, useEffect } from "react";
