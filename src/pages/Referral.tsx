@@ -115,7 +115,7 @@ const Referral = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-32 pb-8 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <Badge variant="outline" className="mb-6 text-primary border-primary">Referral Program</Badge>
