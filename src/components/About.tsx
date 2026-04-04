@@ -60,7 +60,7 @@ const About = () => {
   const totalChars = largeText.length;
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-24 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-12 md:py-16 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
       {/* Animated Shadow Gradient Overlay */}
       <div className="absolute inset-0 animate-gradient-shift">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10"></div>
