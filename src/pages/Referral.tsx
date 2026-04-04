@@ -124,11 +124,11 @@ const Referral = () => {
           </div>
           
           {/* Referral Image */}
-          <div className="flex justify-center mt-16">
+          <div className="mt-12 -mx-4 sm:mx-0">
             <img 
               src={referralImage} 
               alt="Referral Program" 
-              className="w-full max-w-2xl h-auto rounded-3xl shadow-2xl object-cover"
+              className="w-full h-auto sm:rounded-3xl shadow-2xl object-cover sm:max-w-2xl sm:mx-auto"
             />
           </div>
         </div>
