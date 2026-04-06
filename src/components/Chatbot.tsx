@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, Send, MessageCircle, User } from "lucide-react";
+import { X, Send, MessageCircle, User, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -75,7 +75,6 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      // Limit conversation history sent to server
       const recentMessages = messages.slice(-MAX_CONVERSATION_HISTORY);
       
       const { data, error } = await supabase.functions.invoke('vastvik-chat', {
@@ -87,7 +86,6 @@ const Chatbot = () => {
       if (error) {
         console.error('Error calling chat function:', error);
         
-        // Handle specific error status codes
         const errorMessage = error.message?.toLowerCase() || '';
         if (errorMessage.includes('429') || errorMessage.includes('too many requests') || errorMessage.includes('rate limit')) {
           toast({
@@ -118,7 +116,6 @@ const Chatbot = () => {
         throw error;
       }
 
-      // Check for error in the response data
       if (data?.error) {
         console.error('API error in response:', data.error);
         throw new Error(data.error);
@@ -146,6 +143,20 @@ const Chatbot = () => {
 
   return (
     <>
+      {/* Floating Call Button - hidden when chatbot is open */}
+      {!isOpen && (
+        <div className="fixed bottom-24 right-6 z-[60]">
+          <Button
+            size="icon"
+            className="w-14 h-14 bg-foreground/90 backdrop-blur-xl text-background hover:bg-foreground hover:shadow-2xl rounded-full transition-all duration-500 border border-background/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:scale-110 group"
+            onClick={() => window.location.href = 'tel:+918884545404'}
+          >
+            <Phone className="w-5 h-5 group-hover:animate-pulse" />
+          </Button>
+        </div>
+      )}
+
+      {/* Chat toggle button */}
       {!isOpen && (
         <div className="fixed bottom-6 right-6 z-50 group">
           <Button
@@ -160,15 +171,25 @@ const Chatbot = () => {
         </div>
       )}
 
+      {/* Translucent backdrop */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-2rem)] z-50 animate-in slide-in-from-bottom-8 duration-500">
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-primary/10">
-            <div className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-6 text-white relative overflow-hidden">
+        <div
+          className="fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm animate-in fade-in duration-300"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Chat panel */}
+      {isOpen && (
+        <div className="fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 sm:max-w-[calc(100vw-2rem)] z-[60] animate-in slide-in-from-bottom-8 duration-500">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-primary/10 max-h-[85vh] flex flex-col">
+            {/* Header */}
+            <div className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-5 text-white relative overflow-hidden flex-shrink-0">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
-              <div className="flex items-center justify-between mb-4 relative z-10">
+              <div className="flex items-center justify-between relative z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center p-2 shadow-xl ring-2 ring-white/20 backdrop-blur-sm">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-2 shadow-xl ring-2 ring-white/20">
                     <img 
                       src={vastvikLogo} 
                       alt="Vastvik Logo" 
@@ -176,10 +197,10 @@ const Chatbot = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl tracking-tight">Vastvik AI</h3>
-                    <div className="flex items-center space-x-2 mt-1">
-                      <div className="w-2.5 h-2.5 bg-green-300 rounded-full animate-pulse shadow-lg shadow-green-300/50"></div>
-                      <span className="text-sm font-medium opacity-90">Online now</span>
+                    <h3 className="font-bold text-lg tracking-tight">Vastvik AI</h3>
+                    <div className="flex items-center space-x-2 mt-0.5">
+                      <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse shadow-lg shadow-green-300/50"></div>
+                      <span className="text-xs font-medium opacity-90">Online now</span>
                     </div>
                   </div>
                 </div>
@@ -187,21 +208,22 @@ const Chatbot = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="text-white hover:bg-white/20 rounded-full p-2.5 transition-all duration-300 hover:rotate-90"
+                  className="text-white hover:bg-white/20 rounded-full p-2 transition-all duration-300 hover:rotate-90"
                 >
                   <X className="w-5 h-5" />
                 </Button>
               </div>
             </div>
 
-            <div className="p-6 pt-4 max-h-80 overflow-y-auto space-y-3 mb-4 scroll-smooth">
+            {/* Messages */}
+            <div className="p-4 overflow-y-auto space-y-3 flex-1 min-h-0 scroll-smooth">
               {messages.map((msg, index) => (
                 <div 
                   key={index} 
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-4 duration-300`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className={`max-w-[85%] p-3.5 rounded-2xl shadow-sm ${
+                  <div className={`max-w-[85%] p-3 rounded-2xl shadow-sm ${
                     msg.role === 'user'
                       ? 'bg-gradient-to-br from-primary to-primary/90 text-white rounded-tr-sm'
                       : 'bg-gradient-to-br from-accent/60 to-accent/40 text-foreground rounded-tl-sm backdrop-blur-sm'
@@ -212,11 +234,11 @@ const Chatbot = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start animate-in slide-in-from-bottom-4 duration-300">
-                  <div className="bg-gradient-to-br from-accent/60 to-accent/40 p-4 rounded-2xl rounded-tl-sm shadow-sm backdrop-blur-sm">
+                  <div className="bg-gradient-to-br from-accent/60 to-accent/40 p-3 rounded-2xl rounded-tl-sm shadow-sm backdrop-blur-sm">
                     <div className="flex space-x-1.5">
-                      <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2.5 h-2.5 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '300ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce shadow-sm" style={{ animationDelay: '300ms' }}></div>
                     </div>
                   </div>
                 </div>
@@ -224,20 +246,21 @@ const Chatbot = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-6 pt-0">
-              <div className="mb-4 bg-gradient-to-br from-accent/30 to-accent/10 p-4 rounded-2xl border border-primary/10">
-                <p className="font-semibold text-foreground mb-3 text-sm flex items-center">
+            {/* Bottom actions */}
+            <div className="p-4 pt-2 flex-shrink-0 border-t border-primary/5">
+              <div className="mb-3 bg-gradient-to-br from-accent/30 to-accent/10 p-3 rounded-2xl border border-primary/10">
+                <p className="font-semibold text-foreground mb-2 text-xs flex items-center">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
                   Quick actions
                 </p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-1.5">
                   {projects.map((project) => (
                     <Button
                       key={project}
                       variant={selectedProject === project ? "default" : "outline"}
                       size="sm"
                       onClick={() => handleProjectSelect(project)}
-                      className={`text-xs py-2.5 transition-all duration-300 ${
+                      className={`text-xs py-2 transition-all duration-300 ${
                         selectedProject === project
                           ? "bg-gradient-to-br from-primary to-primary/90 text-white shadow-md scale-[1.02]"
                           : "border-primary/30 text-foreground hover:bg-primary/10 hover:border-primary/50 hover:scale-[1.02]"
@@ -249,7 +272,7 @@ const Chatbot = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-2 mb-3">
                 <Button
                   variant="outline"
                   size="sm"
@@ -281,21 +304,21 @@ const Chatbot = () => {
                   onChange={(e) => setMessage(e.target.value.slice(0, MAX_MESSAGE_LENGTH))}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   maxLength={MAX_MESSAGE_LENGTH}
-                  className="flex-1 border-0 bg-white focus-visible:ring-1 focus-visible:ring-primary rounded-full shadow-sm px-4"
+                  className="flex-1 border-0 bg-white focus-visible:ring-1 focus-visible:ring-primary rounded-full shadow-sm px-4 text-sm"
                 />
                 <Button
                   onClick={handleSendMessage}
                   size="sm"
-                  className="bg-gradient-to-br from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 rounded-full w-11 h-11 p-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
+                  className="bg-gradient-to-br from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 rounded-full w-10 h-10 p-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
                   disabled={!message.trim() || isLoading}
                 >
                   <Send className="w-4 h-4" />
                 </Button>
               </div>
 
-              <div className="text-center mt-4 pt-3 border-t border-primary/10">
-                <p className="text-xs text-muted-foreground flex items-center justify-center">
-                  <span className="inline-block w-1 h-1 bg-primary rounded-full mr-2 animate-pulse"></span>
+              <div className="text-center mt-3 pt-2 border-t border-primary/10">
+                <p className="text-[10px] text-muted-foreground flex items-center justify-center">
+                  <span className="inline-block w-1 h-1 bg-primary rounded-full mr-1.5 animate-pulse"></span>
                   Powered by <span className="text-primary font-semibold ml-1">Vastvik AI</span>
                 </p>
               </div>
