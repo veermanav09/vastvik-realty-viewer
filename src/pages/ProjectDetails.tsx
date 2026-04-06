@@ -23,6 +23,7 @@ const ProjectDetails = () => {
     projectId: 0,
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const projects = [
     { 
@@ -88,14 +89,12 @@ const ProjectDetails = () => {
     }
   ];
 
-  const project = projects.find(p => p.id === parseInt(id || "1"));
-  if (!project) return <div>Project not found</div>;
-
-  const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const project = projects.find(p => p.id === parseInt(id || "1"));
+  if (!project) return <div>Project not found</div>;
 
   return (
     <div className="min-h-screen">
@@ -121,7 +120,7 @@ const ProjectDetails = () => {
           {/* Back Button */}
           <div className="container mx-auto px-4 lg:px-8 pt-8">
             <Button 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate({ pathname: "/", hash: "#projects" })} 
               variant="ghost" 
               className={`text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-700 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
             >
