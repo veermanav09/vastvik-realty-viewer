@@ -23,6 +23,7 @@ const ProjectDetails = () => {
     projectId: 0,
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const projects = [
     { 
@@ -88,14 +89,12 @@ const ProjectDetails = () => {
     }
   ];
 
-  const project = projects.find(p => p.id === parseInt(id || "1"));
-  if (!project) return <div>Project not found</div>;
-
-  const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const project = projects.find(p => p.id === parseInt(id || "1"));
+  if (!project) return <div>Project not found</div>;
 
   return (
     <div className="min-h-screen">
