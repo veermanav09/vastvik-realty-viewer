@@ -195,7 +195,7 @@ const About = () => {
           </div>
 
           {/* Right Side - Hoverable Items */}
-          <div className="space-y-2">
+          <div className="space-y-0">
             {philosophyItems.map((item, index) => (
               <div
                 key={index}
@@ -203,10 +203,10 @@ const About = () => {
                 onMouseEnter={() => setHoveredItem(index)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className={`border-b border-border/50 py-5 transition-all duration-500 ${
+                <div className={`border-b border-border/50 py-3 transition-all duration-500 ${
                   hoveredItem === index ? 'border-primary/50 bg-primary/5 -mx-4 px-4 rounded-xl' : ''
                 }`}>
-                  <h4 className={`text-2xl md:text-3xl font-light transition-all duration-500 ${
+                  <h4 className={`text-lg md:text-xl font-light transition-all duration-500 ${
                     hoveredItem === index ? 'text-primary translate-x-2' : 'text-muted-foreground'
                   }`}>
                     {item.title}
@@ -220,7 +220,7 @@ const About = () => {
                       transform: hoveredItem === index ? 'translateY(0)' : 'translateY(-10px)'
                     }}
                   >
-                    <p className="text-muted-foreground mt-4 leading-relaxed pl-2 border-l-2 border-primary/30">
+                    <p className="text-muted-foreground text-sm mt-2 leading-relaxed pl-2 border-l-2 border-primary/30">
                       {item.description}
                     </p>
                   </div>
