@@ -25,8 +25,8 @@ const ProjectDetails = () => {
     projectId: 0,
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [previousImageIndex, setPreviousImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const projects = [
     { 
