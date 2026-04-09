@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import elementImage from "@/assets/element-project.png";
+import elementRender1 from "@/assets/element-render-1.jpg";
+import elementRender2 from "@/assets/element-render-2.jpg";
 import highriseImage from "@/assets/highrise-project.png";
 import { useState, useEffect } from "react";
 import ExpressionOfInterestDialog from "@/components/ExpressionOfInterestDialog";
@@ -57,7 +59,7 @@ const ProjectDetails = () => {
       nearbyHospitals: ["Narayana Institution", "Oxford Medical Institute", "Best Hospital", "Athreya Hospital", "Sparsh Hospital"],
       nearbyCorporate: ["Infosys", "Biocon", "Tech Machindra", "TCS", "Siemens", "Wipro"],
       nearbyRetail: ["M5", "Royal Mart", "D Mart", "Metro Cash and Carry"],
-      gallery: [elementImage, elementImage, elementImage, elementImage] 
+      gallery: [elementImage, elementRender1, elementRender2] 
     },
     { 
       id: 2, 
