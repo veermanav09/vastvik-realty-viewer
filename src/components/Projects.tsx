@@ -106,8 +106,14 @@ const Projects = () => {
               <div 
                 key={project.id} 
                 className="group relative"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
+                onMouseEnter={() => {
+                  setHoveredProject(project.id);
+                  startHoverCycle(project.id, project.gallery.length);
+                }}
+                onMouseLeave={() => {
+                  setHoveredProject(null);
+                  stopHoverCycle(project.id);
+                }}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-700 ease-out ${
