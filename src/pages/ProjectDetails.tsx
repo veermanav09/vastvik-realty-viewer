@@ -26,6 +26,7 @@ const ProjectDetails = () => {
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const projects = [
     { 
@@ -95,6 +96,29 @@ const ProjectDetails = () => {
     setIsLoaded(true);
   }, []);
 
+  const changeImage = (idx: number) => {
+    if (idx === currentImageIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentImageIndex(idx);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  // Auto-advance every 3 seconds
+  useEffect(() => {
+    const project = projects.find(p => p.id === parseInt(id || "1"));
+    if (!project) return;
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex(prev => (prev + 1) % project.gallery.length);
+        setIsTransitioning(false);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [id]);
+
   const project = projects.find(p => p.id === parseInt(id || "1"));
   if (!project) return <div>Project not found</div>;
 
@@ -105,12 +129,11 @@ const ProjectDetails = () => {
       <div className="relative h-[85vh] md:h-screen w-full p-3 md:p-6 overflow-hidden">
         {/* Main Image Container with rounded corners */}
         <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden">
-          {/* Main Image with transition */}
-          <div className="absolute inset-0">
+          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             <img 
               src={project.gallery[currentImageIndex]} 
               alt={project.name} 
-              className="w-full h-full object-cover transition-all duration-700 ease-out"
+              className="w-full h-full object-cover"
             />
           </div>
         
@@ -159,7 +182,7 @@ const ProjectDetails = () => {
             {project.gallery.map((img: string, idx: number) => (
               <button
                 key={idx}
-                onClick={() => setCurrentImageIndex(idx)}
+                onClick={() => changeImage(idx)}
                 className={`relative flex-shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-xl overflow-hidden transition-all duration-300 ${
                   currentImageIndex === idx 
                     ? 'ring-2 ring-white ring-offset-2 ring-offset-transparent scale-105' 
