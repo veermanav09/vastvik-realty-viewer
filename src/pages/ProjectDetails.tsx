@@ -129,12 +129,11 @@ const ProjectDetails = () => {
       <div className="relative h-[85vh] md:h-screen w-full p-3 md:p-6 overflow-hidden">
         {/* Main Image Container with rounded corners */}
         <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden">
-          {/* Main Image with transition */}
-          <div className="absolute inset-0">
+          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             <img 
               src={project.gallery[currentImageIndex]} 
               alt={project.name} 
-              className="w-full h-full object-cover transition-all duration-700 ease-out"
+              className="w-full h-full object-cover"
             />
           </div>
         
@@ -183,7 +182,7 @@ const ProjectDetails = () => {
             {project.gallery.map((img: string, idx: number) => (
               <button
                 key={idx}
-                onClick={() => setCurrentImageIndex(idx)}
+                onClick={() => changeImage(idx)}
                 className={`relative flex-shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-xl overflow-hidden transition-all duration-300 ${
                   currentImageIndex === idx 
                     ? 'ring-2 ring-white ring-offset-2 ring-offset-transparent scale-105' 
