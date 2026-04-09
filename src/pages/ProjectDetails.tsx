@@ -96,6 +96,29 @@ const ProjectDetails = () => {
     setIsLoaded(true);
   }, []);
 
+  const changeImage = (idx: number) => {
+    if (idx === currentImageIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentImageIndex(idx);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  // Auto-advance every 3 seconds
+  useEffect(() => {
+    const project = projects.find(p => p.id === parseInt(id || "1"));
+    if (!project) return;
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex(prev => (prev + 1) % project.gallery.length);
+        setIsTransitioning(false);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [id]);
+
   const project = projects.find(p => p.id === parseInt(id || "1"));
   if (!project) return <div>Project not found</div>;
 
