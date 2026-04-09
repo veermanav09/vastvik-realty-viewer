@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink, ArrowRight } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
 import ExpressionOfInterestDialog from "./ExpressionOfInterestDialog";
 import elementImage from "@/assets/element-project.png";
+import elementRender1 from "@/assets/element-render-1.jpg";
+import elementRender2 from "@/assets/element-render-2.jpg";
 import highriseImage from "@/assets/highrise-project.png";
 
 const Projects = () => {
@@ -20,6 +22,9 @@ const Projects = () => {
   });
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
+  const [hoverImageIndex, setHoverImageIndex] = useState<Record<number, number>>({});
+  const hoverIntervals = useRef<Record<number, ReturnType<typeof setInterval>>>({});
+
   const projects = [
     {
       id: 1,
@@ -30,6 +35,7 @@ const Projects = () => {
       price: "45 LAKHS ONWARD",
       location: "MARSUR GATE",
       image: elementImage,
+      gallery: [elementImage, elementRender1, elementRender2],
       features: ["Premium Amenities", "Gated Community", "24/7 Security"],
       completion: "April 2027",
       description: "Vastvik Element is an exclusive residential sanctuary at Marsur Gate, featuring expansive 2 and 3 BHK residences surrounded by lush landscaped gardens. Experience premium living where every detail reflects sophistication.",
@@ -44,12 +50,32 @@ const Projects = () => {
       price: "60 LAKHS ONWARD",
       location: "CHANDAPURA MAIN ROAD",
       image: highriseImage,
+      gallery: [highriseImage],
       features: ["Sky Lounge", "Swimming Pool", "Gym & Spa"],
       completion: "Q2 2025",
       description: "Elevate your lifestyle at High Rise, where panoramic city vistas meet world-class amenities. The perfect fusion of luxury, convenience, and architectural brilliance on Chandapura Main Road.",
       address: "Survey No. 128, Chandapura Main Road, Near Tech Park, Bangalore - 560099"
     }
   ];
+
+  const startHoverCycle = (projectId: number, galleryLength: number) => {
+    if (galleryLength <= 1) return;
+    setHoverImageIndex(prev => ({ ...prev, [projectId]: 0 }));
+    hoverIntervals.current[projectId] = setInterval(() => {
+      setHoverImageIndex(prev => ({
+        ...prev,
+        [projectId]: ((prev[projectId] ?? 0) + 1) % galleryLength
+      }));
+    }, 2000);
+  };
+
+  const stopHoverCycle = (projectId: number) => {
+    if (hoverIntervals.current[projectId]) {
+      clearInterval(hoverIntervals.current[projectId]);
+      delete hoverIntervals.current[projectId];
+    }
+    setHoverImageIndex(prev => ({ ...prev, [projectId]: 0 }));
+  };
 
   return (
     <section id="projects" className="py-24 bg-gradient-subtle relative overflow-hidden">
@@ -80,8 +106,14 @@ const Projects = () => {
               <div 
                 key={project.id} 
                 className="group relative"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
+                onMouseEnter={() => {
+                  setHoveredProject(project.id);
+                  startHoverCycle(project.id, project.gallery.length);
+                }}
+                onMouseLeave={() => {
+                  setHoveredProject(null);
+                  stopHoverCycle(project.id);
+                }}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className={`relative overflow-hidden rounded-[32px] bg-card transition-all duration-700 ease-out ${
@@ -94,31 +126,39 @@ const Projects = () => {
                     <div className={`relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-[16px] sm:rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
                       isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
                     }`}>
-                      <img
-                        src={project.image}
-                        alt={project.name}
-                        className={`w-full h-full object-cover object-center transition-all duration-1000 ease-out ${
-                          isHovered ? 'scale-110' : 'scale-100'
-                        }`}
-                      />
+                      {/* Layered crossfade images */}
+                      {project.gallery.map((img, imgIdx) => (
+                        <img
+                          key={imgIdx}
+                          src={img}
+                          alt={project.name}
+                          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out ${
+                            imgIdx === (hoverImageIndex[project.id] ?? 0) ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                      ))}
                     
+                      {/* Gradient overlay for text */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                      {/* Project name overlay */}
+                      <h3 className="absolute bottom-4 left-4 font-heading font-bold text-3xl sm:text-4xl text-white drop-shadow-lg z-[1]">
+                        {project.name}
+                      </h3>
+
                       {/* Badge */}
                       <Badge
                         variant={project.type === "ONGOING" ? "default" : "secondary"}
-                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold`}
+                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold z-[1]`}
                       >
                         {project.type}
                       </Badge>
                     </div>
                   </div>
 
-                  {/* Info Card */}
                   <div className="p-6">
-                    {/* Project Title */}
+                    {/* Location */}
                     <div className="mb-4">
-                      <h3 className="font-heading font-bold text-3xl text-foreground mb-2">
-                        {project.name}
-                      </h3>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="w-4 h-4 text-primary" />
                         <span className="text-sm">{project.location}</span>
