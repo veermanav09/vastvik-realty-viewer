@@ -156,13 +156,9 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Info Card */}
                   <div className="p-6">
-                    {/* Project Title */}
+                    {/* Location */}
                     <div className="mb-4">
-                      <h3 className="font-heading font-bold text-3xl text-foreground mb-2">
-                        {project.name}
-                      </h3>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="w-4 h-4 text-primary" />
                         <span className="text-sm">{project.location}</span>
