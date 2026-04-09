@@ -126,18 +126,30 @@ const Projects = () => {
                     <div className={`relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-[16px] sm:rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
                       isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
                     }`}>
-                      <img
-                        src={project.image}
-                        alt={project.name}
-                        className={`w-full h-full object-cover object-center transition-all duration-1000 ease-out ${
-                          isHovered ? 'scale-110' : 'scale-100'
-                        }`}
-                      />
+                      {/* Layered crossfade images */}
+                      {project.gallery.map((img, imgIdx) => (
+                        <img
+                          key={imgIdx}
+                          src={img}
+                          alt={project.name}
+                          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out ${
+                            imgIdx === (hoverImageIndex[project.id] ?? 0) ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                      ))}
                     
+                      {/* Gradient overlay for text */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                      {/* Project name overlay */}
+                      <h3 className="absolute bottom-4 left-4 font-heading font-bold text-3xl sm:text-4xl text-white drop-shadow-lg z-[1]">
+                        {project.name}
+                      </h3>
+
                       {/* Badge */}
                       <Badge
                         variant={project.type === "ONGOING" ? "default" : "secondary"}
-                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold`}
+                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold z-[1]`}
                       >
                         {project.type}
                       </Badge>
