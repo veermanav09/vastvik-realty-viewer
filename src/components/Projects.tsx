@@ -23,7 +23,7 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const [hoverImageIndex, setHoverImageIndex] = useState<Record<number, number>>({});
-  const hoverIntervals = useRef<Record<number, NodeJS.Timeout>>({});
+  const hoverIntervals = useRef<Record<number, ReturnType<typeof setInterval>>>({});
 
   const projects = [
     {
