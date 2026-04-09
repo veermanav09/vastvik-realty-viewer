@@ -25,8 +25,8 @@ const ProjectDetails = () => {
     projectId: 0,
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [previousImageIndex, setPreviousImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const projects = [
     { 
@@ -98,11 +98,8 @@ const ProjectDetails = () => {
 
   const changeImage = (idx: number) => {
     if (idx === currentImageIndex) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentImageIndex(idx);
-      setIsTransitioning(false);
-    }, 300);
+    setPreviousImageIndex(currentImageIndex);
+    setCurrentImageIndex(idx);
   };
 
   // Auto-advance every 3 seconds
@@ -110,11 +107,10 @@ const ProjectDetails = () => {
     const project = projects.find(p => p.id === parseInt(id || "1"));
     if (!project) return;
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex(prev => (prev + 1) % project.gallery.length);
-        setIsTransitioning(false);
-      }, 300);
+      setCurrentImageIndex(prev => {
+        setPreviousImageIndex(prev);
+        return (prev + 1) % project.gallery.length;
+      });
     }, 3000);
     return () => clearInterval(interval);
   }, [id]);
@@ -129,13 +125,17 @@ const ProjectDetails = () => {
       <div className="relative h-[85vh] md:h-screen w-full p-3 md:p-6 overflow-hidden">
         {/* Main Image Container with rounded corners */}
         <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden">
-          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-            <img 
-              src={project.gallery[currentImageIndex]} 
-              alt={project.name} 
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {/* Layered crossfade images */}
+          {project.gallery.map((img: string, idx: number) => (
+            <div
+              key={idx}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                idx === currentImageIndex ? 'opacity-100 z-[1]' : 'opacity-0 z-0'
+              }`}
+            >
+              <img src={img} alt={`${project.name} ${idx + 1}`} className="w-full h-full object-cover" />
+            </div>
+          ))}
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
