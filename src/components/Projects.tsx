@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Users, IndianRupee, Calendar, ChevronDown, ExternalLink, ArrowRight } from "lucide-react";
 import DownloadBrochureDialog from "./DownloadBrochureDialog";
 import ExpressionOfInterestDialog from "./ExpressionOfInterestDialog";
 import elementImage from "@/assets/element-project.png";
+import elementRender1 from "@/assets/element-render-1.jpg";
+import elementRender2 from "@/assets/element-render-2.jpg";
 import highriseImage from "@/assets/highrise-project.png";
 
 const Projects = () => {
