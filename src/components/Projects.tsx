@@ -22,6 +22,9 @@ const Projects = () => {
   });
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
+  const [hoverImageIndex, setHoverImageIndex] = useState<Record<number, number>>({});
+  const hoverIntervals = useRef<Record<number, NodeJS.Timeout>>({});
+
   const projects = [
     {
       id: 1,
@@ -32,6 +35,7 @@ const Projects = () => {
       price: "45 LAKHS ONWARD",
       location: "MARSUR GATE",
       image: elementImage,
+      gallery: [elementImage, elementRender1, elementRender2],
       features: ["Premium Amenities", "Gated Community", "24/7 Security"],
       completion: "April 2027",
       description: "Vastvik Element is an exclusive residential sanctuary at Marsur Gate, featuring expansive 2 and 3 BHK residences surrounded by lush landscaped gardens. Experience premium living where every detail reflects sophistication.",
@@ -46,12 +50,32 @@ const Projects = () => {
       price: "60 LAKHS ONWARD",
       location: "CHANDAPURA MAIN ROAD",
       image: highriseImage,
+      gallery: [highriseImage],
       features: ["Sky Lounge", "Swimming Pool", "Gym & Spa"],
       completion: "Q2 2025",
       description: "Elevate your lifestyle at High Rise, where panoramic city vistas meet world-class amenities. The perfect fusion of luxury, convenience, and architectural brilliance on Chandapura Main Road.",
       address: "Survey No. 128, Chandapura Main Road, Near Tech Park, Bangalore - 560099"
     }
   ];
+
+  const startHoverCycle = (projectId: number, galleryLength: number) => {
+    if (galleryLength <= 1) return;
+    setHoverImageIndex(prev => ({ ...prev, [projectId]: 0 }));
+    hoverIntervals.current[projectId] = setInterval(() => {
+      setHoverImageIndex(prev => ({
+        ...prev,
+        [projectId]: ((prev[projectId] ?? 0) + 1) % galleryLength
+      }));
+    }, 2000);
+  };
+
+  const stopHoverCycle = (projectId: number) => {
+    if (hoverIntervals.current[projectId]) {
+      clearInterval(hoverIntervals.current[projectId]);
+      delete hoverIntervals.current[projectId];
+    }
+    setHoverImageIndex(prev => ({ ...prev, [projectId]: 0 }));
+  };
 
   return (
     <section id="projects" className="py-24 bg-gradient-subtle relative overflow-hidden">
