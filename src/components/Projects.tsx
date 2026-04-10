@@ -66,7 +66,7 @@ const Projects = () => {
         ...prev,
         [projectId]: ((prev[projectId] ?? 0) + 1) % galleryLength
       }));
-    }, 2000);
+    }, 3500);
   };
 
   const stopHoverCycle = (projectId: number) => {
@@ -132,7 +132,7 @@ const Projects = () => {
                           key={imgIdx}
                           src={img}
                           alt={project.name}
-                          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out ${
+                          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-[1200ms] ease-in-out ${
                             imgIdx === (hoverImageIndex[project.id] ?? 0) ? 'opacity-100' : 'opacity-0'
                           }`}
                         />
