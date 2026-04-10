@@ -126,30 +126,37 @@ const Projects = () => {
                     <div className={`relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-[16px] sm:rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
                       isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
                     }`}>
-                      {/* Layered crossfade images */}
-                      {project.gallery.map((img, imgIdx) => (
-                        <img
-                          key={imgIdx}
-                          src={img}
-                          alt={project.name}
-                          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-[1200ms] ease-in-out ${
-                            imgIdx === (hoverImageIndex[project.id] ?? 0) ? 'opacity-100' : 'opacity-0'
-                          }`}
-                        />
-                      ))}
+                      {/* Sliding image strip */}
+                      <div
+                        className="absolute inset-0 flex transition-transform duration-[1500ms] ease-in-out"
+                        style={{
+                          width: `${project.gallery.length * 100}%`,
+                          transform: `translateX(-${((hoverImageIndex[project.id] ?? 0) * 100) / project.gallery.length}%)`
+                        }}
+                      >
+                        {project.gallery.map((img, imgIdx) => (
+                          <img
+                            key={imgIdx}
+                            src={img}
+                            alt={project.name}
+                            className="h-full object-cover object-center flex-shrink-0"
+                            style={{ width: `${100 / project.gallery.length}%` }}
+                          />
+                        ))}
+                      </div>
                     
-                      {/* Gradient overlay for text */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      {/* Gradient overlay for text - always on top */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-[2] pointer-events-none" />
 
-                      {/* Project name overlay */}
-                      <h3 className="absolute bottom-4 left-4 font-heading font-bold text-3xl sm:text-4xl text-white drop-shadow-lg z-[1]">
+                      {/* Project name overlay - always visible */}
+                      <h3 className="absolute bottom-4 left-4 font-heading font-bold text-3xl sm:text-4xl text-white drop-shadow-lg z-[3]">
                         {project.name}
                       </h3>
 
                       {/* Badge */}
                       <Badge
                         variant={project.type === "ONGOING" ? "default" : "secondary"}
-                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold z-[1]`}
+                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold z-[3]`}
                       >
                         {project.type}
                       </Badge>
