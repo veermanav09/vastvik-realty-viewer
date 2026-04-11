@@ -126,40 +126,51 @@ const Projects = () => {
                     <div className={`relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-[16px] sm:rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-700 ease-out ${
                       isHovered ? 'shadow-[0_16px_50px_rgba(0,0,0,0.2)] -translate-y-3' : ''
                     }`}>
-                      {/* Sliding image strip */}
+                      {/* Sliding image strip - lowest layer */}
                       <div
-                        className="absolute inset-0 flex transition-transform duration-[1500ms] ease-in-out"
+                        className="absolute inset-0 will-change-transform"
                         style={{
                           width: `${project.gallery.length * 100}%`,
-                          transform: `translateX(-${((hoverImageIndex[project.id] ?? 0) * 100) / project.gallery.length}%)`
+                          transform: `translateX(-${((hoverImageIndex[project.id] ?? 0) * 100) / project.gallery.length}%)`,
+                          transition: 'transform 2s cubic-bezier(0.25, 0.1, 0.25, 1)',
                         }}
                       >
-                        {project.gallery.map((img, imgIdx) => (
-                          <img
-                            key={imgIdx}
-                            src={img}
-                            alt={project.name}
-                            className="h-full object-cover object-center flex-shrink-0"
-                            style={{ width: `${100 / project.gallery.length}%` }}
-                          />
-                        ))}
+                        <div className="flex h-full">
+                          {project.gallery.map((img, imgIdx) => (
+                            <img
+                              key={imgIdx}
+                              src={img}
+                              alt={project.name}
+                              className="h-full object-cover object-center flex-shrink-0"
+                              style={{ width: `${100 / project.gallery.length}%` }}
+                            />
+                          ))}
+                        </div>
                       </div>
                     
-                      {/* Gradient overlay for text - always on top */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-[2] pointer-events-none" />
+                      {/* Gradient overlay - fixed layer above images */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10 pointer-events-none" />
 
-                      {/* Project name overlay - always visible */}
-                      <h3 className="absolute bottom-4 left-4 font-heading font-bold text-3xl sm:text-4xl text-white drop-shadow-lg z-[3]">
-                        {project.name}
-                      </h3>
-
-                      {/* Badge */}
-                      <Badge
-                        variant={project.type === "ONGOING" ? "default" : "secondary"}
-                        className={`absolute top-4 left-4 ${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold z-[3]`}
-                      >
-                        {project.type}
-                      </Badge>
+                      {/* Text overlay - fixed top layer, never moves */}
+                      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4">
+                        <div>
+                          <Badge
+                            variant={project.type === "ONGOING" ? "default" : "secondary"}
+                            className={`${project.type === "ONGOING" ? "bg-success" : "bg-primary"} text-primary-foreground px-3 py-1 text-xs font-semibold pointer-events-auto`}
+                          >
+                            {project.type}
+                          </Badge>
+                        </div>
+                        <div>
+                          <h3 className="font-heading font-bold text-4xl sm:text-5xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] tracking-wide">
+                            {project.name}
+                          </h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <MapPin className="w-4 h-4 text-white/80" />
+                            <span className="text-white/80 text-sm font-medium tracking-wider">{project.location}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
